@@ -1,2 +1,9 @@
 /* some style */
 
+.New-City {
+  display: none;
+}
+
+.New-City.visible {
+  display: block;
+}
