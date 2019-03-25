@@ -1,5 +1,6 @@
 /resources/public/js/compiled/**
 figwheel_server.log
+/node_modules
 pom.xml
 *jar
 /lib/

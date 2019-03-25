@@ -1,9 +1,14 @@
 /* some style */
 
-.New-City {
-  display: none;
+.itemPage {
+  position: fixed;
+  top: -105%;
+  transition: all .35s;
+  background: white;
+  height: 100%;
+  width: 100%;
 }
 
-.New-City.visible {
-  display: block;
+.itemPage.visible {
+  top: 0;
 }

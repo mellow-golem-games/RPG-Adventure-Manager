@@ -4,8 +4,12 @@
 
 ; Holds a reference to all the current Items in the Database
 (defonce state (atom {:text "Hello world!"
-                      :activeView {
+                      :activeView {  ; This gets erased as state changes but I left it here as a reminder for accepted values
                         :new-city false
+                        :new-npc false
+                        :new-item false
+                        :new-location false
+                        :new-hook false
                       }}))
 
 (defn update-current-view [payload]

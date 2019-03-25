@@ -33,6 +33,8 @@
                            :open-urls ["http://localhost:3449/index.html"]}
 
                 :compiler {:main rpg-adventure-manager.core
+                           :npm-deps {:localforage "*"}
+                           :install-deps true
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/rpg_adventure_manager.js"
                            :output-dir "resources/public/js/compiled/out"
@@ -47,6 +49,8 @@
                 :source-paths ["src"]
                 :compiler {:output-to "resources/public/js/compiled/rpg_adventure_manager.js"
                            :main rpg-adventure-manager.core
+                           :npm-deps {:localforage "*"}
+                           :install-deps true
                            :optimizations :advanced
                            :pretty-print false}}]}
 
