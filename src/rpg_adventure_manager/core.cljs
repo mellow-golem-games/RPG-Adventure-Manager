@@ -20,11 +20,11 @@
    [:h4 {:on-click #(handle-state-change "update-current-view" "new-hook")} "Add New Plot Hook"]
    [:h1 {:on-click #(handle-state-change "update-state-text" "Hello New World")} (:text @state)]
    [:h3 "Edit this and watch it change!"]
-   (newcity/render state)
-   (newnpc/render state)
-   (newitem/render state)
-   (newlocation/render state)
-   (newhook/render state)])
+   [newcity/render state]
+   [newnpc/render state]
+   [newitem/render state]
+   [newlocation/render state]
+   [newhook/render state]])
 
 (reagent/render-component [Main]
                           (. js/document (getElementById "app")))

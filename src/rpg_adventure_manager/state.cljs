@@ -3,7 +3,7 @@
 
 
 ; Holds a reference to all the current Items in the Database
-(defonce state (atom {:text "Hello world!"
+(defonce state (atom {:text "Hello world!" ;TODO remove this
                       :activeView {  ; This gets erased as state changes but I left it here as a reminder for accepted values
                         :new-city false
                         :new-npc false
