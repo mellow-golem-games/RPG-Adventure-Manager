@@ -1,5 +1,6 @@
 (ns rpg-adventure-manager.newhook
-    (:require [rpg-adventure-manager.state :refer [handle-state-change]]))
+    (:require [rpg-adventure-manager.state :refer [handle-state-change]]
+              [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
 
 (defn add-hook [details]
   (print @details))
@@ -15,4 +16,4 @@
       [:input {:type "text" :placeholder "Plot Hook Name" :on-change #(swap! details conj {:name (-> % .-target .-value)})}]
       [:textarea {:placeholder "Plot Hook Description" :on-change #(swap! details conj {:description (-> % .-target .-value)})}]
       [:input {:type "text" :placeholder "Relevent Characters" :on-change #(swap! details conj {:characters (-> % .-target .-value)})}]
-      [:button {:on-click #(add-hook details)} "Add Hook"]])))
+      [:button {:on-click #(localforageApi/add-item "hooks" details)} "Add Hook"]])))

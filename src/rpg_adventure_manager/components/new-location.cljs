@@ -1,5 +1,6 @@
 (ns rpg-adventure-manager.newlocation
-    (:require [rpg-adventure-manager.state :refer [handle-state-change]]))
+    (:require [rpg-adventure-manager.state :refer [handle-state-change]]
+              [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
 
 (defn add-location [details]
   (print @details))
@@ -16,4 +17,4 @@
       [:textarea {:placeholder "Location Description" :on-change #(swap! details conj {:description (-> % .-target .-value)})}]
       [:input {:type "text" :placeholder "Owner or Residents" :on-change #(swap! details conj {:owner (-> % .-target .-value)})}]
       [:input {:type "text" :placeholder "Inventory/Loot" :on-change #(swap! details conj {:inventory (-> % .-target .-value)})}]
-      [:button {:on-click #(add-location details)} "Add Location"]])))
+      [:button {:on-click #(localforageApi/add-item "locations" details)} "Add Location"]])))

@@ -1,5 +1,6 @@
 (ns rpg-adventure-manager.newnpc
-    (:require [rpg-adventure-manager.state :refer [handle-state-change]]))
+    (:require [rpg-adventure-manager.state :refer [handle-state-change]]
+              [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
 
 (defn add-npc [details]
   (print @details))
@@ -27,4 +28,4 @@
       [:input {:type "text" :placeholder "goals" :on-change #(swap! details conj {:goals (-> % .-target .-value)})}]
       [:textarea {:placeholder "history" :on-change #(swap! details conj {:history (-> % .-target .-value)})}]
       [:input {:type "text" :placeholder "location" :on-change #(swap! details conj {:location (-> % .-target .-value)})}]
-      [:button {:on-click #(add-npc details)} "Add NPC"]])))
+      [:button {:on-click #(localforageApi/add-item "npcs" details)} "Add NPC"]])))
