@@ -12,6 +12,7 @@
 
 
 (defn Main []
+  (print @state)
   [:div.Main-Wrapper
    [:h4 {:on-click #(handle-state-change "update-current-view" "new-city")} "Add New City"]
    [:h4 {:on-click #(handle-state-change "update-current-view" "new-npc")} "Add New NPC"]
