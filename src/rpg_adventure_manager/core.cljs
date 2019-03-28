@@ -5,6 +5,7 @@
               [rpg-adventure-manager.newitem :as newitem]
               [rpg-adventure-manager.newlocation :as newlocation]
               [rpg-adventure-manager.newhook :as newhook]
+              [rpg-adventure-manager.components.shared.alert :as alert]
               [rpg-adventure-manager.state :refer [state handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
 
@@ -21,6 +22,9 @@
    [:h4 {:on-click #(handle-state-change "update-current-view" "new-item")} "Add New Item"]
    [:h4 {:on-click #(handle-state-change "update-current-view" "new-location")} "Add New Location"]
    [:h4 {:on-click #(handle-state-change "update-current-view" "new-hook")} "Add New Plot Hook"]
+   [:h4 {:on-click #(handle-state-change "update-alert" {:visible true :content "This is text"})} "Add New Plot Hook"]
+   (if (= (:visible (:showAlert @state)) true)  ; conditionally show the alert box
+    [alert/render (:content (:showAlert @state))])
    [newcity/render state]
    [newnpc/render state]
    [newitem/render state]

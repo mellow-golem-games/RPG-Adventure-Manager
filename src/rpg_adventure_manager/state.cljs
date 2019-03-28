@@ -3,12 +3,13 @@
 
 
 ; Holds a reference to all the current Items in the Database
-(defonce state (atom { :activeView {  ; This gets erased as state changes but I left it here as a reminder for accepted values
+(defonce state (atom {:activeView {  ; This gets erased as state changes but I left it here as a reminder for accepted values
                          :new-city false
                          :new-npc false
                          :new-item false
                          :new-location false
-                         :new-hook false}}))
+                         :new-hook false}
+                       :showAlert {:visible false :content ""}}))
 
 (defn update-current-view [payload]
   "Handles changing the view to the next selected page"
@@ -17,6 +18,10 @@
 (defn update-entity [payload]
   "Payload : {:type type :value {object}} - Used to arbitarily update an entity of any type"
   (swap! state conj {(keyword (:type payload)) (:value payload)}))
+
+(defn update-alert [payload]
+  "updates alert status to provided value"
+  (swap! state conj {:showAlert payload}))
 
 (defn handle-state-change [action payload]
   "Accept an action function to dispatch and passes it the current payload"

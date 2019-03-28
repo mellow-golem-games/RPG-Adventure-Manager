@@ -9,8 +9,9 @@
   (conj details {:used false :created (js/Date.)}))
 
 (defn get-initial-data-by-type [type]
+  "Quries an entity from out localstorage and adds it to local store"
   (.then (.getItem localforage type) (fn [value]
-  (handle-state-change "update-entity" {:type type :value value}))))
+    (handle-state-change "update-entity" {:type type :value value}))))
 
 (defn pull-initial-data []
   "this function gets all the current saved data and pushes it to the store"
@@ -21,8 +22,10 @@
   (go (get-initial-data-by-type "hooks")))
 
 (defn add-item [type details]
+  "adds an item to localstorage by pulling current list, conj them together and overwrite"
   (.then (.getItem localforage type) (fn [value]
     (let [currentStorage (js->clj value)]
       (.then (.setItem localforage type (clj->js (conj currentStorage (add-metadata @details))) (fn [value]
         (handle-state-change "update-entity" {:type type :value (conj currentStorage (add-metadata @details))})
-        (js/alert "Item Saved")  )))))))
+        (handle-state-change "update-alert" {:visible true :content "Item Saved!"})
+        (handle-state-change "update-current-view" "")))))))) ; TODO we need a better alert box
