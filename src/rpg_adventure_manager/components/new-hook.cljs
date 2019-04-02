@@ -1,10 +1,7 @@
 (ns rpg-adventure-manager.newhook
     (:require [rpg-adventure-manager.state :refer [handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
-
-(defn add-hook [details]
-  (print @details))
-
+              
 ; TODO make a heper function to get the current state of any particular page
 (defn render [state]
   (let [details (atom {:name "" :description "" :characters ""})]

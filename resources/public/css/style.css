@@ -1,6 +1,6 @@
 /* some style */
 
-.itemPage {
+.itemPage, .viewPage {
   position: fixed;
   top: -105%;
   transition: all .35s;
@@ -9,7 +9,7 @@
   width: 100%;
 }
 
-.itemPage.visible {
+.itemPage.visible, .viewPage.visible {
   top: 0;
 }
 

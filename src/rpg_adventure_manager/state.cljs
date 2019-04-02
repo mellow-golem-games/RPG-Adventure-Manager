@@ -3,13 +3,15 @@
 
 
 ; Holds a reference to all the current Items in the Database
+; :activeView also contains things like view-all-cities & view-individual-city
 (defonce state (atom {:activeView {  ; This gets erased as state changes but I left it here as a reminder for accepted values
                          :new-city false
                          :new-npc false
                          :new-item false
                          :new-location false
                          :new-hook false}
-                       :showAlert {:visible false :content ""}}))
+                       :showAlert {:visible false :content ""}
+                       :activeEntity {}}))
 
 (defn update-current-view [payload]
   "Handles changing the view to the next selected page"
@@ -22,6 +24,10 @@
 (defn update-alert [payload]
   "updates alert status to provided value"
   (swap! state conj {:showAlert payload}))
+
+(defn set-active-entity [payload]
+  "Sets the entity to be active to display on view all page"
+  (swap! state conj {:activeEntity payload}))
 
 (defn handle-state-change [action payload]
   "Accept an action function to dispatch and passes it the current payload"
