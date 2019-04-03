@@ -6,6 +6,7 @@
               [rpg-adventure-manager.newlocation :as newlocation]
               [rpg-adventure-manager.newhook :as newhook]
               [rpg-adventure-manager.components.all.view :as viewall]
+              [rpg-adventure-manager.components.individual.individual :as viewSingle]
               [rpg-adventure-manager.components.shared.alert :as alert]
               [rpg-adventure-manager.state :refer [state handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
@@ -15,12 +16,13 @@
 ; First thing we need to do is pull all the current entities that we have saved
 (localforageApi/pull-initial-data)
 
+; Handles the show all page
 (defn show-view-all [entitiesToView]
-  (handle-state-change "update-current-view" "view-all-cities")
+  (handle-state-change "update-current-view" "view-all-entities")
   (handle-state-change "set-active-entity" entitiesToView))
 
 (defn Main []
-  ;(print @state) ; TODO remove in prod but nice for dev use to see that state is what we expect
+  ; (print (:activeView @state)) ; TODO remove in prod but nice for dev use to see that state is what we expect
   [:div.Main-Wrapper
     [:div.itemContainer
       [:button {:on-click #(handle-state-change "update-current-view" "new-city")} "Add New City"]
@@ -44,7 +46,8 @@
    [newitem/render state]
    [newlocation/render state]
    [newhook/render state]
-   [viewall/render state]])
+   [viewall/render state]
+   [viewSingle/render state]])
 
 (reagent/render-component [Main]
                           (. js/document (getElementById "app")))

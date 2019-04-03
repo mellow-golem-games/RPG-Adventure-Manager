@@ -11,7 +11,8 @@
                          :new-location false
                          :new-hook false}
                        :showAlert {:visible false :content ""}
-                       :activeEntity {}}))
+                       :activeEntity {}
+                       :singleEntity {}}))
 
 (defn update-current-view [payload]
   "Handles changing the view to the next selected page"
@@ -28,6 +29,10 @@
 (defn set-active-entity [payload]
   "Sets the entity to be active to display on view all page"
   (swap! state conj {:activeEntity payload}))
+
+(defn set-single-entity [payload]
+  "sets the entity to view on the single page"
+  (swap! state conj {:singleEntity payload}))
 
 (defn handle-state-change [action payload]
   "Accept an action function to dispatch and passes it the current payload"

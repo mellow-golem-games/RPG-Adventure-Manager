@@ -3,7 +3,7 @@
 
 
 (defn hide-alert []
-  ; timeout for 3 seconds that hides the active class on the element
+  ; timeout for 2 seconds that hides the active class on the element
   (js/setTimeout #(handle-state-change "update-alert" {:visible false :content ""}) 2000))
 
 (defn render [text]
