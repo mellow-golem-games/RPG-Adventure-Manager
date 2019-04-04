@@ -2,9 +2,9 @@
     (:require [rpg-adventure-manager.state :refer [handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
 
-(defn toggle-used-state [entity]
+(defn toggle-used-state [entity type]
   "Marks the given entity as used or unused"
-  (localforageApi/update-item "cities" (conj entity {:used (not (:used entity))}))
+  (localforageApi/update-item type (conj entity {:used (not (:used entity))}))
   ; we need to first swap the value in the local entity then post that entity to localstorate
   ; we then need to make a query to the store to update the state of the current entity
   ; last need to update the single entity property in the store to update this page
@@ -20,8 +20,8 @@
         [:h2 "Single Page"]
         [:h2 (:name entity)]
         (if (= (:used entity) false)
-          [:button {:on-click #(toggle-used-state entity)} "Mark as Used"]
-          [:button {:on-click #(toggle-used-state entity)} "mark as unused"])
+          [:button {:on-click #(toggle-used-state entity (:activeType @state))} "Mark as Used"]
+          [:button {:on-click #(toggle-used-state entity (:activeType @state))} "mark as unused"])
         (doall (for [key entity]
           (if (and (not (= (first key) :used)) (not (= (first key) :created))) ; No display for used and created
             [:h2 {:key (name (first key))} (str (name (first key)) ": " (second key))])))])))

@@ -17,28 +17,29 @@
 (localforageApi/pull-initial-data)
 
 ; Handles the show all page
-(defn show-view-all [entitiesToView]
+(defn show-view-all [entitiesToView type]
   (handle-state-change "update-current-view" "view-all-entities")
-  (handle-state-change "set-active-entity" entitiesToView))
+  (handle-state-change "set-active-entity" entitiesToView)
+  (handle-state-change "set-active-type" type))
 
 (defn Main []
-  (print (:activeView @state)) ; TODO remove in prod but nice for dev use to see that state is what we expect
+  (print @state) ; TODO remove in prod but nice for dev use to see that state is what we expect
   [:div.Main-Wrapper
     [:div.itemContainer
       [:button {:on-click #(handle-state-change "update-current-view" "new-city")} "Add New City"]
-      [:button {:on-click #(show-view-all (:cities @state))} "View All Cities"]]
+      [:button {:on-click #(show-view-all (:cities @state) "cities")} "View All Cities"]]
     [:div.itemContainer
       [:button {:on-click #(handle-state-change "update-current-view" "new-npc")} "Add New NPC"]
-      [:button {:on-click #(show-view-all (:npcs @state))} "View All NPCs"]]
+      [:button {:on-click #(show-view-all (:npcs @state) "npcs")} "View All NPCs"]]
     [:div.itemContainer
       [:button {:on-click #(handle-state-change "update-current-view" "new-item")} "Add New Item"]
-      [:button {:on-click #(show-view-all (:items @state))} "View All Items"]]
+      [:button {:on-click #(show-view-all (:items @state) "items")} "View All Items"]]
     [:div.itemContainer
       [:button {:on-click #(handle-state-change "update-current-view" "new-location")} "Add New Location"]
-      [:button {:on-click #(show-view-all (:locations @state))} "View All Locations"]]
+      [:button {:on-click #(show-view-all (:locations @state) "locations")} "View All Locations"]]
     [:div.itemContainer
       [:button {:on-click #(handle-state-change "update-current-view" "new-hook")} "Add New Plot Hook"]
-      [:button {:on-click #(show-view-all (:hooks @state))} "View All Plot Hooks"]]
+      [:button {:on-click #(show-view-all (:hooks @state) "hooks")} "View All Plot Hooks"]]
    (if (= (:visible (:showAlert @state)) true)  ; conditionally show the alert box
     [alert/render (:content (:showAlert @state))])
    [newcity/render state]

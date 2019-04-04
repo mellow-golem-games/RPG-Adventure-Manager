@@ -11,6 +11,7 @@
                          :new-location false
                          :new-hook false}
                        :showAlert {:visible false :content ""}
+                       :activeType ""
                        :activeEntity {}
                        :singleEntity {}}))
 
@@ -25,6 +26,10 @@
 (defn update-alert [payload]
   "updates alert status to provided value"
   (swap! state conj {:showAlert payload}))
+
+(defn set-active-type [payload]
+  "updates the active type"
+  (swap! state conj {:activeType payload}))
 
 (defn set-active-entity [payload]
   "Sets the entity to be active to display on view all page"
