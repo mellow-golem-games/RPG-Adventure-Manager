@@ -16,4 +16,4 @@
       [:input {:type "text" :placeholder "Item Name" :on-change #(swap! details conj {:name (-> % .-target .-value)})}]
       [:textarea {:placeholder "Item Description" :on-change #(swap! details conj {:description (-> % .-target .-value)})}]
       [:input {:type "text" :placeholder "Item Location" :on-change #(swap! details conj {:location (-> % .-target .-value)})}]
-      [:button {:on-click #(localforageApi/add-item "items" details)} "Add Item"]])))
+      [:button {:on-click #(localforageApi/add-item "items" @details)} "Add Item"]])))

@@ -13,4 +13,4 @@
       [:h2 "This is the new city page"]
       [:input {:type "text" :placeholder "City Name" :on-change #(swap! details conj {:name (-> % .-target .-value)})}]
       [:textarea {:placeholder "description" :on-change #(swap! details conj {:description (-> % .-target .-value)})}]
-      [:button {:on-click #(localforageApi/add-item "cities" details)} "Add City"]])))
+      [:button {:on-click #(localforageApi/add-item "cities" @details)} "Add City"]])))

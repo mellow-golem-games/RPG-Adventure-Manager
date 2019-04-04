@@ -28,4 +28,4 @@
       [:input {:type "text" :placeholder "goals" :on-change #(swap! details conj {:goals (-> % .-target .-value)})}]
       [:textarea {:placeholder "history" :on-change #(swap! details conj {:history (-> % .-target .-value)})}]
       [:input {:type "text" :placeholder "location" :on-change #(swap! details conj {:location (-> % .-target .-value)})}]
-      [:button {:on-click #(localforageApi/add-item "npcs" details)} "Add NPC"]])))
+      [:button {:on-click #(localforageApi/add-item "npcs" @details)} "Add NPC"]])))

@@ -25,7 +25,20 @@
   "adds an item to localstorage by pulling current list, conj them together and overwrite"
   (.then (.getItem localforage type) (fn [value]
     (let [currentStorage (js->clj value)]
-      (.then (.setItem localforage type (clj->js (conj currentStorage (add-metadata @details))) (fn [value]
-        (handle-state-change "update-entity" {:type type :value (conj currentStorage (add-metadata @details))})
+      (.then (.setItem localforage type (clj->js (conj currentStorage (add-metadata details))) (fn [value]
+        (handle-state-change "update-entity" {:type type :value (conj currentStorage (add-metadata details))})
         (handle-state-change "update-alert" {:visible true :content "Item Saved!"})
         (handle-state-change "update-current-view" "")))))))) ; TODO we need a better alert box
+
+(defn update-item [type item]
+  "updats an item - does so by completly overriding it so it must pass the same item with update details and all fields"
+   (.then (.getItem localforage type) (fn [value]
+     (let [currentStorage (js->clj value :keywordize-keys true)]
+      (loop [i 0] ; Little cleaner than doall so we only iterate as needed
+        (if (= (:name (nth currentStorage i)) (:name item))
+            (.then (.setItem localforage type (clj->js (conj (assoc currentStorage i item))) (fn [value]
+              (handle-state-change "update-entity" {:type type :value (conj currentStorage)})
+              (handle-state-change "update-alert" {:visible true :content "Item Updated!"}))))
+            (recur (inc i)))
+      )
+     ))))

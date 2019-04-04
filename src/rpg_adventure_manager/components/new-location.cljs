@@ -17,4 +17,4 @@
       [:textarea {:placeholder "Location Description" :on-change #(swap! details conj {:description (-> % .-target .-value)})}]
       [:input {:type "text" :placeholder "Owner or Residents" :on-change #(swap! details conj {:owner (-> % .-target .-value)})}]
       [:input {:type "text" :placeholder "Inventory/Loot" :on-change #(swap! details conj {:inventory (-> % .-target .-value)})}]
-      [:button {:on-click #(localforageApi/add-item "locations" details)} "Add Location"]])))
+      [:button {:on-click #(localforageApi/add-item "locations" @details)} "Add Location"]])))

@@ -22,7 +22,7 @@
   (handle-state-change "set-active-entity" entitiesToView))
 
 (defn Main []
-  ; (print (:activeView @state)) ; TODO remove in prod but nice for dev use to see that state is what we expect
+  (print (:activeView @state)) ; TODO remove in prod but nice for dev use to see that state is what we expect
   [:div.Main-Wrapper
     [:div.itemContainer
       [:button {:on-click #(handle-state-change "update-current-view" "new-city")} "Add New City"]
