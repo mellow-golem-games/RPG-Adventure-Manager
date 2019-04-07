@@ -34,11 +34,11 @@
   "updats an item - does so by completly overriding it so it must pass the same item with update details and all fields"
    (.then (.getItem localforage type) (fn [value]
      (let [currentStorage (js->clj value :keywordize-keys true)]
-      (loop [i 0] ; Little cleaner than doall so we only iterate as needed
+      (loop [i 0] ; Little cleaner than doall/for so we only iterate as needed this probably won't get too big anyways
         (if (= (:name (nth currentStorage i)) (:name item))
             (.then (.setItem localforage type (clj->js (conj (assoc currentStorage i item))) (fn [value]
               (handle-state-change "update-entity" {:type type :value (conj currentStorage)})
+              (handle-state-change "set-single-entity" item)
+              (handle-state-change "set-active-entity" (conj (assoc currentStorage i item)))
               (handle-state-change "update-alert" {:visible true :content "Item Updated!"}))))
-            (recur (inc i)))
-      )
-     ))))
+            (recur (inc i))))))))

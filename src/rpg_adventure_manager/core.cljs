@@ -23,7 +23,7 @@
   (handle-state-change "set-active-type" type))
 
 (defn Main []
-  (print @state) ; TODO remove in prod but nice for dev use to see that state is what we expect
+  ; (print @state) ; TODO remove in prod but nice for dev use to see that state is what we expect
   [:div.Main-Wrapper
     [:div.itemContainer
       [:button {:on-click #(handle-state-change "update-current-view" "new-city")} "Add New City"]
