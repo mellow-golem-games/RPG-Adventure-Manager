@@ -14,12 +14,16 @@
     [:div.View-Cities.viewPage {:class (:view-all-entities (:activeView @state))}
       [:div.New-Hook__header.viewPage__header
         [:p {:on-click #(handle-state-change "update-current-view" "")} "x"]]
-        [:h3 "Currently In Use"]
-        (doall (for [entity (:activeEntity (js->clj @state :keywordize-keys true))] ; TODO we can bring this down to 1 loop
-          (if (:used entity)
-          [:p {:on-click #(show-view-all entity) :key (:name entity)} (:name entity)])))
-        [:h3 "Not In use"]
-        (doall (for [entity (:activeEntity (js->clj @state :keywordize-keys true))]
-          (if (not (:used entity))
-          [:p {:on-click #(show-view-all entity) :key (:name entity)}  (:name entity)])))
-      [:h2 "View All all"]])))
+        [:div.View-all-body
+          [:div.View-all-group
+            [:h3 "Currently In Use"]
+            (doall (for [entity (:activeEntity (js->clj @state :keywordize-keys true))] ; TODO we can bring this down to 1 loop
+              (if (:used entity)
+              [:div.View-all-item
+                [:p {:on-click #(show-view-all entity) :key (:name entity)} (:name entity)]])))]
+          [:div.View-all-group
+            [:h3 "Not In use"]
+            (doall (for [entity (:activeEntity (js->clj @state :keywordize-keys true))]
+              (if (not (:used entity))
+              [:div.View-all-item
+                [:p {:on-click #(show-view-all entity) :key (:name entity)}  (:name entity)]])))]]])))

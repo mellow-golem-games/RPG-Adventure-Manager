@@ -1,5 +1,6 @@
 (ns rpg-adventure-manager.core
     (:require [reagent.core :as reagent :refer [atom]]
+              [rpg-adventure-manager.components.header :as header]
               [rpg-adventure-manager.newcity :as newcity]
               [rpg-adventure-manager.newnpc :as newnpc]
               [rpg-adventure-manager.newitem :as newitem]
@@ -25,21 +26,38 @@
 (defn Main []
   ; (print @state) ; TODO remove in prod but nice for dev use to see that state is what we expect
   [:div.Main-Wrapper
-    [:div.itemContainer
-      [:button {:on-click #(handle-state-change "update-current-view" "new-city")} "Add New City"]
-      [:button {:on-click #(show-view-all (:cities @state) "cities")} "View All Cities"]]
-    [:div.itemContainer
-      [:button {:on-click #(handle-state-change "update-current-view" "new-npc")} "Add New NPC"]
-      [:button {:on-click #(show-view-all (:npcs @state) "npcs")} "View All NPCs"]]
-    [:div.itemContainer
-      [:button {:on-click #(handle-state-change "update-current-view" "new-item")} "Add New Item"]
-      [:button {:on-click #(show-view-all (:items @state) "items")} "View All Items"]]
-    [:div.itemContainer
-      [:button {:on-click #(handle-state-change "update-current-view" "new-location")} "Add New Location"]
-      [:button {:on-click #(show-view-all (:locations @state) "locations")} "View All Locations"]]
-    [:div.itemContainer
-      [:button {:on-click #(handle-state-change "update-current-view" "new-hook")} "Add New Plot Hook"]
-      [:button {:on-click #(show-view-all (:hooks @state) "hooks")} "View All Plot Hooks"]]
+    [header/render]
+    [:div.Home-content
+      [:div.itemContainer
+        [:div.itemContainer__left
+          [:h2 "City"]]
+        [:div.itemContainer__right
+          [:button {:on-click #(handle-state-change "update-current-view" "new-city")} "Add New"]
+          [:button {:on-click #(show-view-all (:cities @state) "cities")} "View All"]]]
+      [:div.itemContainer
+        [:div.itemContainer__left
+          [:h2 "NPC"]]
+        [:div.itemContainer__right
+          [:button {:on-click #(handle-state-change "update-current-view" "new-npc")} "Add New"]
+          [:button {:on-click #(show-view-all (:npcs @state) "npcs")} "View All"]]]
+      [:div.itemContainer
+        [:div.itemContainer__left
+          [:h2 "Item"]]
+        [:div.itemContainer__right
+          [:button {:on-click #(handle-state-change "update-current-view" "new-item")} "Add New"]
+          [:button {:on-click #(show-view-all (:items @state) "items")} "View All"]]]
+      [:div.itemContainer
+        [:div.itemContainer__left
+          [:h2 "Location"]]
+        [:div.itemContainer__right
+          [:button {:on-click #(handle-state-change "update-current-view" "new-location")} "Add New"]
+          [:button {:on-click #(show-view-all (:locations @state) "locations")} "View All"]]]
+      [:div.itemContainer
+        [:div.itemContainer__left
+          [:h2 "Plot Hooks"]]
+        [:div.itemContainer__right
+          [:button {:on-click #(handle-state-change "update-current-view" "new-hook")} "Add New"]
+          [:button {:on-click #(show-view-all (:hooks @state) "hooks")} "View All"]]]]
    (if (= (:visible (:showAlert @state)) true)  ; conditionally show the alert box
     [alert/render (:content (:showAlert @state))])
    [newcity/render state]
