@@ -3,12 +3,13 @@ body, html {
   margin: 0;
   padding: 0;
   background: #f4f3ef;
+  font-size: 16px;
 }
 
 .itemPage, .viewPage {
   position: fixed;
   top: -105%;
-  transition: all .35s;
+  transition: all .25s;
   background: #f4f3ef;
   height: 100%;
   width: 100%;
@@ -33,16 +34,39 @@ body, html {
   border: 1px solid black;
 }
 
+button {
+  border: 1px solid #9776ec;
+  font-size: .75rem;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  color: white;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#9776ec+11,7a53e0+100 */
+  background: #9776ec; /* Old browsers */
+  background: -moz-linear-gradient(top, #9776ec 11%, #7a53e0 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #9776ec 11%,#7a53e0 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #9776ec 11%,#7a53e0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9776ec', endColorstr='#7a53e0',GradientType=0 ); /* IE6-9 */
+}
+
 /* GLOBALISH STUFF */
-.Header {
+.Header, .header {
   background: #101518;
   color: white;
   padding: 10px;
-  text-align: center;
 }
 
 .Header h4 {
   margin: 0;
+}
+
+.header p {
+  margin: 0;
+}
+
+.headerInner {
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
 }
 
 
@@ -53,7 +77,8 @@ body, html {
 }
 .Home-content .itemContainer {
   width: 30%;
-  border: 1px solid gray;
+  border-radius: 10px;
+  border: 2px solid #ecebe9;
   margin: 25px 15px;
   padding: 25px 15px;
   box-sizing: border-box;
@@ -61,13 +86,28 @@ body, html {
 }
 
 .Home-content .itemContainer .itemContainer__left {
-  width: 75%;
+  width: 60%;
 }
 
 .Home-content .itemContainer .itemContainer__right {
-  width: 25%;
+  width: 40%;
   display: flex;
   flex-direction: column;
+}
+
+/* NEW ITEM PAGES */
+.new.itemPage .content{
+  width: 75%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.new.itemPage .content input, .new.itemPage .content textarea {
+  width: 100%;
+  border: 1px solid #ecebe9;
+  padding: 5px;
+  font-size: .85rem;
+  margin: 5px 0;
 }
 
 
