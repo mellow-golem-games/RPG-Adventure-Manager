@@ -4,4 +4,4 @@
 (defn render []
   (fn []
     [:div.Header
-      [:h4 "Header Content"]]))
+      [:h4 "RPG Adventure Manager"]]))

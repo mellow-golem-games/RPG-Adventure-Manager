@@ -30,25 +30,25 @@
     [:div.Home-content
       [:div.itemContainer
         [:div.itemContainer__left
-          [:h2 "City"]]
+          [:h2 "Cities"]]
         [:div.itemContainer__right
           [:button {:on-click #(handle-state-change "update-current-view" "new-city")} "Add New"]
           [:button {:on-click #(show-view-all (:cities @state) "cities")} "View All"]]]
       [:div.itemContainer
         [:div.itemContainer__left
-          [:h2 "NPC"]]
+          [:h2 "NPCs"]]
         [:div.itemContainer__right
           [:button {:on-click #(handle-state-change "update-current-view" "new-npc")} "Add New"]
           [:button {:on-click #(show-view-all (:npcs @state) "npcs")} "View All"]]]
       [:div.itemContainer
         [:div.itemContainer__left
-          [:h2 "Item"]]
+          [:h2 "Items"]]
         [:div.itemContainer__right
           [:button {:on-click #(handle-state-change "update-current-view" "new-item")} "Add New"]
           [:button {:on-click #(show-view-all (:items @state) "items")} "View All"]]]
       [:div.itemContainer
         [:div.itemContainer__left
-          [:h2 "Location"]]
+          [:h2 "Locations"]]
         [:div.itemContainer__right
           [:button {:on-click #(handle-state-change "update-current-view" "new-location")} "Add New"]
           [:button {:on-click #(show-view-all (:locations @state) "locations")} "View All"]]]

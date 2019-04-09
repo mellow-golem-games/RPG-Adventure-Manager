@@ -20,7 +20,7 @@
     [:div.New-Npc.itemPage.new {:class (:new-npc (:activeView @state))}
       (header/render)
       [:div.new.content
-        [:h2 "This is the new NPC page"]
+        [:h2 "Add a New NPC"]
         [:input {:type "text" :placeholder "NPC Name" :on-change #(swap! details conj {:name (-> % .-target .-value)})}]
         [:textarea {:placeholder "Character Description" :on-change #(swap! details conj {:description (-> % .-target .-value)})}]
         [:input {:type "text" :placeholder "Equipment" :on-change #(swap! details conj {:equipment (-> % .-target .-value)})}]
