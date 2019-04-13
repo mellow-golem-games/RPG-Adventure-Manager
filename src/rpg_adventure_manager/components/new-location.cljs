@@ -8,7 +8,7 @@
 
 ; TODO MAKE liniing functionality that can pull up side by side each page!!!!
 (defn render [state]
-  (let [details (atom {:name "" :description "" :owner "" :inventory ""})]
+  (let [details (atom {:name "" :description "" :owner "" :inventory "" :usage ""})]
   (fn []
     [:div.New-Location.itemPage.new {:class (:new-location (:activeView @state))}
     (header/render)
@@ -18,4 +18,5 @@
       [:textarea {:placeholder "Location Description" :on-change #(swap! details conj {:description (-> % .-target .-value)})}]
       [:input {:type "text" :placeholder "Owner or Residents" :on-change #(swap! details conj {:owner (-> % .-target .-value)})}]
       [:input {:type "text" :placeholder "Inventory/Loot" :on-change #(swap! details conj {:inventory (-> % .-target .-value)})}]
+      [:textarea {:placeholder "Usage Details" :on-change #(swap! details conj {:usage (-> % .-target .-value)})}]
       [:button {:on-click #(localforageApi/add-item "locations" @details)} "Add Location"]]])))

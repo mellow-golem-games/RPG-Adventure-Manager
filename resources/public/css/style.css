@@ -150,6 +150,16 @@ button:active {
   /* margin: 15px 0; */
   margin-bottom: 32px;
   padding: 5px;
+  border-radius: 10px;
+  border: 2px solid #ecebe9;
+  display: flex;
+  justify-content: space-between;
+}
+
+.View-all-body .View-all-item:first-of-type {
+  /* margin: 15px 0; */
+  margin-bottom: 32px;
+  padding: 5px;
   border-radius: 0 0 10px 10px;
   border: 2px solid #ecebe9;
   display: flex;

@@ -15,7 +15,8 @@
                        :flaws ""
                        :goals ""
                        :history ""
-                       :location ""})]
+                       :location ""
+                       :usage ""})]
   (fn []
     [:div.New-Npc.itemPage.new {:class (:new-npc (:activeView @state))}
       (header/render)
@@ -29,4 +30,5 @@
         [:input {:type "text" :placeholder "goals" :on-change #(swap! details conj {:goals (-> % .-target .-value)})}]
         [:textarea {:placeholder "history" :on-change #(swap! details conj {:history (-> % .-target .-value)})}]
         [:input {:type "text" :placeholder "location" :on-change #(swap! details conj {:location (-> % .-target .-value)})}]
+        [:textarea {:placeholder "Usage Details" :on-change #(swap! details conj {:usage (-> % .-target .-value)})}]
         [:button {:on-click #(localforageApi/add-item "npcs" @details)} "Add NPC"]]])))
