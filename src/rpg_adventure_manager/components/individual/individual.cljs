@@ -19,12 +19,14 @@
         (header/render)
         [:div.singlePage.body
           [:div.singlePage.body.indivHeader
-            [:h2 (:name entity)]
+            [:h1 (:name entity)]
             [:div
               (if (= (:used entity) false)
                 [:button {:on-click #(toggle-used-state entity (:activeType @state))} "Mark as Used"]
                 [:button {:on-click #(toggle-used-state entity (:activeType @state))} "mark as unused"])]]
           (doall (for [key entity]
             (if (and (not (= (first key) :used)) (not (= (first key) :name)) (not (= (first key) :created))) ; No display for used and created
-              [:h2 {:key (name (first key))} (str (name (first key)) ": " (second key))])))
-              [:button "Delete"]]])))
+              [:div.singlePage.body.item
+                [:h2 {:key (name (first key))} (str (name (first key)) ": ")]
+                [:p (str (second key))]])))
+              [:button.delete "Delete"]]])))

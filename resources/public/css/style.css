@@ -18,6 +18,7 @@ h1, h2, h3, h4, h5 {
   background: #f4f3ef;
   height: 100%;
   width: 100%;
+  overflow: scroll;
 }
 
 .itemPage.visible, .viewPage.visible {
@@ -56,6 +57,20 @@ button {
 
 button:active {
   background: #7a53e0;
+}
+
+
+button.delete {
+  border-color: #c54949;
+  background: #f85e5e; /* Old browsers */
+  background: -moz-linear-gradient(top, #f85e5e 11%, #c54949 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #f85e5e 11%,#c54949 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #f85e5e 11%,#c54949 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85e5e', endColorstr='#c54949',GradientType=0 ); /* IE6-9 */
+}
+
+button.delete:active {
+  background: #c54949;
 }
 
 /* GLOBALISH STUFF */
@@ -104,7 +119,7 @@ button:active {
   border-bottom: 2px solid #e6b345;
   display: inline-block;
   padding: 2px 4px;
-  font-size: 1.75rem
+  font-size: 1.75rem;
 }
 
 .Home-content .itemContainer .itemContainer__right {
@@ -179,4 +194,14 @@ button:active {
   display: flex;
   justify-content: space-between;
   vertical-align: middle;
+}
+
+.View-single .singlePage.body.item {
+  text-transform: capitalize;
+  border-bottom: 2px solid #e6b345;
+}
+
+.View-single .singlePage.body.item p {
+  line-height: 1.55rem;
+  font-weight: 300;
 }
