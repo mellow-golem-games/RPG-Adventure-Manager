@@ -23,12 +23,14 @@
 
 (defn add-item [type details]
   "adds an item to localstorage by pulling current list, conj them together and overwrite"
-  (.then (.getItem localforage type) (fn [value]
-    (let [currentStorage (js->clj value)]
-      (.then (.setItem localforage type (clj->js (conj currentStorage (add-metadata details))) (fn [value]
-        (handle-state-change "update-entity" {:type type :value (conj currentStorage (add-metadata details))})
-        (handle-state-change "update-alert" {:visible true :content "Item Saved!"})
-        (handle-state-change "update-current-view" "")))))))) ; TODO we need a better alert box
+  (if (clojure.string/blank? (:name details)) ; Name is the only field we require
+    (js/alert "Name Cannot Be Blank!")
+    (.then (.getItem localforage type) (fn [value]
+      (let [currentStorage (js->clj value)]
+        (.then (.setItem localforage type (clj->js (conj currentStorage (add-metadata details))) (fn [value]
+          (handle-state-change "update-entity" {:type type :value (conj currentStorage (add-metadata details))})
+          (handle-state-change "update-alert" {:visible true :content "Item Saved!"})
+          (handle-state-change "update-current-view" ""))))))))) ; TODO we need a better alert box
 
 (defn update-item [type item]
   "updats an item - does so by completly overriding it so it must pass the same item with update details and all fields"

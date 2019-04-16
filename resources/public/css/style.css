@@ -172,7 +172,7 @@ button:active {
 .View-single .singlePage.body {
   width: 75%;
   max-width: 680px;
-  margin: 0 auto;
+  margin: 32px auto;
 }
 
 .View-single .singlePage.body.indivHeader {
