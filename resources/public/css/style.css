@@ -186,22 +186,26 @@ button.delete:active {
 
 .View-single .singlePage.body {
   width: 75%;
-  max-width: 680px;
+  max-width: 620px;
   margin: 32px auto;
 }
 
-.View-single .singlePage.body.indivHeader {
+.View-single .singlePage.indivHeader {
   display: flex;
   justify-content: space-between;
   vertical-align: middle;
 }
 
-.View-single .singlePage.body.item {
+.View-single .singlePage.item {
   text-transform: capitalize;
   border-bottom: 2px solid #e6b345;
 }
 
-.View-single .singlePage.body.item p {
+.View-single .singlePage.item p {
   line-height: 1.55rem;
   font-weight: 300;
+}
+
+.View-single button.delete {
+  margin-top: 16px;
 }
