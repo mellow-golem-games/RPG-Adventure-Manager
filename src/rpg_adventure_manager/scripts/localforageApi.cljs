@@ -49,3 +49,13 @@
               (handle-state-change "set-active-entity" (conj (assoc currentStorage i item)))
               (handle-state-change "update-alert" {:visible true :content "Item Updated!"}))))
             (recur (inc i))))))))
+
+(defn delete-item [entity type]
+  "deletes an item by creating a new list of type without the removed element and overrides storage"
+  (.then (.getItem localforage type) (fn [value]
+    (let [currentStorage (js->clj value :keywordize-keys true)
+          filteredValues (filter (fn [item]
+            (not= (:name item) (:name entity))) currentStorage)]
+      (.then (.setItem localforage type (clj->js filteredValues) (fn [value]
+          (handle-state-change "update-entity" {:type type :value filteredValues})
+          (handle-state-change "update-alert" {:visible true :content "Item Deleted!"}))))))))

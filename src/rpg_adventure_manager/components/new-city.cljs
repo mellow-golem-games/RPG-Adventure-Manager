@@ -6,7 +6,7 @@
 
 ; TODO make a heper function to get the current state of any particular page
 (defn render [state]
-  (let [details (atom {:name "" :description "" :population "" :location "" :usage ""})]
+  (let [details (atom {:name "" :description "" :population "" :usage ""})]
   (fn []
     [:div.New-City.itemPage.new {:class (:new-city (:activeView @state))}
       (header/render)

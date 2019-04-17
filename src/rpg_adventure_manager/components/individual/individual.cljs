@@ -11,9 +11,8 @@
   ; last need to update the single entity property in the store to update this page
   )
 
-;TODO actually do delete here
-(defn delete-item [entity]
-  (js/alert "Item Deleted!")
+(defn delete-item [entity type]
+  (localforageApi/delete-item entity type)
   (handle-state-change "update-current-view" ""))
 
 
@@ -34,4 +33,4 @@
               [:div.singlePage.item
                 [:h2 {:key (name (first key))} (str (name (first key)) ": ")]
                 [:p (str (second key))]])))
-              [:button.delete {:on-click #(delete-item entity)} "Delete"]]])))
+              [:button.delete {:on-click #(delete-item entity (:activeType @state))} "Delete"]]])))
