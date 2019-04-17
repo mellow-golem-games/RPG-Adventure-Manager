@@ -30,7 +30,7 @@
                 [:button {:on-click #(toggle-used-state entity (:activeType @state))} "mark as unused"])]]
           (doall (for [key entity]
             (if (and (not (= (first key) :used)) (not (= (first key) :name)) (not (= (first key) :created))) ; No display for used and created
-              [:div.singlePage.item
+              [:div.singlePage.item {:key key}
                 [:h2 {:key (name (first key))} (str (name (first key)) ": ")]
                 [:p (str (second key))]])))
               [:button.delete {:on-click #(delete-item entity (:activeType @state))} "Delete"]]])))
