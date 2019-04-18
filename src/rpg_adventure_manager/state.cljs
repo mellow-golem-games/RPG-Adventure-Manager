@@ -4,7 +4,7 @@
 
 ; Holds a reference to all the current Items in the Database
 ; :activeView also contains things like view-all-cities & view-individual-city
-(defonce state (atom {:activeView {  ; This gets erased as state changes but I left it here as a reminder for accepted values
+(defonce state (atom {:activeView {  ; This gets erased as state changes but I left it here as a reminder for expected values
                          :new-city false
                          :new-npc false
                          :new-item false

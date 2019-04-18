@@ -196,6 +196,11 @@ button.delete:active {
   vertical-align: middle;
 }
 
+.View-single .singlePage.indivHeader button {
+  position: relative;
+  top: 18px;
+}
+
 .View-single .singlePage.item {
   text-transform: capitalize;
   border-bottom: 2px solid #e6b345;
