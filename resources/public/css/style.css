@@ -128,6 +128,17 @@ button.delete:active {
   flex-direction: column;
 }
 
+.Home-lists {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.Home-lists-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 /* NEW ITEM PAGES */
 .new.itemPage .content{
   width: 75%;

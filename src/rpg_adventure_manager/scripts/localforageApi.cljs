@@ -19,7 +19,23 @@
   (go (get-initial-data-by-type "npcs"))
   (go (get-initial-data-by-type "locations"))
   (go (get-initial-data-by-type "items"))
-  (go (get-initial-data-by-type "hooks")))
+  (go (get-initial-data-by-type "hooks"))
+  (go (get-initial-data-by-type "lists")))
+
+(defn add-list [details]
+  "Adds a list to localstorage"
+  (if (clojure.string/blank? (:name details)) ; Name is the only field we require
+    (js/alert "Name Cannot Be Blank!")
+    (.then (.getItem localforage "lists") (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)]
+        (loop [i 0]
+          (if (= (count currentStorage) i)
+            (.then (.setItem localforage "lists" (clj->js (conj currentStorage (add-metadata details))) (fn [value]
+              (handle-state-change "update-alert" {:visible true :content "List Saved!"})
+              (handle-state-change "update-current-view" ""))))
+            (if (= (:name (nth currentStorage i)) (:name details))
+              (js/alert "That Name Is Already Taken!")
+              (recur (inc i))))))))))
 
 (defn add-item [type details]
   "adds an item to localstorage by pulling current list, conj them together and overwrite"

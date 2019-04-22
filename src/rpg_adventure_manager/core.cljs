@@ -8,6 +8,7 @@
               [rpg-adventure-manager.newhook :as newhook]
               [rpg-adventure-manager.components.all.view :as viewall]
               [rpg-adventure-manager.components.individual.individual :as viewSingle]
+              [rpg-adventure-manager.components.lists.list :as listView]
               [rpg-adventure-manager.components.shared.alert :as alert]
               [rpg-adventure-manager.state :refer [state handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
@@ -24,7 +25,7 @@
   (handle-state-change "set-active-type" type))
 
 (defn Main []
-  ; (print @state) ; TODO remove in prod but nice for dev use to see that state is what we expect
+  (print @state) ; TODO remove in prod but nice for dev use to see that state is what we expect
   [:div.Main-Wrapper
     [header/render]
     [:div.Home-content
@@ -58,6 +59,7 @@
         [:div.itemContainer__right
           [:button {:on-click #(handle-state-change "update-current-view" "new-hook")} "Add New"]
           [:button {:on-click #(show-view-all (:hooks @state) "hooks")} "View All"]]]]
+   [listView/render state]
    (if (= (:visible (:showAlert @state)) true)  ; conditionally show the alert box
     [alert/render (:content (:showAlert @state))])
    [newcity/render state]
