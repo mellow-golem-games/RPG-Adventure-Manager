@@ -9,11 +9,13 @@
                          :new-npc false
                          :new-item false
                          :new-location false
-                         :new-hook false}
+                         :new-hook false
+                         :active-list false}
                        :showAlert {:visible false :content ""}
                        :activeType ""
                        :activeEntity {}
-                       :singleEntity {}}))
+                       :singleEntity {}
+                       :activeList {}}))
 
 (defn update-current-view [payload]
   "Handles changing the view to the next selected page"
@@ -38,6 +40,10 @@
 (defn set-single-entity [payload]
   "sets the entity to view on the single page"
   (swap! state conj {:singleEntity payload}))
+
+(defn set-active-list [payload]
+  "Sets the provided list to active"
+  (swap! state conj {:activeList payload}))
 
 (defn handle-state-change [action payload]
   "Accept an action function to dispatch and passes it the current payload"

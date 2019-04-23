@@ -14,6 +14,7 @@ h1, h2, h3, h4, h5 {
 .itemPage, .viewPage {
   position: fixed;
   top: -105%;
+  left: 0;
   transition: all .25s;
   background: #f4f3ef;
   height: 100%;
@@ -131,6 +132,8 @@ button.delete:active {
 .Home-lists {
   display: flex;
   flex-flow: wrap;
+  max-width: 620px;
+  margin: 0 auto;
 }
 
 .Home-lists-header {
