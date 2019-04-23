@@ -8,6 +8,10 @@
   "Adds the extra metadata we want to track on each item"
   (conj details {:used false :created (js/Date.)}))
 
+(defn add-metadata-list [details]
+  "Adds the extra metadata we want to track on each item"
+  (conj details {:used false :created (js/Date.) :items {:1 ""}}))
+
 (defn get-initial-data-by-type [type]
   "Quries an entity from out localstorage and adds it to local store"
   (.then (.getItem localforage type) (fn [value]
@@ -30,7 +34,7 @@
       (let [currentStorage (js->clj value :keywordize-keys true)]
         (loop [i 0]
           (if (= (count currentStorage) i)
-            (.then (.setItem localforage "lists" (clj->js (conj currentStorage (add-metadata details))) (fn [value]
+            (.then (.setItem localforage "lists" (clj->js (conj currentStorage (add-metadata-list details))) (fn [value]
               (handle-state-change "update-alert" {:visible true :content "List Saved!"})
               (handle-state-change "update-current-view" ""))))
             (if (= (:name (nth currentStorage i)) (:name details))
@@ -75,3 +79,18 @@
       (.then (.setItem localforage type (clj->js filteredValues) (fn [value]
           (handle-state-change "update-entity" {:type type :value filteredValues})
           (handle-state-change "update-alert" {:visible true :content "Item Deleted!"}))))))))
+
+(defn save-list [name list]
+  "saves a list to localstorage"
+  (.then (.getItem localforage "lists") (fn [value]
+    (let [currentStorage (js->clj value :keywordize-keys true)]
+      (loop [i 0]
+        (if (= (:name (nth currentStorage i)) name )
+          ; (print (assoc currentStorage i (conj (nth currentStorage i) {:items list})))
+          (.then (.setItem localforage "lists" (clj->js (assoc currentStorage i (conj (nth currentStorage i) {:items list}))) (fn [value]
+            (handle-state-change "update-alert" {:visible true :content "List Updated"}))))
+          (recur (inc i))))
+      )
+    ))
+
+  )
