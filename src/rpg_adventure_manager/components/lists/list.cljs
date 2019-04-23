@@ -21,6 +21,6 @@
         [:button {:on-click #(handle-state-change "update-current-view" "new-list")} "Add List"]]
       [:div.Home-lists-content
         (doall (for [list (:lists (js->clj @state :keywordize-keys true))]
-          [:div.Home-lists-container
-            [:p {:on-click #(show-active-list list) :key (:name list)} (:name list)]
+          [:div.Home-lists-container {:key (:name list)}
+            [:p {:on-click #(show-active-list list)} (:name list)]
             [:button.delete {:on-click #(localforageApi/delete-list (:name list))} "Delete"]]))]]))

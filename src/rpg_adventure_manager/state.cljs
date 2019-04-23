@@ -25,6 +25,10 @@
   "Payload : {:type type :value {object}} - Used to arbitarily update an entity of any type"
   (swap! state conj {(keyword (:type payload)) (:value payload)}))
 
+(defn update-list [payload]
+  "completely blows away the current lists"
+  (swap! state conj {:lists payload}))
+
 (defn update-alert [payload]
   "updates alert status to provided value"
   (swap! state conj {:showAlert payload}))

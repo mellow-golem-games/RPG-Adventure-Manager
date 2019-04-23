@@ -26,21 +26,6 @@
   (go (get-initial-data-by-type "hooks"))
   (go (get-initial-data-by-type "lists")))
 
-(defn add-list [details]
-  "Adds a list to localstorage"
-  (if (clojure.string/blank? (:name details)) ; Name is the only field we require
-    (js/alert "Name Cannot Be Blank!")
-    (.then (.getItem localforage "lists") (fn [value]
-      (let [currentStorage (js->clj value :keywordize-keys true)]
-        (loop [i 0]
-          (if (= (count currentStorage) i)
-            (.then (.setItem localforage "lists" (clj->js (conj currentStorage (add-metadata-list details))) (fn [value]
-              (handle-state-change "update-alert" {:visible true :content "List Saved!"})
-              (handle-state-change "update-current-view" ""))))
-            (if (= (:name (nth currentStorage i)) (:name details))
-              (js/alert "That Name Is Already Taken!")
-              (recur (inc i))))))))))
-
 (defn add-item [type details]
   "adds an item to localstorage by pulling current list, conj them together and overwrite"
   (if (clojure.string/blank? (:name details)) ; Name is the only field we require
@@ -80,6 +65,23 @@
           (handle-state-change "update-entity" {:type type :value filteredValues})
           (handle-state-change "update-alert" {:visible true :content "Item Deleted!"}))))))))
 
+; ALL list functions have a bit of code repeating to update the store - probably ````let```` that to resuse
+(defn add-list [details]
+  "Adds a list to localstorage"
+  (if (clojure.string/blank? (:name details)) ; Name is the only field we require
+    (js/alert "Name Cannot Be Blank!")
+    (.then (.getItem localforage "lists") (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)]
+        (loop [i 0]
+          (if (= (count currentStorage) i)
+            (.then (.setItem localforage "lists" (clj->js (conj currentStorage (add-metadata-list details))) (fn [value]
+              (handle-state-change "update-list" (conj currentStorage (add-metadata-list details)))
+              (handle-state-change "update-alert" {:visible true :content "List Saved!"})
+              (handle-state-change "update-current-view" ""))))
+          (if (= (:name (nth currentStorage i)) (:name details))
+            (js/alert "That Name Is Already Taken!")
+          (recur (inc i))))))))))
+
 (defn save-list [name list]
   "saves a list to localstorage"
   (.then (.getItem localforage "lists") (fn [value]
@@ -87,6 +89,7 @@
       (loop [i 0]
         (if (= (:name (nth currentStorage i)) name )
           (.then (.setItem localforage "lists" (clj->js (assoc currentStorage i (conj (nth currentStorage i) {:items list}))) (fn [value]
+            (handle-state-change "update-list" (assoc currentStorage i (conj (nth currentStorage i) {:items list})))
             (handle-state-change "update-alert" {:visible true :content "List Updated"}))))
           (recur (inc i))))))))
 
@@ -98,5 +101,7 @@
         (if (= (:name (nth currentStorage i)) name )
           (.then (.setItem localforage "lists" (clj->js (concat (subvec currentStorage 0 i)
                                                (subvec currentStorage (inc i)))) (fn [value]
+            (handle-state-change "update-list" (concat (subvec currentStorage 0 i)
+                                                 (subvec currentStorage (inc i))))
             (handle-state-change "update-alert" {:visible true :content "List Delete"}))))
           (recur (inc i))))))))
