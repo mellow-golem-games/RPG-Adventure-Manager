@@ -18,9 +18,12 @@
       [newitem/render state]
       [:div.Home-lists-header
         [:h2 "Custom Lists"]
-        [:button {:on-click #(handle-state-change "update-current-view" "new-list")} "Add List"]]
+        [:div
+         [:button {:on-click #(handle-state-change "update-current-view" "new-list")} "Add List"]]]
       [:div.Home-lists-content
         (doall (for [list (:lists (js->clj @state :keywordize-keys true))]
           [:div.Home-lists-container {:key (:name list)}
-            [:p {:on-click #(show-active-list list)} (:name list)]
-            [:button.delete {:on-click #(localforageApi/delete-list (:name list))} "Delete"]]))]]))
+            [:h3 (:name list)]
+            [:div
+              [:button {:on-click #(show-active-list list)} "View List"]
+              [:button.delete {:on-click #(localforageApi/delete-list (:name list))} "Delete"]]]))]]))

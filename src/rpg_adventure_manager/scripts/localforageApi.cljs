@@ -9,7 +9,7 @@
   (conj details {:used false :created (js/Date.)}))
 
 (defn add-metadata-list [details]
-  "Adds the extra metadata we want to track on each item"
+  "Adds the extra metadata we want to track on each list"
   (conj details {:used false :created (js/Date.) :items {:1 ""}}))
 
 (defn get-initial-data-by-type [type]

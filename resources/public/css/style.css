@@ -134,12 +134,34 @@ button.delete:active {
   flex-flow: wrap;
   max-width: 620px;
   margin: 0 auto;
+  padding-bottom: 16px;
 }
 
 .Home-lists-header {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  text-transform: capitalize;
+}
+
+.Home-lists-content {
+  width: 100%;
+}
+
+.Home-lists-content h3 {
+  text-transform: capitalize;
+}
+
+.Home-lists-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 24px;
+  border-bottom: 2px solid #e6b345;
+}
+
+.Active-List h2 {
+  text-transform: uppercase;
 }
 
 /* NEW ITEM PAGES */
