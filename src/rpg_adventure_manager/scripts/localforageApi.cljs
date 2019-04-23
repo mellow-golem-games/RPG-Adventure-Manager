@@ -86,11 +86,17 @@
     (let [currentStorage (js->clj value :keywordize-keys true)]
       (loop [i 0]
         (if (= (:name (nth currentStorage i)) name )
-          ; (print (assoc currentStorage i (conj (nth currentStorage i) {:items list})))
           (.then (.setItem localforage "lists" (clj->js (assoc currentStorage i (conj (nth currentStorage i) {:items list}))) (fn [value]
             (handle-state-change "update-alert" {:visible true :content "List Updated"}))))
-          (recur (inc i))))
-      )
-    ))
+          (recur (inc i))))))))
 
-  )
+(defn delete-list [name]
+  "Deletes a list from localstorage"
+  (.then (.getItem localforage "lists") (fn [value]
+    (let [currentStorage (js->clj value :keywordize-keys true)]
+      (loop [i 0]
+        (if (= (:name (nth currentStorage i)) name )
+          (.then (.setItem localforage "lists" (clj->js (concat (subvec currentStorage 0 i)
+                                               (subvec currentStorage (inc i)))) (fn [value]
+            (handle-state-change "update-alert" {:visible true :content "List Delete"}))))
+          (recur (inc i))))))))

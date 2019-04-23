@@ -12,9 +12,7 @@
   (if (not= @active-list-name name)
     (do
       (reset! inputs list)
-      (reset! active-list-name name)))
-
-  )
+      (reset! active-list-name name))))
 
 (defn handle-input-change [key value]
   "on input change adds a new input and updates the local atom with the new value"
