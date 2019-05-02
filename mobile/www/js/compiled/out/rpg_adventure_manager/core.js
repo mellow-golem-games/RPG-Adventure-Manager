@@ -51,4 +51,4 @@ rpg_adventure_manager.core.on_js_reload = (function rpg_adventure_manager$core$o
 return null;
 });
 
-//# sourceMappingURL=core.js.map?rel=1556058927294
+//# sourceMappingURL=core.js.map?rel=1556800584639

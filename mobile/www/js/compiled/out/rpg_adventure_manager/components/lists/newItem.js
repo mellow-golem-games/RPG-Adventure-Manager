@@ -42,30 +42,30 @@ var list = new cljs.core.Keyword(null,"activeList","activeList",1327514260).cljs
 rpg_adventure_manager.components.lists.newitem.update_default_inputs.call(null,new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(list),new cljs.core.Keyword(null,"items","items",1031954938).cljs$core$IFn$_invoke$arity$1(list));
 
 return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.Active-List.itemPage.new","div.Active-List.itemPage.new",-636219494),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),new cljs.core.Keyword(null,"active-list","active-list",-1848992403).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"activeView","activeView",-879635345).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,state)))], null),rpg_adventure_manager.components.new_header.render.call(null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.new.content","div.new.content",1078457008),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"h2","h2",-372662728),new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(list)], null),cljs.core.doall.call(null,(function (){var iter__4292__auto__ = ((function (list){
-return (function rpg_adventure_manager$components$lists$newitem$render_$_iter__28971(s__28972){
+return (function rpg_adventure_manager$components$lists$newitem$render_$_iter__37395(s__37396){
 return (new cljs.core.LazySeq(null,((function (list){
 return (function (){
-var s__28972__$1 = s__28972;
+var s__37396__$1 = s__37396;
 while(true){
-var temp__5457__auto__ = cljs.core.seq.call(null,s__28972__$1);
+var temp__5457__auto__ = cljs.core.seq.call(null,s__37396__$1);
 if(temp__5457__auto__){
-var s__28972__$2 = temp__5457__auto__;
-if(cljs.core.chunked_seq_QMARK_.call(null,s__28972__$2)){
-var c__4290__auto__ = cljs.core.chunk_first.call(null,s__28972__$2);
+var s__37396__$2 = temp__5457__auto__;
+if(cljs.core.chunked_seq_QMARK_.call(null,s__37396__$2)){
+var c__4290__auto__ = cljs.core.chunk_first.call(null,s__37396__$2);
 var size__4291__auto__ = cljs.core.count.call(null,c__4290__auto__);
-var b__28974 = cljs.core.chunk_buffer.call(null,size__4291__auto__);
-if((function (){var i__28973 = (0);
+var b__37398 = cljs.core.chunk_buffer.call(null,size__4291__auto__);
+if((function (){var i__37397 = (0);
 while(true){
-if((i__28973 < size__4291__auto__)){
-var input = cljs.core._nth.call(null,c__4290__auto__,i__28973);
-cljs.core.chunk_append.call(null,b__28974,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"key","key",-1516042587),cljs.core.first.call(null,input),new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"default-value","default-value",232220170),cljs.core.second.call(null,input),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),"List Item",new cljs.core.Keyword(null,"on-change","on-change",-732046149),((function (i__28973,input,c__4290__auto__,size__4291__auto__,b__28974,s__28972__$2,temp__5457__auto__,list){
-return (function (p1__28970_SHARP_){
-return rpg_adventure_manager.components.lists.newitem.handle_input_change.call(null,cljs.core.first.call(null,input),p1__28970_SHARP_.target.value);
-});})(i__28973,input,c__4290__auto__,size__4291__auto__,b__28974,s__28972__$2,temp__5457__auto__,list))
+if((i__37397 < size__4291__auto__)){
+var input = cljs.core._nth.call(null,c__4290__auto__,i__37397);
+cljs.core.chunk_append.call(null,b__37398,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"key","key",-1516042587),cljs.core.first.call(null,input),new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"default-value","default-value",232220170),cljs.core.second.call(null,input),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),"List Item",new cljs.core.Keyword(null,"on-change","on-change",-732046149),((function (i__37397,input,c__4290__auto__,size__4291__auto__,b__37398,s__37396__$2,temp__5457__auto__,list){
+return (function (p1__37394_SHARP_){
+return rpg_adventure_manager.components.lists.newitem.handle_input_change.call(null,cljs.core.first.call(null,input),p1__37394_SHARP_.target.value);
+});})(i__37397,input,c__4290__auto__,size__4291__auto__,b__37398,s__37396__$2,temp__5457__auto__,list))
 ], null)], null));
 
-var G__28975 = (i__28973 + (1));
-i__28973 = G__28975;
+var G__37399 = (i__37397 + (1));
+i__37397 = G__37399;
 continue;
 } else {
 return true;
@@ -73,17 +73,17 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons.call(null,cljs.core.chunk.call(null,b__28974),rpg_adventure_manager$components$lists$newitem$render_$_iter__28971.call(null,cljs.core.chunk_rest.call(null,s__28972__$2)));
+return cljs.core.chunk_cons.call(null,cljs.core.chunk.call(null,b__37398),rpg_adventure_manager$components$lists$newitem$render_$_iter__37395.call(null,cljs.core.chunk_rest.call(null,s__37396__$2)));
 } else {
-return cljs.core.chunk_cons.call(null,cljs.core.chunk.call(null,b__28974),null);
+return cljs.core.chunk_cons.call(null,cljs.core.chunk.call(null,b__37398),null);
 }
 } else {
-var input = cljs.core.first.call(null,s__28972__$2);
-return cljs.core.cons.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"key","key",-1516042587),cljs.core.first.call(null,input),new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"default-value","default-value",232220170),cljs.core.second.call(null,input),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),"List Item",new cljs.core.Keyword(null,"on-change","on-change",-732046149),((function (input,s__28972__$2,temp__5457__auto__,list){
-return (function (p1__28970_SHARP_){
-return rpg_adventure_manager.components.lists.newitem.handle_input_change.call(null,cljs.core.first.call(null,input),p1__28970_SHARP_.target.value);
-});})(input,s__28972__$2,temp__5457__auto__,list))
-], null)], null),rpg_adventure_manager$components$lists$newitem$render_$_iter__28971.call(null,cljs.core.rest.call(null,s__28972__$2)));
+var input = cljs.core.first.call(null,s__37396__$2);
+return cljs.core.cons.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"key","key",-1516042587),cljs.core.first.call(null,input),new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"default-value","default-value",232220170),cljs.core.second.call(null,input),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),"List Item",new cljs.core.Keyword(null,"on-change","on-change",-732046149),((function (input,s__37396__$2,temp__5457__auto__,list){
+return (function (p1__37394_SHARP_){
+return rpg_adventure_manager.components.lists.newitem.handle_input_change.call(null,cljs.core.first.call(null,input),p1__37394_SHARP_.target.value);
+});})(input,s__37396__$2,temp__5457__auto__,list))
+], null)], null),rpg_adventure_manager$components$lists$newitem$render_$_iter__37395.call(null,cljs.core.rest.call(null,s__37396__$2)));
 }
 } else {
 return null;
@@ -103,4 +103,4 @@ return rpg_adventure_manager.components.lists.newitem.save_list.call(null,new cl
 });
 });
 
-//# sourceMappingURL=newitem.js.map?rel=1556058634753
+//# sourceMappingURL=newitem.js.map?rel=1556800584494
