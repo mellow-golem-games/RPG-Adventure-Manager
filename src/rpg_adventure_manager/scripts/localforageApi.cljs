@@ -25,6 +25,7 @@
   (go (get-initial-data-by-type "hooks"))
   (go (get-initial-data-by-type "lists")))
 
+; NEXT couple of functions are probably a good case for multimethods
 (defn add-item [type details]
   "adds an item to localstorage by pulling current list, conj them together and overwrite"
   (if (clojure.string/blank? (:name details)) ; Name is the only field we require
