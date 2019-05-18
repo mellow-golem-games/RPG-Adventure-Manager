@@ -59,7 +59,7 @@
    (.then (.getItem (.-localforage js/window) type) (fn [value]
      (let [currentStorage (js->clj value :keywordize-keys true)]
       (loop [i 0] ; Little cleaner than doall/for so we only iterate as needed this probably won't get too big anyways
-        (if (= (:name (nth currentStorage i)) (:name item))
+        (if (= (:created (nth currentStorage i)) (:created item))
             (.then (.setItem (.-localforage js/window) type (clj->js (conj (assoc currentStorage i item))) (fn [value]
               (handle-state-change "update-entity" {:type type :value (conj currentStorage)})
               (handle-state-change "set-single-entity" item)
@@ -68,7 +68,8 @@
                 {:text "Item Updated!" :hideAfterN false
                 :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
                 :buttonProperties {:buttonText "Okay"}}))))
-            (recur (inc i))))))))
+            (recur (inc i)))
+            )))))
 
 (defn delete-item [entity type]
   "deletes an item by creating a new list of type without the removed element and overrides storage"

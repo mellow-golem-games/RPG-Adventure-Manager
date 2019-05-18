@@ -180,6 +180,10 @@ button.delete:active {
   margin: 5px 0;
 }
 
+textarea {
+  height: 100px;
+}
+
 
 /* VIEW ALL PAGE STYLES */
 .View-all-body {

@@ -5,8 +5,8 @@
 
 ; Handles the show all page
   (defn show-view-all [entity]
-    (handle-state-change "update-current-view" "view-single")
-    (handle-state-change "set-single-entity" entity))
+    (handle-state-change "set-single-entity" entity)
+    (handle-state-change "update-current-view" "view-single"))
 
 
 (defn render [state]
