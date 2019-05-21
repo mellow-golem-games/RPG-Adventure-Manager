@@ -62,6 +62,8 @@
         (if (= (:created (nth currentStorage i)) (:created item))
             (.then (.setItem (.-localforage js/window) type (clj->js (conj (assoc currentStorage i item))) (fn [value]
               (handle-state-change "update-entity" {:type type :value (conj currentStorage)})
+              (get-initial-data-by-type type) ; we need to reset our main store here with the updated version or
+              ; going back to the homepage wll not reflect our recent changes
               (handle-state-change "set-single-entity" item)
               (handle-state-change "set-active-entity" (conj (assoc currentStorage i item)))
               (fancy-alert/fancy-alert
