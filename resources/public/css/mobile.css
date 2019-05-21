@@ -24,3 +24,18 @@
     width: 43%;
   }
 }
+
+@media(max-width: 500px) {
+  .Home-content {
+    padding-top: 24px;
+  }
+  
+  .Home-content .itemContainer {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .Home-lists {
+    padding: 100px 10px;
+  }
+}

@@ -1,5 +1,6 @@
 (ns rpg-adventure-manager.components.individual.individual
-    (:require [rpg-adventure-manager.state :refer [handle-state-change]]
+    (:require [reagent.core :as reagent :refer [atom]]
+              [rpg-adventure-manager.state :refer [handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]
               [rpg-adventure-manager.components.individual.header :as header]))
 
@@ -15,10 +16,17 @@
   (localforageApi/delete-item entity type)
   (handle-state-change "update-current-view" ""))
 
+(defn save-edits [entity editing type]
+  "Handles saving when an entity is updated"
+  (swap! editing not)
+  (localforageApi/update-item type @entity)
+  )
 
 (defn render [state] ; TODO probably don't want to pass the whole state here but it causes problems with the view since we need that too...
-  (fn []
-    (let [entity (:singleEntity @state)]
+  (let [editing (atom false)]
+    (fn []
+      (let [entity (:singleEntity @state)
+            details (atom entity)]
       [:div.View-single.singlePage.viewPage {:class (:view-single (:activeView @state))}
         (header/render)
         [:div.singlePage.body
@@ -27,10 +35,20 @@
             [:div
               (if (= (:used entity) false)
                 [:button {:on-click #(toggle-used-state entity (:activeType @state))} "Mark as Used"]
-                [:button {:on-click #(toggle-used-state entity (:activeType @state))} "mark as unused"])]]
-          (doall (for [key entity]
-            (if (and (not (= (first key) :used)) (not (= (first key) :name)) (not (= (first key) :created))) ; No display for used and created
+                [:button {:on-click #(toggle-used-state entity (:activeType @state))} "Mark Unused"])
+                (if (not @editing)
+                  [:button {:on-click #(swap! editing not)} "Edit"]
+                  [:button {:on-click #(save-edits details editing (:activeType @state))} "Save"])]]
+          (doall (for [key entity
+                  :when (not= (first key) :created) ; do not display created for our edit view
+                  :when (not= (first key) :used)] ; do not display used in our edit view]
               [:div.singlePage.item {:key key}
-                [:h2 {:key (name (first key))} (str (name (first key)) ": ")]
-                [:p (str (second key))]])))
-              [:button.delete {:on-click #(delete-item entity (:activeType @state))} "Delete"]]])))
+                (if (not @editing)
+                [:div.singlePageItem.content
+                  [:h2 {:key (name (first key))} (str (name (first key)) ": ")]
+                  [:p (str (second key))]]
+                [:div.singlePageItem.edit
+                  [:input {:type "text" :placeholder (first key) :defaultValue (second key)
+                    :on-change #(swap! details conj {(first key) (-> % .-target .-value)})}]]) ; end of editing if
+              ]))
+              [:button.delete {:on-click #(delete-item entity (:activeType @state))} "Delete"]]]))))

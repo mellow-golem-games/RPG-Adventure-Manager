@@ -1,6 +1,4 @@
 goog.addDependency("base.js", ['goog'], []);
-goog.addDependency("../cljsjs/react/development/react.inc.js", ['cljsjs.react'], [], {'foreign-lib': true});
-goog.addDependency("../cljsjs/create-react-class/development/create-react-class.inc.js", ['cljsjs.create_react_class'], ['cljsjs.react'], {'foreign-lib': true});
 goog.addDependency("../cljs/core.js", ['cljs.core'], ['goog.string', 'goog.Uri', 'goog.object', 'goog.math.Integer', 'goog.string.StringBuffer', 'goog.array', 'goog.math.Long']);
 goog.addDependency("../process/env.js", ['process.env'], ['cljs.core']);
 goog.addDependency("../devtools/version.js", ['devtools.version'], ['cljs.core']);
@@ -55,6 +53,9 @@ goog.addDependency("../cljs/repl.js", ['cljs.repl'], ['cljs.core', 'cljs.spec.al
 goog.addDependency("../figwheel/client.js", ['figwheel.client'], ['goog.userAgent.product', 'goog.Uri', 'cljs.core', 'goog.object', 'cljs.core.async', 'figwheel.client.file_reloading', 'figwheel.client.utils', 'cljs.repl', 'figwheel.client.heads_up', 'figwheel.client.socket', 'clojure.string', 'cljs.reader']);
 goog.addDependency("../figwheel/connect.js", ['figwheel.connect'], ['cljs.core', 'figwheel.client']);
 goog.addDependency("../devtools/preload.js", ['devtools.preload'], ['cljs.core', 'devtools.core', 'devtools.prefs']);
+goog.addDependency("../fancy_alert/core.js", ['fancy_alert.core'], ['cljs.core']);
+goog.addDependency("../cljsjs/react/development/react.inc.js", ['cljsjs.react'], [], {'foreign-lib': true});
+goog.addDependency("../cljsjs/create-react-class/development/create-react-class.inc.js", ['cljsjs.create_react_class'], ['cljsjs.react'], {'foreign-lib': true});
 goog.addDependency("../reagent/interop.js", ['reagent.interop'], ['cljs.core']);
 goog.addDependency("../reagent/debug.js", ['reagent.debug'], ['cljs.core']);
 goog.addDependency("../reagent/impl/util.js", ['reagent.impl.util'], ['cljsjs.create_react_class', 'reagent.interop', 'cljs.core', 'cljsjs.react', 'reagent.debug', 'clojure.string']);
@@ -66,7 +67,8 @@ goog.addDependency("../cljsjs/react-dom/development/react-dom.inc.js", ['cljsjs.
 goog.addDependency("../reagent/dom.js", ['reagent.dom'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'cljsjs.react.dom', 'reagent.debug']);
 goog.addDependency("../reagent/core.js", ['reagent.core'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'reagent.impl.component', 'reagent.debug', 'reagent.dom']);
 goog.addDependency("../rpg_adventure_manager/state.js", ['rpg_adventure_manager.state'], ['reagent.core', 'cljs.core']);
-goog.addDependency("../rpg_adventure_manager/scripts/localforageApi.js", ['rpg_adventure_manager.scripts.localforageApi'], ['rpg_adventure_manager.state', 'cljs.core', 'cljs.core.async']);
+goog.addDependency("../rpg_adventure_manager/scripts/localforageApi.js", ['rpg_adventure_manager.scripts.localforageApi'], ['rpg_adventure_manager.state', 'cljs.core', 'cljs.core.async', 'fancy_alert.core']);
+goog.addDependency("../rpg_adventure_manager/components/shared/alert.js", ['rpg_adventure_manager.components.shared.alert'], ['rpg_adventure_manager.state', 'cljs.core']);
 goog.addDependency("../rpg_adventure_manager/components/new_header.js", ['rpg_adventure_manager.components.new_header'], ['rpg_adventure_manager.state', 'cljs.core']);
 goog.addDependency("../rpg_adventure_manager/newnpc.js", ['rpg_adventure_manager.newnpc'], ['rpg_adventure_manager.scripts.localforageApi', 'rpg_adventure_manager.state', 'rpg_adventure_manager.components.new_header', 'cljs.core']);
 goog.addDependency("../rpg_adventure_manager/components/all/view.js", ['rpg_adventure_manager.components.all.view'], ['rpg_adventure_manager.scripts.localforageApi', 'rpg_adventure_manager.state', 'rpg_adventure_manager.components.new_header', 'cljs.core']);
@@ -77,9 +79,8 @@ goog.addDependency("../rpg_adventure_manager/components/lists/list.js", ['rpg_ad
 goog.addDependency("../rpg_adventure_manager/newlocation.js", ['rpg_adventure_manager.newlocation'], ['rpg_adventure_manager.scripts.localforageApi', 'rpg_adventure_manager.state', 'rpg_adventure_manager.components.new_header', 'cljs.core']);
 goog.addDependency("../rpg_adventure_manager/components/header.js", ['rpg_adventure_manager.components.header'], ['rpg_adventure_manager.state', 'cljs.core']);
 goog.addDependency("../rpg_adventure_manager/components/individual/header.js", ['rpg_adventure_manager.components.individual.header'], ['rpg_adventure_manager.state', 'cljs.core']);
-goog.addDependency("../rpg_adventure_manager/components/individual/individual.js", ['rpg_adventure_manager.components.individual.individual'], ['rpg_adventure_manager.scripts.localforageApi', 'rpg_adventure_manager.state', 'cljs.core', 'rpg_adventure_manager.components.individual.header']);
+goog.addDependency("../rpg_adventure_manager/components/individual/individual.js", ['rpg_adventure_manager.components.individual.individual'], ['rpg_adventure_manager.scripts.localforageApi', 'rpg_adventure_manager.state', 'reagent.core', 'cljs.core', 'rpg_adventure_manager.components.individual.header']);
 goog.addDependency("../node_modules/localforage/dist/localforage.js", ['module$Applications$server$RPG_Adventure_Manager$node_modules$localforage$dist$localforage'], []);
 goog.addDependency("../rpg_adventure_manager/newcity.js", ['rpg_adventure_manager.newcity'], ['rpg_adventure_manager.scripts.localforageApi', 'rpg_adventure_manager.state', 'rpg_adventure_manager.components.new_header', 'cljs.core', 'module$Applications$server$RPG_Adventure_Manager$node_modules$localforage$dist$localforage']);
 goog.addDependency("../rpg_adventure_manager/newhook.js", ['rpg_adventure_manager.newhook'], ['rpg_adventure_manager.scripts.localforageApi', 'rpg_adventure_manager.state', 'rpg_adventure_manager.components.new_header', 'cljs.core']);
-goog.addDependency("../rpg_adventure_manager/components/shared/alert.js", ['rpg_adventure_manager.components.shared.alert'], ['rpg_adventure_manager.state', 'cljs.core']);
 goog.addDependency("../rpg_adventure_manager/core.js", ['rpg_adventure_manager.core'], ['rpg_adventure_manager.scripts.localforageApi', 'rpg_adventure_manager.newnpc', 'rpg_adventure_manager.state', 'rpg_adventure_manager.components.all.view', 'rpg_adventure_manager.newitem', 'rpg_adventure_manager.components.lists.list', 'reagent.core', 'rpg_adventure_manager.newlocation', 'cljs.core', 'rpg_adventure_manager.components.header', 'rpg_adventure_manager.components.individual.individual', 'rpg_adventure_manager.newcity', 'rpg_adventure_manager.newhook', 'rpg_adventure_manager.components.shared.alert']);
