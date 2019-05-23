@@ -5,21 +5,43 @@
 ; Holds a reference to all the current Items in the Database
 ; :activeView also contains things like view-all-cities & view-individual-city
 (defonce state (atom {:activeView {  ; This gets erased as state changes but I left it here as a reminder for expected values
-                         :new-city false
-                         :new-npc false
-                         :new-item false
-                         :new-location false
-                         :new-hook false
-                         :active-list false}
+                                   :new-city false
+                                   :new-npc false
+                                   :new-item false
+                                   :new-location false
+                                   :new-hook false
+                                   :active-list false}
                        :showAlert {:visible false :content ""}
                        :activeType ""
                        :activeEntity {}
                        :singleEntity {}
+                       :scrollOffset {}
                        :activeList {}}))
+
+(defn update-scroll-position [val scroll]
+  ; (js/console.log  state)
+  (if scroll
+    (do
+      (js/console.log (js/parseInt (:scrollOffset @state)))
+      (.scrollTo js/window 0 (:scrollOffset @state))))
+  (swap! state conj {:scrollOffset val}))
+
+
+(defn handle-scroll-func [payload]
+  ; (js/console.log (.-pageYOffset js/window))
+  (if (= payload "")
+    (do
+      (.remove (.-classList (.-body js/document)) "hide-scroll")
+      (update-scroll-position 0 true)) ; this should be instant
+    (do
+      (update-scroll-position (.-pageYOffset js/window) false)
+      (js/setTimeout #(.add (.-classList (.-body js/document)) "hide-scroll") 250)))) ; here we need to set a short timeout like 50ms)
+
 
 (defn update-current-view [payload]
   "Handles changing the view to the next selected page"
-  (swap! state conj {:activeView {(keyword payload) "visible"}}))
+  (swap! state conj {:activeView {(keyword payload) "visible"}})
+  (handle-scroll-func payload))
 
 (defn update-entity [payload]
   "Payload : {:type type :value {object}} - Used to arbitarily update an entity of any type"
@@ -52,4 +74,4 @@
 (defn handle-state-change [action payload]
   "Accept an action function to dispatch and passes it the current payload"
   (let [fn-var ((ns-publics 'rpg-adventure-manager.state) (symbol action))]
-               (fn-var payload)))
+       (fn-var payload)))

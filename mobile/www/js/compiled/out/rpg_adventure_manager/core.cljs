@@ -23,7 +23,7 @@
   (handle-state-change "update-current-view" "view-all-entities")
   (handle-state-change "set-active-entity" entitiesToView)
   (handle-state-change "set-active-type" type))
-
+; {:class (if ( > (count (:activeType @state)) 2) :hide-scroll)}
 (defn Main []
   [:div.Main-Wrapper
     [header/render]
@@ -72,8 +72,8 @@
 (reagent/render-component [Main]
                           (. js/document (getElementById "app")))
 
-(defn on-js-reload []
+(defn on-js-reload [])
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
-)
+

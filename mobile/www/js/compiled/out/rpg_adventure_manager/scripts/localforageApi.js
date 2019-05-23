@@ -20,36 +20,36 @@ return rpg_adventure_manager.state.handle_state_change.call(null,"update-entity"
 });
 rpg_adventure_manager.scripts.localforageApi.pull_initial_data = (function rpg_adventure_manager$scripts$localforageApi$pull_initial_data(){
 
-var c__28783__auto___29068 = cljs.core.async.chan.call(null,(1));
-cljs.core.async.impl.dispatch.run.call(null,((function (c__28783__auto___29068){
+var c__28783__auto___33350 = cljs.core.async.chan.call(null,(1));
+cljs.core.async.impl.dispatch.run.call(null,((function (c__28783__auto___33350){
 return (function (){
-var f__28784__auto__ = (function (){var switch__28760__auto__ = ((function (c__28783__auto___29068){
-return (function (state_29022){
-var state_val_29023 = (state_29022[(1)]);
-if((state_val_29023 === (1))){
-var inst_29020 = rpg_adventure_manager.scripts.localforageApi.get_initial_data_by_type.call(null,"cities");
-var state_29022__$1 = state_29022;
-return cljs.core.async.impl.ioc_helpers.return_chan.call(null,state_29022__$1,inst_29020);
+var f__28784__auto__ = (function (){var switch__28760__auto__ = ((function (c__28783__auto___33350){
+return (function (state_33304){
+var state_val_33305 = (state_33304[(1)]);
+if((state_val_33305 === (1))){
+var inst_33302 = rpg_adventure_manager.scripts.localforageApi.get_initial_data_by_type.call(null,"cities");
+var state_33304__$1 = state_33304;
+return cljs.core.async.impl.ioc_helpers.return_chan.call(null,state_33304__$1,inst_33302);
 } else {
 return null;
 }
-});})(c__28783__auto___29068))
+});})(c__28783__auto___33350))
 ;
-return ((function (switch__28760__auto__,c__28783__auto___29068){
+return ((function (switch__28760__auto__,c__28783__auto___33350){
 return (function() {
 var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = null;
 var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____0 = (function (){
-var statearr_29024 = [null,null,null,null,null,null,null];
-(statearr_29024[(0)] = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__);
+var statearr_33306 = [null,null,null,null,null,null,null];
+(statearr_33306[(0)] = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__);
 
-(statearr_29024[(1)] = (1));
+(statearr_33306[(1)] = (1));
 
-return statearr_29024;
+return statearr_33306;
 });
-var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1 = (function (state_29022){
+var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1 = (function (state_33304){
 while(true){
 var ret_value__28762__auto__ = (function (){try{while(true){
-var result__28763__auto__ = switch__28760__auto__.call(null,state_29022);
+var result__28763__auto__ = switch__28760__auto__.call(null,state_33304);
 if(cljs.core.keyword_identical_QMARK_.call(null,result__28763__auto__,new cljs.core.Keyword(null,"recur","recur",-437573268))){
 continue;
 } else {
@@ -57,23 +57,23 @@ return result__28763__auto__;
 }
 break;
 }
-}catch (e29025){if((e29025 instanceof Object)){
-var ex__28764__auto__ = e29025;
-var statearr_29026_29069 = state_29022;
-(statearr_29026_29069[(5)] = ex__28764__auto__);
+}catch (e33307){if((e33307 instanceof Object)){
+var ex__28764__auto__ = e33307;
+var statearr_33308_33351 = state_33304;
+(statearr_33308_33351[(5)] = ex__28764__auto__);
 
 
-cljs.core.async.impl.ioc_helpers.process_exception.call(null,state_29022);
+cljs.core.async.impl.ioc_helpers.process_exception.call(null,state_33304);
 
 return new cljs.core.Keyword(null,"recur","recur",-437573268);
 } else {
-throw e29025;
+throw e33307;
 
 }
 }})();
 if(cljs.core.keyword_identical_QMARK_.call(null,ret_value__28762__auto__,new cljs.core.Keyword(null,"recur","recur",-437573268))){
-var G__29070 = state_29022;
-state_29022 = G__29070;
+var G__33352 = state_33304;
+state_33304 = G__33352;
 continue;
 } else {
 return ret_value__28762__auto__;
@@ -81,12 +81,12 @@ return ret_value__28762__auto__;
 break;
 }
 });
-rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = function(state_29022){
+rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = function(state_33304){
 switch(arguments.length){
 case 0:
 return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____0.call(this);
 case 1:
-return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1.call(this,state_29022);
+return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1.call(this,state_33304);
 }
 throw(new Error('Invalid arity: ' + (arguments.length - 1)));
 };
@@ -94,48 +94,48 @@ rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__
 rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__.cljs$core$IFn$_invoke$arity$1 = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1;
 return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__;
 })()
-;})(switch__28760__auto__,c__28783__auto___29068))
+;})(switch__28760__auto__,c__28783__auto___33350))
 })();
-var state__28785__auto__ = (function (){var statearr_29027 = f__28784__auto__.call(null);
-(statearr_29027[(6)] = c__28783__auto___29068);
+var state__28785__auto__ = (function (){var statearr_33309 = f__28784__auto__.call(null);
+(statearr_33309[(6)] = c__28783__auto___33350);
 
-return statearr_29027;
+return statearr_33309;
 })();
 return cljs.core.async.impl.ioc_helpers.run_state_machine_wrapped.call(null,state__28785__auto__);
-});})(c__28783__auto___29068))
+});})(c__28783__auto___33350))
 );
 
 
-var c__28783__auto___29071 = cljs.core.async.chan.call(null,(1));
-cljs.core.async.impl.dispatch.run.call(null,((function (c__28783__auto___29071){
+var c__28783__auto___33353 = cljs.core.async.chan.call(null,(1));
+cljs.core.async.impl.dispatch.run.call(null,((function (c__28783__auto___33353){
 return (function (){
-var f__28784__auto__ = (function (){var switch__28760__auto__ = ((function (c__28783__auto___29071){
-return (function (state_29030){
-var state_val_29031 = (state_29030[(1)]);
-if((state_val_29031 === (1))){
-var inst_29028 = rpg_adventure_manager.scripts.localforageApi.get_initial_data_by_type.call(null,"npcs");
-var state_29030__$1 = state_29030;
-return cljs.core.async.impl.ioc_helpers.return_chan.call(null,state_29030__$1,inst_29028);
+var f__28784__auto__ = (function (){var switch__28760__auto__ = ((function (c__28783__auto___33353){
+return (function (state_33312){
+var state_val_33313 = (state_33312[(1)]);
+if((state_val_33313 === (1))){
+var inst_33310 = rpg_adventure_manager.scripts.localforageApi.get_initial_data_by_type.call(null,"npcs");
+var state_33312__$1 = state_33312;
+return cljs.core.async.impl.ioc_helpers.return_chan.call(null,state_33312__$1,inst_33310);
 } else {
 return null;
 }
-});})(c__28783__auto___29071))
+});})(c__28783__auto___33353))
 ;
-return ((function (switch__28760__auto__,c__28783__auto___29071){
+return ((function (switch__28760__auto__,c__28783__auto___33353){
 return (function() {
 var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = null;
 var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____0 = (function (){
-var statearr_29032 = [null,null,null,null,null,null,null];
-(statearr_29032[(0)] = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__);
+var statearr_33314 = [null,null,null,null,null,null,null];
+(statearr_33314[(0)] = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__);
 
-(statearr_29032[(1)] = (1));
+(statearr_33314[(1)] = (1));
 
-return statearr_29032;
+return statearr_33314;
 });
-var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1 = (function (state_29030){
+var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1 = (function (state_33312){
 while(true){
 var ret_value__28762__auto__ = (function (){try{while(true){
-var result__28763__auto__ = switch__28760__auto__.call(null,state_29030);
+var result__28763__auto__ = switch__28760__auto__.call(null,state_33312);
 if(cljs.core.keyword_identical_QMARK_.call(null,result__28763__auto__,new cljs.core.Keyword(null,"recur","recur",-437573268))){
 continue;
 } else {
@@ -143,23 +143,23 @@ return result__28763__auto__;
 }
 break;
 }
-}catch (e29033){if((e29033 instanceof Object)){
-var ex__28764__auto__ = e29033;
-var statearr_29034_29072 = state_29030;
-(statearr_29034_29072[(5)] = ex__28764__auto__);
+}catch (e33315){if((e33315 instanceof Object)){
+var ex__28764__auto__ = e33315;
+var statearr_33316_33354 = state_33312;
+(statearr_33316_33354[(5)] = ex__28764__auto__);
 
 
-cljs.core.async.impl.ioc_helpers.process_exception.call(null,state_29030);
+cljs.core.async.impl.ioc_helpers.process_exception.call(null,state_33312);
 
 return new cljs.core.Keyword(null,"recur","recur",-437573268);
 } else {
-throw e29033;
+throw e33315;
 
 }
 }})();
 if(cljs.core.keyword_identical_QMARK_.call(null,ret_value__28762__auto__,new cljs.core.Keyword(null,"recur","recur",-437573268))){
-var G__29073 = state_29030;
-state_29030 = G__29073;
+var G__33355 = state_33312;
+state_33312 = G__33355;
 continue;
 } else {
 return ret_value__28762__auto__;
@@ -167,12 +167,12 @@ return ret_value__28762__auto__;
 break;
 }
 });
-rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = function(state_29030){
+rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = function(state_33312){
 switch(arguments.length){
 case 0:
 return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____0.call(this);
 case 1:
-return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1.call(this,state_29030);
+return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1.call(this,state_33312);
 }
 throw(new Error('Invalid arity: ' + (arguments.length - 1)));
 };
@@ -180,48 +180,48 @@ rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__
 rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__.cljs$core$IFn$_invoke$arity$1 = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1;
 return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__;
 })()
-;})(switch__28760__auto__,c__28783__auto___29071))
+;})(switch__28760__auto__,c__28783__auto___33353))
 })();
-var state__28785__auto__ = (function (){var statearr_29035 = f__28784__auto__.call(null);
-(statearr_29035[(6)] = c__28783__auto___29071);
+var state__28785__auto__ = (function (){var statearr_33317 = f__28784__auto__.call(null);
+(statearr_33317[(6)] = c__28783__auto___33353);
 
-return statearr_29035;
+return statearr_33317;
 })();
 return cljs.core.async.impl.ioc_helpers.run_state_machine_wrapped.call(null,state__28785__auto__);
-});})(c__28783__auto___29071))
+});})(c__28783__auto___33353))
 );
 
 
-var c__28783__auto___29074 = cljs.core.async.chan.call(null,(1));
-cljs.core.async.impl.dispatch.run.call(null,((function (c__28783__auto___29074){
+var c__28783__auto___33356 = cljs.core.async.chan.call(null,(1));
+cljs.core.async.impl.dispatch.run.call(null,((function (c__28783__auto___33356){
 return (function (){
-var f__28784__auto__ = (function (){var switch__28760__auto__ = ((function (c__28783__auto___29074){
-return (function (state_29038){
-var state_val_29039 = (state_29038[(1)]);
-if((state_val_29039 === (1))){
-var inst_29036 = rpg_adventure_manager.scripts.localforageApi.get_initial_data_by_type.call(null,"locations");
-var state_29038__$1 = state_29038;
-return cljs.core.async.impl.ioc_helpers.return_chan.call(null,state_29038__$1,inst_29036);
+var f__28784__auto__ = (function (){var switch__28760__auto__ = ((function (c__28783__auto___33356){
+return (function (state_33320){
+var state_val_33321 = (state_33320[(1)]);
+if((state_val_33321 === (1))){
+var inst_33318 = rpg_adventure_manager.scripts.localforageApi.get_initial_data_by_type.call(null,"locations");
+var state_33320__$1 = state_33320;
+return cljs.core.async.impl.ioc_helpers.return_chan.call(null,state_33320__$1,inst_33318);
 } else {
 return null;
 }
-});})(c__28783__auto___29074))
+});})(c__28783__auto___33356))
 ;
-return ((function (switch__28760__auto__,c__28783__auto___29074){
+return ((function (switch__28760__auto__,c__28783__auto___33356){
 return (function() {
 var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = null;
 var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____0 = (function (){
-var statearr_29040 = [null,null,null,null,null,null,null];
-(statearr_29040[(0)] = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__);
+var statearr_33322 = [null,null,null,null,null,null,null];
+(statearr_33322[(0)] = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__);
 
-(statearr_29040[(1)] = (1));
+(statearr_33322[(1)] = (1));
 
-return statearr_29040;
+return statearr_33322;
 });
-var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1 = (function (state_29038){
+var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1 = (function (state_33320){
 while(true){
 var ret_value__28762__auto__ = (function (){try{while(true){
-var result__28763__auto__ = switch__28760__auto__.call(null,state_29038);
+var result__28763__auto__ = switch__28760__auto__.call(null,state_33320);
 if(cljs.core.keyword_identical_QMARK_.call(null,result__28763__auto__,new cljs.core.Keyword(null,"recur","recur",-437573268))){
 continue;
 } else {
@@ -229,23 +229,23 @@ return result__28763__auto__;
 }
 break;
 }
-}catch (e29041){if((e29041 instanceof Object)){
-var ex__28764__auto__ = e29041;
-var statearr_29042_29075 = state_29038;
-(statearr_29042_29075[(5)] = ex__28764__auto__);
+}catch (e33323){if((e33323 instanceof Object)){
+var ex__28764__auto__ = e33323;
+var statearr_33324_33357 = state_33320;
+(statearr_33324_33357[(5)] = ex__28764__auto__);
 
 
-cljs.core.async.impl.ioc_helpers.process_exception.call(null,state_29038);
+cljs.core.async.impl.ioc_helpers.process_exception.call(null,state_33320);
 
 return new cljs.core.Keyword(null,"recur","recur",-437573268);
 } else {
-throw e29041;
+throw e33323;
 
 }
 }})();
 if(cljs.core.keyword_identical_QMARK_.call(null,ret_value__28762__auto__,new cljs.core.Keyword(null,"recur","recur",-437573268))){
-var G__29076 = state_29038;
-state_29038 = G__29076;
+var G__33358 = state_33320;
+state_33320 = G__33358;
 continue;
 } else {
 return ret_value__28762__auto__;
@@ -253,12 +253,12 @@ return ret_value__28762__auto__;
 break;
 }
 });
-rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = function(state_29038){
+rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = function(state_33320){
 switch(arguments.length){
 case 0:
 return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____0.call(this);
 case 1:
-return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1.call(this,state_29038);
+return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1.call(this,state_33320);
 }
 throw(new Error('Invalid arity: ' + (arguments.length - 1)));
 };
@@ -266,48 +266,48 @@ rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__
 rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__.cljs$core$IFn$_invoke$arity$1 = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1;
 return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__;
 })()
-;})(switch__28760__auto__,c__28783__auto___29074))
+;})(switch__28760__auto__,c__28783__auto___33356))
 })();
-var state__28785__auto__ = (function (){var statearr_29043 = f__28784__auto__.call(null);
-(statearr_29043[(6)] = c__28783__auto___29074);
+var state__28785__auto__ = (function (){var statearr_33325 = f__28784__auto__.call(null);
+(statearr_33325[(6)] = c__28783__auto___33356);
 
-return statearr_29043;
+return statearr_33325;
 })();
 return cljs.core.async.impl.ioc_helpers.run_state_machine_wrapped.call(null,state__28785__auto__);
-});})(c__28783__auto___29074))
+});})(c__28783__auto___33356))
 );
 
 
-var c__28783__auto___29077 = cljs.core.async.chan.call(null,(1));
-cljs.core.async.impl.dispatch.run.call(null,((function (c__28783__auto___29077){
+var c__28783__auto___33359 = cljs.core.async.chan.call(null,(1));
+cljs.core.async.impl.dispatch.run.call(null,((function (c__28783__auto___33359){
 return (function (){
-var f__28784__auto__ = (function (){var switch__28760__auto__ = ((function (c__28783__auto___29077){
-return (function (state_29046){
-var state_val_29047 = (state_29046[(1)]);
-if((state_val_29047 === (1))){
-var inst_29044 = rpg_adventure_manager.scripts.localforageApi.get_initial_data_by_type.call(null,"items");
-var state_29046__$1 = state_29046;
-return cljs.core.async.impl.ioc_helpers.return_chan.call(null,state_29046__$1,inst_29044);
+var f__28784__auto__ = (function (){var switch__28760__auto__ = ((function (c__28783__auto___33359){
+return (function (state_33328){
+var state_val_33329 = (state_33328[(1)]);
+if((state_val_33329 === (1))){
+var inst_33326 = rpg_adventure_manager.scripts.localforageApi.get_initial_data_by_type.call(null,"items");
+var state_33328__$1 = state_33328;
+return cljs.core.async.impl.ioc_helpers.return_chan.call(null,state_33328__$1,inst_33326);
 } else {
 return null;
 }
-});})(c__28783__auto___29077))
+});})(c__28783__auto___33359))
 ;
-return ((function (switch__28760__auto__,c__28783__auto___29077){
+return ((function (switch__28760__auto__,c__28783__auto___33359){
 return (function() {
 var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = null;
 var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____0 = (function (){
-var statearr_29048 = [null,null,null,null,null,null,null];
-(statearr_29048[(0)] = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__);
+var statearr_33330 = [null,null,null,null,null,null,null];
+(statearr_33330[(0)] = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__);
 
-(statearr_29048[(1)] = (1));
+(statearr_33330[(1)] = (1));
 
-return statearr_29048;
+return statearr_33330;
 });
-var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1 = (function (state_29046){
+var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1 = (function (state_33328){
 while(true){
 var ret_value__28762__auto__ = (function (){try{while(true){
-var result__28763__auto__ = switch__28760__auto__.call(null,state_29046);
+var result__28763__auto__ = switch__28760__auto__.call(null,state_33328);
 if(cljs.core.keyword_identical_QMARK_.call(null,result__28763__auto__,new cljs.core.Keyword(null,"recur","recur",-437573268))){
 continue;
 } else {
@@ -315,23 +315,23 @@ return result__28763__auto__;
 }
 break;
 }
-}catch (e29049){if((e29049 instanceof Object)){
-var ex__28764__auto__ = e29049;
-var statearr_29050_29078 = state_29046;
-(statearr_29050_29078[(5)] = ex__28764__auto__);
+}catch (e33331){if((e33331 instanceof Object)){
+var ex__28764__auto__ = e33331;
+var statearr_33332_33360 = state_33328;
+(statearr_33332_33360[(5)] = ex__28764__auto__);
 
 
-cljs.core.async.impl.ioc_helpers.process_exception.call(null,state_29046);
+cljs.core.async.impl.ioc_helpers.process_exception.call(null,state_33328);
 
 return new cljs.core.Keyword(null,"recur","recur",-437573268);
 } else {
-throw e29049;
+throw e33331;
 
 }
 }})();
 if(cljs.core.keyword_identical_QMARK_.call(null,ret_value__28762__auto__,new cljs.core.Keyword(null,"recur","recur",-437573268))){
-var G__29079 = state_29046;
-state_29046 = G__29079;
+var G__33361 = state_33328;
+state_33328 = G__33361;
 continue;
 } else {
 return ret_value__28762__auto__;
@@ -339,12 +339,12 @@ return ret_value__28762__auto__;
 break;
 }
 });
-rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = function(state_29046){
+rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = function(state_33328){
 switch(arguments.length){
 case 0:
 return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____0.call(this);
 case 1:
-return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1.call(this,state_29046);
+return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1.call(this,state_33328);
 }
 throw(new Error('Invalid arity: ' + (arguments.length - 1)));
 };
@@ -352,48 +352,48 @@ rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__
 rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__.cljs$core$IFn$_invoke$arity$1 = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1;
 return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__;
 })()
-;})(switch__28760__auto__,c__28783__auto___29077))
+;})(switch__28760__auto__,c__28783__auto___33359))
 })();
-var state__28785__auto__ = (function (){var statearr_29051 = f__28784__auto__.call(null);
-(statearr_29051[(6)] = c__28783__auto___29077);
+var state__28785__auto__ = (function (){var statearr_33333 = f__28784__auto__.call(null);
+(statearr_33333[(6)] = c__28783__auto___33359);
 
-return statearr_29051;
+return statearr_33333;
 })();
 return cljs.core.async.impl.ioc_helpers.run_state_machine_wrapped.call(null,state__28785__auto__);
-});})(c__28783__auto___29077))
+});})(c__28783__auto___33359))
 );
 
 
-var c__28783__auto___29080 = cljs.core.async.chan.call(null,(1));
-cljs.core.async.impl.dispatch.run.call(null,((function (c__28783__auto___29080){
+var c__28783__auto___33362 = cljs.core.async.chan.call(null,(1));
+cljs.core.async.impl.dispatch.run.call(null,((function (c__28783__auto___33362){
 return (function (){
-var f__28784__auto__ = (function (){var switch__28760__auto__ = ((function (c__28783__auto___29080){
-return (function (state_29054){
-var state_val_29055 = (state_29054[(1)]);
-if((state_val_29055 === (1))){
-var inst_29052 = rpg_adventure_manager.scripts.localforageApi.get_initial_data_by_type.call(null,"hooks");
-var state_29054__$1 = state_29054;
-return cljs.core.async.impl.ioc_helpers.return_chan.call(null,state_29054__$1,inst_29052);
+var f__28784__auto__ = (function (){var switch__28760__auto__ = ((function (c__28783__auto___33362){
+return (function (state_33336){
+var state_val_33337 = (state_33336[(1)]);
+if((state_val_33337 === (1))){
+var inst_33334 = rpg_adventure_manager.scripts.localforageApi.get_initial_data_by_type.call(null,"hooks");
+var state_33336__$1 = state_33336;
+return cljs.core.async.impl.ioc_helpers.return_chan.call(null,state_33336__$1,inst_33334);
 } else {
 return null;
 }
-});})(c__28783__auto___29080))
+});})(c__28783__auto___33362))
 ;
-return ((function (switch__28760__auto__,c__28783__auto___29080){
+return ((function (switch__28760__auto__,c__28783__auto___33362){
 return (function() {
 var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = null;
 var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____0 = (function (){
-var statearr_29056 = [null,null,null,null,null,null,null];
-(statearr_29056[(0)] = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__);
+var statearr_33338 = [null,null,null,null,null,null,null];
+(statearr_33338[(0)] = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__);
 
-(statearr_29056[(1)] = (1));
+(statearr_33338[(1)] = (1));
 
-return statearr_29056;
+return statearr_33338;
 });
-var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1 = (function (state_29054){
+var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1 = (function (state_33336){
 while(true){
 var ret_value__28762__auto__ = (function (){try{while(true){
-var result__28763__auto__ = switch__28760__auto__.call(null,state_29054);
+var result__28763__auto__ = switch__28760__auto__.call(null,state_33336);
 if(cljs.core.keyword_identical_QMARK_.call(null,result__28763__auto__,new cljs.core.Keyword(null,"recur","recur",-437573268))){
 continue;
 } else {
@@ -401,23 +401,23 @@ return result__28763__auto__;
 }
 break;
 }
-}catch (e29057){if((e29057 instanceof Object)){
-var ex__28764__auto__ = e29057;
-var statearr_29058_29081 = state_29054;
-(statearr_29058_29081[(5)] = ex__28764__auto__);
+}catch (e33339){if((e33339 instanceof Object)){
+var ex__28764__auto__ = e33339;
+var statearr_33340_33363 = state_33336;
+(statearr_33340_33363[(5)] = ex__28764__auto__);
 
 
-cljs.core.async.impl.ioc_helpers.process_exception.call(null,state_29054);
+cljs.core.async.impl.ioc_helpers.process_exception.call(null,state_33336);
 
 return new cljs.core.Keyword(null,"recur","recur",-437573268);
 } else {
-throw e29057;
+throw e33339;
 
 }
 }})();
 if(cljs.core.keyword_identical_QMARK_.call(null,ret_value__28762__auto__,new cljs.core.Keyword(null,"recur","recur",-437573268))){
-var G__29082 = state_29054;
-state_29054 = G__29082;
+var G__33364 = state_33336;
+state_33336 = G__33364;
 continue;
 } else {
 return ret_value__28762__auto__;
@@ -425,12 +425,12 @@ return ret_value__28762__auto__;
 break;
 }
 });
-rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = function(state_29054){
+rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = function(state_33336){
 switch(arguments.length){
 case 0:
 return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____0.call(this);
 case 1:
-return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1.call(this,state_29054);
+return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1.call(this,state_33336);
 }
 throw(new Error('Invalid arity: ' + (arguments.length - 1)));
 };
@@ -438,15 +438,15 @@ rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__
 rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__.cljs$core$IFn$_invoke$arity$1 = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1;
 return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__;
 })()
-;})(switch__28760__auto__,c__28783__auto___29080))
+;})(switch__28760__auto__,c__28783__auto___33362))
 })();
-var state__28785__auto__ = (function (){var statearr_29059 = f__28784__auto__.call(null);
-(statearr_29059[(6)] = c__28783__auto___29080);
+var state__28785__auto__ = (function (){var statearr_33341 = f__28784__auto__.call(null);
+(statearr_33341[(6)] = c__28783__auto___33362);
 
-return statearr_29059;
+return statearr_33341;
 })();
 return cljs.core.async.impl.ioc_helpers.run_state_machine_wrapped.call(null,state__28785__auto__);
-});})(c__28783__auto___29080))
+});})(c__28783__auto___33362))
 );
 
 
@@ -454,12 +454,12 @@ var c__28783__auto__ = cljs.core.async.chan.call(null,(1));
 cljs.core.async.impl.dispatch.run.call(null,((function (c__28783__auto__){
 return (function (){
 var f__28784__auto__ = (function (){var switch__28760__auto__ = ((function (c__28783__auto__){
-return (function (state_29062){
-var state_val_29063 = (state_29062[(1)]);
-if((state_val_29063 === (1))){
-var inst_29060 = rpg_adventure_manager.scripts.localforageApi.get_initial_data_by_type.call(null,"lists");
-var state_29062__$1 = state_29062;
-return cljs.core.async.impl.ioc_helpers.return_chan.call(null,state_29062__$1,inst_29060);
+return (function (state_33344){
+var state_val_33345 = (state_33344[(1)]);
+if((state_val_33345 === (1))){
+var inst_33342 = rpg_adventure_manager.scripts.localforageApi.get_initial_data_by_type.call(null,"lists");
+var state_33344__$1 = state_33344;
+return cljs.core.async.impl.ioc_helpers.return_chan.call(null,state_33344__$1,inst_33342);
 } else {
 return null;
 }
@@ -469,17 +469,17 @@ return ((function (switch__28760__auto__,c__28783__auto__){
 return (function() {
 var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = null;
 var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____0 = (function (){
-var statearr_29064 = [null,null,null,null,null,null,null];
-(statearr_29064[(0)] = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__);
+var statearr_33346 = [null,null,null,null,null,null,null];
+(statearr_33346[(0)] = rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__);
 
-(statearr_29064[(1)] = (1));
+(statearr_33346[(1)] = (1));
 
-return statearr_29064;
+return statearr_33346;
 });
-var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1 = (function (state_29062){
+var rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1 = (function (state_33344){
 while(true){
 var ret_value__28762__auto__ = (function (){try{while(true){
-var result__28763__auto__ = switch__28760__auto__.call(null,state_29062);
+var result__28763__auto__ = switch__28760__auto__.call(null,state_33344);
 if(cljs.core.keyword_identical_QMARK_.call(null,result__28763__auto__,new cljs.core.Keyword(null,"recur","recur",-437573268))){
 continue;
 } else {
@@ -487,23 +487,23 @@ return result__28763__auto__;
 }
 break;
 }
-}catch (e29065){if((e29065 instanceof Object)){
-var ex__28764__auto__ = e29065;
-var statearr_29066_29083 = state_29062;
-(statearr_29066_29083[(5)] = ex__28764__auto__);
+}catch (e33347){if((e33347 instanceof Object)){
+var ex__28764__auto__ = e33347;
+var statearr_33348_33365 = state_33344;
+(statearr_33348_33365[(5)] = ex__28764__auto__);
 
 
-cljs.core.async.impl.ioc_helpers.process_exception.call(null,state_29062);
+cljs.core.async.impl.ioc_helpers.process_exception.call(null,state_33344);
 
 return new cljs.core.Keyword(null,"recur","recur",-437573268);
 } else {
-throw e29065;
+throw e33347;
 
 }
 }})();
 if(cljs.core.keyword_identical_QMARK_.call(null,ret_value__28762__auto__,new cljs.core.Keyword(null,"recur","recur",-437573268))){
-var G__29084 = state_29062;
-state_29062 = G__29084;
+var G__33366 = state_33344;
+state_33344 = G__33366;
 continue;
 } else {
 return ret_value__28762__auto__;
@@ -511,12 +511,12 @@ return ret_value__28762__auto__;
 break;
 }
 });
-rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = function(state_29062){
+rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto__ = function(state_33344){
 switch(arguments.length){
 case 0:
 return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____0.call(this);
 case 1:
-return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1.call(this,state_29062);
+return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_machine__28761__auto____1.call(this,state_33344);
 }
 throw(new Error('Invalid arity: ' + (arguments.length - 1)));
 };
@@ -526,10 +526,10 @@ return rpg_adventure_manager$scripts$localforageApi$pull_initial_data_$_state_ma
 })()
 ;})(switch__28760__auto__,c__28783__auto__))
 })();
-var state__28785__auto__ = (function (){var statearr_29067 = f__28784__auto__.call(null);
-(statearr_29067[(6)] = c__28783__auto__);
+var state__28785__auto__ = (function (){var statearr_33349 = f__28784__auto__.call(null);
+(statearr_33349[(6)] = c__28783__auto__);
 
-return statearr_29067;
+return statearr_33349;
 })();
 return cljs.core.async.impl.ioc_helpers.run_state_machine_wrapped.call(null,state__28785__auto__);
 });})(c__28783__auto__))
@@ -560,8 +560,8 @@ return rpg_adventure_manager.state.handle_state_change.call(null,"update-current
 if(cljs.core._EQ_.call(null,new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(cljs.core.nth.call(null,currentStorage,i)),new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(details))){
 return fancy_alert.core.fancy_alert(new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"text","text",-1790561697),"That Name Is Already Taken!",new cljs.core.Keyword(null,"hideAfterN","hideAfterN",1402371045),false,new cljs.core.Keyword(null,"styles","styles",1954480375),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"background","background",-863952629),"white;",new cljs.core.Keyword(null,"border","border",1444987323),"1px solid #9776ec;",new cljs.core.Keyword(null,"z-index","z-index",1892827090),"999;",new cljs.core.Keyword(null,"color","color",1011675173),"black;"], null),new cljs.core.Keyword(null,"buttonProperties","buttonProperties",1221783147),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"buttonText","buttonText",282861744),"Okay"], null)], null));
 } else {
-var G__29085 = (i + (1));
-i = G__29085;
+var G__33367 = (i + (1));
+i = G__33367;
 continue;
 }
 }
@@ -591,8 +591,8 @@ return fancy_alert.core.fancy_alert(new cljs.core.PersistentArrayMap(null, 4, [n
 });})(i,currentStorage))
 ).then();
 } else {
-var G__29086 = (i + (1));
-i = G__29086;
+var G__33368 = (i + (1));
+i = G__33368;
 continue;
 }
 break;
@@ -640,8 +640,8 @@ return rpg_adventure_manager.state.handle_state_change.call(null,"update-current
 if(cljs.core._EQ_.call(null,new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(cljs.core.nth.call(null,currentStorage,i)),new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(details))){
 return fancy_alert.core.fancy_alert(new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"text","text",-1790561697),"That Name Is Already Taken!",new cljs.core.Keyword(null,"hideAfterN","hideAfterN",1402371045),false,new cljs.core.Keyword(null,"styles","styles",1954480375),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"background","background",-863952629),"white;",new cljs.core.Keyword(null,"border","border",1444987323),"1px solid #9776ec;",new cljs.core.Keyword(null,"z-index","z-index",1892827090),"999;",new cljs.core.Keyword(null,"color","color",1011675173),"black;"], null),new cljs.core.Keyword(null,"buttonProperties","buttonProperties",1221783147),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"buttonText","buttonText",282861744),"Okay"], null)], null));
 } else {
-var G__29087 = (i + (1));
-i = G__29087;
+var G__33369 = (i + (1));
+i = G__33369;
 continue;
 }
 }
@@ -665,8 +665,8 @@ return fancy_alert.core.fancy_alert(new cljs.core.PersistentArrayMap(null, 4, [n
 });})(i,currentStorage))
 ).then();
 } else {
-var G__29088 = (i + (1));
-i = G__29088;
+var G__33370 = (i + (1));
+i = G__33370;
 continue;
 }
 break;
@@ -688,8 +688,8 @@ return fancy_alert.core.fancy_alert(new cljs.core.PersistentArrayMap(null, 4, [n
 });})(i,currentStorage))
 ).then();
 } else {
-var G__29089 = (i + (1));
-i = G__29089;
+var G__33371 = (i + (1));
+i = G__33371;
 continue;
 }
 break;
@@ -697,4 +697,4 @@ break;
 }));
 });
 
-//# sourceMappingURL=localforageApi.js.map?rel=1558443078142
+//# sourceMappingURL=localforageApi.js.map?rel=1558649728833

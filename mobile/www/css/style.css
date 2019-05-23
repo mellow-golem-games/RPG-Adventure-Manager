@@ -21,8 +21,13 @@ h1, h2, h3, h4, h5 {
   font-family: 'MavenPro', sans-serif;
 }
 
+body.hide-scroll {
+  overflow: hidden;
+  position: fixed;
+}
+
 .itemPage, .viewPage {
-  position: absolute;
+  position: fixed;
   top: calc(-105% - 100px);
   left: 0;
   transition: all .25s;

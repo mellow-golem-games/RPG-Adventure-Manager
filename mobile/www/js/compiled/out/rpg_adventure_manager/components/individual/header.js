@@ -8,4 +8,4 @@ return rpg_adventure_manager.state.handle_state_change.call(null,"update-current
 })], null),"x"], null)], null)], null);
 });
 
-//# sourceMappingURL=header.js.map?rel=1558046468881
+//# sourceMappingURL=header.js.map?rel=1558649729655
