@@ -186,6 +186,7 @@ button.delete:active {
   width: 75%;
   max-width: 480px;
   margin: 0 auto;
+  padding-bottom: 100px;
 }
 
 .new.itemPage .content input, .new.itemPage .content textarea {
@@ -205,6 +206,7 @@ textarea {
 .View-all-body {
   width: 75%;
   margin: 0 auto;
+  padding-bottom: 75px;
 }
 .View-all-body .View-all-group {
   margin-top: 48px;
