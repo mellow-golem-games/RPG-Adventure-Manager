@@ -35,7 +35,7 @@
       (update-scroll-position 0 true)) ; this should be instant
     (do
       (update-scroll-position (.-pageYOffset js/window) false)
-      (js/setTimeout #(.add (.-classList (.-body js/document)) "hide-scroll") 300)))) ; here we need to set a short timeout like 50ms)
+      (js/setTimeout #(.add (.-classList (.-body js/document)) "hide-scroll") 600)))) ; here we need to set a short timeout like 50ms)
 
 
 (defn update-current-view [payload]

@@ -26,7 +26,7 @@ rpg_adventure_manager.state.update_scroll_position.call(null,window.pageYOffset,
 
 return setTimeout((function (){
 return document.body.classList.add("hide-scroll");
-}),(250));
+}),(600));
 }
 });
 rpg_adventure_manager.state.update_current_view = (function rpg_adventure_manager$state$update_current_view(payload){
@@ -69,4 +69,4 @@ var fn_var = cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,new clj
 return fn_var.call(null,payload);
 });
 
-//# sourceMappingURL=state.js.map?rel=1558649728597
+//# sourceMappingURL=state.js.map?rel=1558721517022
