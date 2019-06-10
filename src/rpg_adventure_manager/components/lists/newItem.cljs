@@ -33,6 +33,7 @@
         [:div.new.content
           [:h2 (:name list)]
           (doall (for [input @inputs]
-            [:input {:key (first input) :type "text" :default-value (second input) :placeholder "List Item" :on-change #(handle-input-change (first input) (-> % .-target .-value))}]
+            ; input doesnt update default value on update?
+            [:input {:key (first input) :type "text" :value (second input) :placeholder "List Item" :on-change #(handle-input-change (first input) (-> % .-target .-value))}]
           ))
           [:button {:on-click #(save-list (:name list))} "Save List"]]])))
