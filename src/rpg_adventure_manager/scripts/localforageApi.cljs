@@ -24,7 +24,8 @@
   (go (get-initial-data-by-type "locations"))
   (go (get-initial-data-by-type "items"))
   (go (get-initial-data-by-type "hooks"))
-  (go (get-initial-data-by-type "lists")))
+  (go (get-initial-data-by-type "lists"))
+  (go (get-initial-data-by-type "notes")))
 
 ; TODO we need to go back and extract the alert settings to a single var since we re-use it so much
 ; NEXT couple of functions are probably a good case for multimethods
@@ -141,3 +142,42 @@
                                                                                                                                                                 :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
                                                                                                                                                                 :buttonProperties {:buttonText "Okay"}}))))
                                                              (recur (inc i))))))))
+
+(defn check-if-key-exists-on-notes [newNote currentStorage]
+  (loop [i 0]
+    (if (= (count currentStorage) i)
+      true
+      (if (= (:key newNote) (:key (nth currentStorage i)))
+        false
+        (recur (inc i))))))
+
+(defn add-note [note]
+  (.then (.getItem (.-localforage js/window) "notes")
+    (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)
+            newNote (conj note {:key (rand-int 90000000)})]
+        (print (check-if-key-exists-on-notes newNote currentStorage))
+        (if (check-if-key-exists-on-notes newNote currentStorage)
+          (.then (.setItem (.-localforage js/window) "notes" (clj->js (conj currentStorage newNote)))
+            (fn [value]
+              (fancy-alert/fancy-alert
+                {:text "Note Added!" :hideAfterN false
+                 :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
+                 :buttonProperties {:buttonText "Okay"}})
+                 (handle-state-change "update-note" (conj currentStorage newNote))))
+                 (add-note newNote)))))) ; if we have a dup (never really should) jst call it call again
+
+(defn delete-note [key]
+  (.then (.getItem (.-localforage js/window) "notes")
+    (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)]
+        (loop [i 0]
+          (if (= (:key (nth currentStorage i)) key)
+            (.then (.setItem (.-localforage js/window) "notes" (clj->js (concat (subvec currentStorage 0 i)
+                                                                         (subvec currentStorage (inc i)))) (fn [value]
+                                                                                                              (fancy-alert/fancy-alert
+                                                                                                                {:text "Note Deleted!" :hideAfterN false
+                                                                                                                 :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
+                                                                                                                 :buttonProperties {:buttonText "Okay"}})
+                                                                                                                  (get-initial-data-by-type "notes"))))
+          (recur (inc i))))))))

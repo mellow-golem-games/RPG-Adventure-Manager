@@ -294,3 +294,27 @@ textarea {
 .Home-lists-container button{
   padding: 5px 12px;
 }
+
+
+/* NOTES CSS SHOULD GO HERE */
+.Home-notes {
+  padding: 0px 10px;
+  padding-bottom: 100px
+}
+.Home-notes-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-transform: capitalize;
+}
+
+.Note-item {
+  display: flex;
+}
+
+.Note-item .deleteNote {
+  padding-right: 12px;
+  font-size: .75rem;
+  color: red;
+  line-height: 1.75rem;
+}
