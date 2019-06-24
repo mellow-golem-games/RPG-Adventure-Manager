@@ -36,10 +36,12 @@ body.hide-scroll {
   width: 100%;
   overflow: scroll;
   padding-bottom: 100px; /* needed for ads to not cover content */
+  opacity: 0;
 }
 
 .itemPage.visible, .viewPage.visible {
   top: 0;
+  opacity: 1;
 }
 
 .itemPage__header {
@@ -115,6 +117,11 @@ button.delete:active {
 
 
 /* HOME PAGE STYLES */
+
+body.hide-scroll .Home-content {
+  opacity: 0;
+}
+
 .Home-content {
   display: flex;
   flex-flow: wrap;
