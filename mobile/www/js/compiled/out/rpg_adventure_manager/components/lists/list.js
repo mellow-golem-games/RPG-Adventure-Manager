@@ -16,33 +16,33 @@ rpg_adventure_manager.components.lists.list.render = (function rpg_adventure_man
 return (function (){
 return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.Home-lists","div.Home-lists",-883442095),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [rpg_adventure_manager.components.lists.newlist.render,state], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [rpg_adventure_manager.components.lists.newitem.render,state], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.Home-lists-header","div.Home-lists-header",981828081),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"h2","h2",-372662728),"Custom Lists"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),(function (){
 return rpg_adventure_manager.state.handle_state_change.call(null,"update-current-view","new-list");
-})], null),"Add List"], null)], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.Home-lists-content","div.Home-lists-content",2110843440),cljs.core.doall.call(null,(function (){var iter__4292__auto__ = (function rpg_adventure_manager$components$lists$list$render_$_iter__23260(s__23261){
+})], null),"Add List"], null)], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.Home-lists-content","div.Home-lists-content",2110843440),cljs.core.doall.call(null,(function (){var iter__4292__auto__ = (function rpg_adventure_manager$components$lists$list$render_$_iter__31106(s__31107){
 return (new cljs.core.LazySeq(null,(function (){
-var s__23261__$1 = s__23261;
+var s__31107__$1 = s__31107;
 while(true){
-var temp__5457__auto__ = cljs.core.seq.call(null,s__23261__$1);
+var temp__5457__auto__ = cljs.core.seq.call(null,s__31107__$1);
 if(temp__5457__auto__){
-var s__23261__$2 = temp__5457__auto__;
-if(cljs.core.chunked_seq_QMARK_.call(null,s__23261__$2)){
-var c__4290__auto__ = cljs.core.chunk_first.call(null,s__23261__$2);
+var s__31107__$2 = temp__5457__auto__;
+if(cljs.core.chunked_seq_QMARK_.call(null,s__31107__$2)){
+var c__4290__auto__ = cljs.core.chunk_first.call(null,s__31107__$2);
 var size__4291__auto__ = cljs.core.count.call(null,c__4290__auto__);
-var b__23263 = cljs.core.chunk_buffer.call(null,size__4291__auto__);
-if((function (){var i__23262 = (0);
+var b__31109 = cljs.core.chunk_buffer.call(null,size__4291__auto__);
+if((function (){var i__31108 = (0);
 while(true){
-if((i__23262 < size__4291__auto__)){
-var list = cljs.core._nth.call(null,c__4290__auto__,i__23262);
-cljs.core.chunk_append.call(null,b__23263,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.Home-lists-container","div.Home-lists-container",-485567935),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(list)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"h3","h3",2067611163),new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(list)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__23262,list,c__4290__auto__,size__4291__auto__,b__23263,s__23261__$2,temp__5457__auto__){
+if((i__31108 < size__4291__auto__)){
+var list = cljs.core._nth.call(null,c__4290__auto__,i__31108);
+cljs.core.chunk_append.call(null,b__31109,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.Home-lists-container","div.Home-lists-container",-485567935),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(list)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"h3","h3",2067611163),new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(list)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__31108,list,c__4290__auto__,size__4291__auto__,b__31109,s__31107__$2,temp__5457__auto__){
 return (function (){
 return rpg_adventure_manager.components.lists.list.show_active_list.call(null,list);
-});})(i__23262,list,c__4290__auto__,size__4291__auto__,b__23263,s__23261__$2,temp__5457__auto__))
-], null),"View List"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button.delete","button.delete",898132078),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__23262,list,c__4290__auto__,size__4291__auto__,b__23263,s__23261__$2,temp__5457__auto__){
+});})(i__31108,list,c__4290__auto__,size__4291__auto__,b__31109,s__31107__$2,temp__5457__auto__))
+], null),"View List"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button.delete","button.delete",898132078),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (i__31108,list,c__4290__auto__,size__4291__auto__,b__31109,s__31107__$2,temp__5457__auto__){
 return (function (){
 return rpg_adventure_manager.scripts.localforageApi.delete_list.call(null,new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(list));
-});})(i__23262,list,c__4290__auto__,size__4291__auto__,b__23263,s__23261__$2,temp__5457__auto__))
+});})(i__31108,list,c__4290__auto__,size__4291__auto__,b__31109,s__31107__$2,temp__5457__auto__))
 ], null),"Delete"], null)], null)], null));
 
-var G__23264 = (i__23262 + (1));
-i__23262 = G__23264;
+var G__31110 = (i__31108 + (1));
+i__31108 = G__31110;
 continue;
 } else {
 return true;
@@ -50,21 +50,21 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons.call(null,cljs.core.chunk.call(null,b__23263),rpg_adventure_manager$components$lists$list$render_$_iter__23260.call(null,cljs.core.chunk_rest.call(null,s__23261__$2)));
+return cljs.core.chunk_cons.call(null,cljs.core.chunk.call(null,b__31109),rpg_adventure_manager$components$lists$list$render_$_iter__31106.call(null,cljs.core.chunk_rest.call(null,s__31107__$2)));
 } else {
-return cljs.core.chunk_cons.call(null,cljs.core.chunk.call(null,b__23263),null);
+return cljs.core.chunk_cons.call(null,cljs.core.chunk.call(null,b__31109),null);
 }
 } else {
-var list = cljs.core.first.call(null,s__23261__$2);
-return cljs.core.cons.call(null,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.Home-lists-container","div.Home-lists-container",-485567935),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(list)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"h3","h3",2067611163),new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(list)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (list,s__23261__$2,temp__5457__auto__){
+var list = cljs.core.first.call(null,s__31107__$2);
+return cljs.core.cons.call(null,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.Home-lists-container","div.Home-lists-container",-485567935),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(list)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"h3","h3",2067611163),new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(list)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button","button",1456579943),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (list,s__31107__$2,temp__5457__auto__){
 return (function (){
 return rpg_adventure_manager.components.lists.list.show_active_list.call(null,list);
-});})(list,s__23261__$2,temp__5457__auto__))
-], null),"View List"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button.delete","button.delete",898132078),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (list,s__23261__$2,temp__5457__auto__){
+});})(list,s__31107__$2,temp__5457__auto__))
+], null),"View List"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"button.delete","button.delete",898132078),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (list,s__31107__$2,temp__5457__auto__){
 return (function (){
 return rpg_adventure_manager.scripts.localforageApi.delete_list.call(null,new cljs.core.Keyword(null,"name","name",1843675177).cljs$core$IFn$_invoke$arity$1(list));
-});})(list,s__23261__$2,temp__5457__auto__))
-], null),"Delete"], null)], null)], null),rpg_adventure_manager$components$lists$list$render_$_iter__23260.call(null,cljs.core.rest.call(null,s__23261__$2)));
+});})(list,s__31107__$2,temp__5457__auto__))
+], null),"Delete"], null)], null)], null),rpg_adventure_manager$components$lists$list$render_$_iter__31106.call(null,cljs.core.rest.call(null,s__31107__$2)));
 }
 } else {
 return null;
@@ -78,4 +78,4 @@ return iter__4292__auto__.call(null,new cljs.core.Keyword(null,"lists","lists",-
 });
 });
 
-//# sourceMappingURL=list.js.map?rel=1561380005137
+//# sourceMappingURL=list.js.map?rel=1561420202871

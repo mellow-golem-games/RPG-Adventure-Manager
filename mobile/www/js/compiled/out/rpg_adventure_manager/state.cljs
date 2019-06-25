@@ -19,16 +19,13 @@
                        :activeList {}}))
 
 (defn update-scroll-position [val scroll]
-  ; (js/console.log  state)
   (if scroll
     (do
-      (js/console.log (js/parseInt (:scrollOffset @state)))
       (.scrollTo js/window 0 (:scrollOffset @state))))
   (swap! state conj {:scrollOffset val}))
 
 
 (defn handle-scroll-func [payload]
-  ; (js/console.log (.-pageYOffset js/window))
   (if (= payload "")
     (do
       (.remove (.-classList (.-body js/document)) "hide-scroll")
@@ -50,6 +47,9 @@
 (defn update-list [payload]
   "completely blows away the current lists"
   (swap! state conj {:lists payload}))
+
+(defn update-note [payload]
+  (swap! state conj {:notes payload}))
 
 (defn update-alert [payload]
   "updates alert status to provided value"
