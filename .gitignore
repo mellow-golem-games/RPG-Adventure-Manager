@@ -15,3 +15,5 @@ pom.xml
 /mobile/platforms
 /mobile/plugins
 /mobile/node_modules
+/mobile/www/js
+/mobile/www/css
