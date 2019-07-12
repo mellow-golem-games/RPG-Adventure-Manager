@@ -60,11 +60,11 @@
   (swap! state conj {:activeType payload}))
 
 (defn set-active-entity [payload]
-  "Sets the entity to be active to display on view all page"
+  "Sets the entity to be active to display on view all page - takes all entities to show there []"
   (swap! state conj {:activeEntity payload}))
 
 (defn set-single-entity [payload]
-  "sets the entity to view on the single page"
+  "sets the entity to view on the single page - single entity {}"
   (swap! state conj {:singleEntity payload}))
 
 (defn set-active-list [payload]
