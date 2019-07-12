@@ -10,6 +10,7 @@
               [rpg-adventure-manager.components.individual.individual :as viewSingle]
               [rpg-adventure-manager.components.lists.list :as listView]
               [rpg-adventure-manager.components.notes.noteview :as noteView]
+              [rpg-adventure-manager.components.search :as search]
               [rpg-adventure-manager.components.shared.alert :as alert]
               [rpg-adventure-manager.state :refer [state handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
@@ -28,6 +29,7 @@
 (defn Main []
   [:div.Main-Wrapper
     [header/render]
+    [search/render state]
     [:div.Home-content
       [:div.itemContainer
         [:div.itemContainer__left

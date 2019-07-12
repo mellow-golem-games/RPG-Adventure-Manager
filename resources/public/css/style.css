@@ -322,3 +322,42 @@ textarea {
   color: red;
   line-height: 1.75rem;
 }
+
+
+/* SEARCH STYLES HERE */
+.Search {
+  display: flex;
+  padding: 15px;
+  max-width: 320px;
+  position: relative;
+}
+
+.Search input {
+  height: 15px;
+  background: #f4f3ef;
+  border: 1px solid #cececc;
+  border-radius: 4px;
+  position: relative;
+  top: 17px;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.Search .SearchResults {
+  position: absolute;
+  top: 59px;
+  right: 30px;
+  background: #f4f3ef;
+  border: 1px solid #cececc;
+}
+
+.SearchResults .SearchResults-item {
+  padding: 10px;
+  margin: 0;
+  border-bottom: 1px solid #cececc;
+  transition: all .25s;
+}
+
+.SearchResults .SearchResults-item:hover {
+  background: #e1e1e0;
+}
