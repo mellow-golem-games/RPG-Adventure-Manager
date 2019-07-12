@@ -20,7 +20,4 @@
           [:div.Home-notes-container {:key (:key note)}
             [:div.Note-item
               [:p.deleteNote {:on-click #(delete-note (:key note))}"x"]
-              [:p (:note note)]]
-          ]
-        ))
-    ]]))
+              [:p (:note note)]]]))]]))

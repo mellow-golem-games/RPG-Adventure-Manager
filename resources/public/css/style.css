@@ -26,6 +26,10 @@ body.hide-scroll {
   position: fixed;
 }
 
+body.hide-scroll .Home-Content {
+  opacity: 0;
+}
+
 .itemPage, .viewPage {
   position: fixed;
   top: calc(-105% - 100px);
