@@ -35,7 +35,7 @@
   (let [searchResults (atom nil)]
     (fn []
       [:div.Search
-        [:h5 "Search Your Enteries: "]
+        [:h5 "Search Your Entries: "]
         [:input {:type "text" :on-change #(handle-search-change (-> % .-target .-value) searchResults state)}]
         [:div.SearchResults
           (doall (for [item @searchResults]
