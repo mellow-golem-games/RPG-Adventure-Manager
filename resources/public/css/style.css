@@ -126,6 +126,18 @@ body.hide-scroll .Home-content {
   opacity: 0;
 }
 
+.Header.home p {
+  position: absolute;
+  right: 10px;
+  top: -7px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  color: black;
+  border-radius: 50%;
+  text-align: center;
+}
+
 .Home-content {
   display: flex;
   flex-flow: wrap;
@@ -360,4 +372,9 @@ textarea {
 
 .SearchResults .SearchResults-item:hover {
   background: #e1e1e0;
+}
+
+/* ABOUT PAGE */
+.About.content {
+  padding: 10px;
 }

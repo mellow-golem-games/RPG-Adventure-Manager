@@ -3,5 +3,6 @@
 
 (defn render []
   (fn []
-    [:div.Header
-      [:h4 "RPG Adventure Manager"]]))
+    [:div.Header.home
+      [:h4 "RPG Adventure Manager"]
+      [:p {:on-click #(handle-state-change "update-current-view" "about")} "i"]]))
