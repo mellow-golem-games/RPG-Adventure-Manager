@@ -315,7 +315,9 @@ textarea {
 /* NOTES CSS SHOULD GO HERE */
 .Home-notes {
   padding: 0px 10px;
-  padding-bottom: 100px
+  padding-bottom: 100px;
+  max-width: 620px;
+  margin: 0 auto;
 }
 .Home-notes-header {
   width: 100%;
@@ -377,4 +379,12 @@ textarea {
 /* ABOUT PAGE */
 .About.content {
   padding: 10px;
+}
+
+.About.content a, .About.content p{
+  display: inline-block;
+}
+
+.About.content a {
+  padding-left: 4px;
 }
