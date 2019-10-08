@@ -12,6 +12,7 @@
               [rpg-adventure-manager.components.notes.noteview :as noteView]
               [rpg-adventure-manager.components.search :as search]
               [rpg-adventure-manager.components.about :as about]
+              [rpg-adventure-manager.components.canvas :as canvas]
               [rpg-adventure-manager.components.shared.alert :as alert]
               [rpg-adventure-manager.state :refer [state handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
@@ -30,8 +31,11 @@
 (defn Main []
   [:div.Main-Wrapper
     [header/render]
+    [:div.ViewSwitcher
+      [:h2 {:on-click #(handle-state-change "update-current-view" "canvas")} "Canvas"]]
     [search/render state]
     [about/render (:about (:activeView @state))]
+    [canvas/render state]
     [:div.Home-content
       [:div.itemContainer
         [:div.itemContainer__left
