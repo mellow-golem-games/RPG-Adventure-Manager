@@ -34,7 +34,7 @@
                            :open-urls ["http://localhost:3449/index.html"]}
 
                 :compiler {:main rpg-adventure-manager.core
-                           :npm-deps {:localforage "*" :panzoom "*" :interactjs "*"}
+                           :npm-deps {:localforage "*" :panzoom "*" :interactjs "*" :displacejs "*"}
                            :install-deps true
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/rpg_adventure_manager.js"
@@ -50,7 +50,7 @@
                 :source-paths ["src"]
                 :compiler {:output-to "resources/public/js/compiled/rpg_adventure_manager.js"
                            :main rpg-adventure-manager.core
-                           :npm-deps {:localforage "*" :panzoom "*" :interactjs "*"}
+                           :npm-deps {:localforage "*" :panzoom "*" :interactjs "*" :displacejs "*"}
                            :install-deps true
                            :optimizations :advanced
                            :pretty-print false}}]}

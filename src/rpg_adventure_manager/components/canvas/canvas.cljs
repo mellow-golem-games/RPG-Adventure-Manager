@@ -1,33 +1,11 @@
-(ns rpg-adventure-manager.components.canvas
+(ns rpg-adventure-manager.components.canvas.canvas
     (:require [reagent.core :as reagent :refer [atom]]
               [rpg-adventure-manager.state :refer [handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]
               [rpg-adventure-manager.components.new-header :as header]
               ["panzoom" :as panzoom]
+              ["displacejs" :as displace]
               ["interactjs" :as interact]))
-
-
-(defn getXVal [target event]
-  "Grabs the x value for the onDrag event"
-  (let [x (+ (js/parseFloat (.getAttribute target "data-x")) (.-dx event))]
-    (if (or (js/isNaN x) (< x 0))
-      0
-      x)))
-
-(defn getYVal [target event]
-  "Grabs the y value for the onDrag event"
-  (let [y (+ (js/parseFloat (.getAttribute target "data-y")) (.-dy event))]
-    (if (or (js/isNaN y) (< y 0))
-      0
-      y)))
-
-; (defn render [state]
-;   (fn []
-;     [:div.Canvas.viewPage {:class (:canvas (:activeView @state))}
-;       (header/render)
-;     [:div.Canvas-body
-;       [:h2 "Test"]]
-;     ]))
 
 ; We need to setup all our handlers after the componeent has rendered
 ; TODO test with state - think a rerender will break everything - maybe set a global `handlersSet` ?
@@ -41,25 +19,41 @@
                                               :boundsPadding 1 ; it multiplies by this is in the code for panzoom
                                               :bounds true})))
 
-  ; function taken from interact - probably not `functional`
-  ; TODO we should chanage drag speed based on zoom level
-  ; The further out the faster the zoom needs to be to seem fluid
-  (defn onMoveHandler [event]
-    (.pause panHandler) ; resume call on end on end
-    (let [target (.-target event)]
-      (let [x (getXVal target event)
-            y (getYVal target event)]
-        (set! (.-transform (.-style target)) (str "translate("x"px, "y"px)"))
-        (set! (.-webkitTransform (.-style target)) (str "translate("x"px, "y"px)"))
-        (.setAttribute target "data-x" x)
-        (.setAttribute target "data-y" y))))
+  (defn handle-lower-bounds [event]
+    "drag position cannot be lower than 0"
+    (let [left (js/parseInt (.-left (.-style event)))
+          top (js/parseInt (.-top (.-style event)))]
+    (if (< left 0)
+        (set! (.-left (.-style event)) 0))
+    (if (< top 0)
+      (set! (.-top (.-style event)) 0))))
 
-  (defn onMoveEndHandler [event]
+  (defn handle-upper-bounds [event]
+    ; TODO set and test upper drag limit
+  )
 
+  (defn handleBounds [event]
+    "handles calling check for upper and lower bounds"
+    (handle-lower-bounds event)
+    (handle-upper-bounds event))
+
+  (defn onMoveEventEnd [event]
+    ; Extra check - may refactor this - possible to 'throw' it out of bounds
+    (handle-lower-bounds event)
+    (handle-upper-bounds event)
     (.resume panHandler))
-  (print "darag")
-  (.draggable (interact ".draggable") (clj->js {:inertia false :onmove onMoveHandler :onend onMoveEndHandler})))
-))
+
+  (defn onMoveEventStart []
+    (.pause panHandler))
+
+  (displace (.querySelector js/document ".draggable")
+    (clj->js
+      {:onMouseDown onMoveEventStart
+       :onTouchStart onMoveEventStart
+       :onTouchMove handleBounds
+       :onMouseMove handleBounds
+       :onMouseUp onMoveEventEnd
+       :onTouchStop onMoveEventEnd})))))
 
 (defn Canvas [state]
   (reagent/create-class                 ;; <-- expects a map of functions
@@ -78,13 +72,11 @@
         ;; other lifecycle funcs can go in here
         :reagent-render        ;; Note:  is not :render
          (fn [state]           ;; remember to repeat parameters
-          (print "loaded q")
           [:div.Canvas.viewPage {:class (:canvas (:activeView @state))}
             (header/render)
-            [:div.draggable [:p "Drag Me"]]
             [:div.CanvasParent
               [:div#Canvas
-                ]]])}))
+                [:div.draggable [:p "Drag Me"]]]]])}))
 
 ; TODO we can probably just work with the abpve canvas - remove this and import the component
 (defn render [state]

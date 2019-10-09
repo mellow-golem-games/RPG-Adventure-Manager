@@ -12,7 +12,7 @@
               [rpg-adventure-manager.components.notes.noteview :as noteView]
               [rpg-adventure-manager.components.search :as search]
               [rpg-adventure-manager.components.about :as about]
-              [rpg-adventure-manager.components.canvas :as canvas]
+              [rpg-adventure-manager.components.canvas.canvas :as canvas]
               [rpg-adventure-manager.components.shared.alert :as alert]
               [rpg-adventure-manager.state :refer [state handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
