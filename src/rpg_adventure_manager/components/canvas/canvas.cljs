@@ -3,6 +3,7 @@
               [rpg-adventure-manager.state :refer [handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]
               [rpg-adventure-manager.components.new-header :as header]
+              [rpg-adventure-manager.components.canvas.controls :as controls]
               ["panzoom" :as panzoom]
               ["displacejs" :as displace]
               ["interactjs" :as interact]))
@@ -46,14 +47,15 @@
   (defn onMoveEventStart []
     (.pause panHandler))
 
-  (displace (.querySelector js/document ".draggable")
-    (clj->js
-      {:onMouseDown onMoveEventStart
-       :onTouchStart onMoveEventStart
-       :onTouchMove handleBounds
-       :onMouseMove handleBounds
-       :onMouseUp onMoveEventEnd
-       :onTouchStop onMoveEventEnd})))))
+  ; (def displaceRef (displace (.querySelector js/document ".draggable")
+  ;   (clj->js
+  ;     {:onMouseDown onMoveEventStart
+  ;      :onTouchStart onMoveEventStart
+  ;      :onTouchMove handleBounds
+  ;      :onMouseMove handleBounds
+  ;      :onMouseUp onMoveEventEnd
+  ;      :onTouchStop onMoveEventEnd})))
+)))
 
 (defn Canvas [state]
   (reagent/create-class                 ;; <-- expects a map of functions
@@ -66,17 +68,34 @@
 
        :component-did-update              ;; the name of a lifecycle function
         (fn [this old-argv]                ;; reagent provides you the entire "argv", not just the "props"
-          ; (js/console.log "did update")
-        )
+          (let [elems (array-seq (.getElementsByClassName js/document "draggable"))]
+            (doseq [elem elems]
+              (displace elem
+                (clj->js
+                  {:onMouseDown onMoveEventStart
+                   :onTouchStart onMoveEventStart
+                   :onTouchMove handleBounds
+                   :onMouseMove handleBounds
+                   :onMouseUp onMoveEventEnd
+                   :onTouchStop onMoveEventEnd})))))
 
         ;; other lifecycle funcs can go in here
         :reagent-render        ;; Note:  is not :render
          (fn [state]           ;; remember to repeat parameters
-          [:div.Canvas.viewPage {:class (:canvas (:activeView @state))}
-            (header/render)
-            [:div.CanvasParent
-              [:div#Canvas
-                [:div.draggable [:p "Drag Me"]]]]])}))
+          (let [canvasComponents (:canvasComponents @state)]
+            [:div.Canvas.viewPage {:class (:canvas (:activeView @state))}
+              (header/render)
+              [:div.CanvasParent
+                (controls/render)
+                [:div#Canvas
+                  [:div.draggable
+                  ]
+                  (for [component canvasComponents]
+                    [:div.draggable {:key (:id component)}
+                      [:p (:title component)]
+                      [:p (:description component)]
+                      [:p (:id component)]])
+                  ]]]))}))
 
 ; TODO we can probably just work with the abpve canvas - remove this and import the component
 (defn render [state]

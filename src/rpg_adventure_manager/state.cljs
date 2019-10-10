@@ -1,6 +1,25 @@
 (ns rpg-adventure-manager.state
   (:require [reagent.core :as reagent :refer [atom]]))
 
+; MODEL of canvas component
+; (def obj "canvasComponent" {
+;   :title "string"
+;   :description "string"
+;   :id "string" ; UUID - probably work
+;   :linkedTo "vector of ID's"
+; })
+
+(defn generate-canvasComponent-id [component]
+  "TODO change this to use a UUID"
+  (conj component {:id (rand-int 1000)}))
+
+(def canvasComponent {
+  :id nil
+  :title "Title"
+  :descrition "Description"
+  :linkedTo []
+})
+
 
 ; Holds a reference to all the current Items in the Database
 ; :activeView also contains things like view-all-cities & view-individual-city
@@ -16,7 +35,8 @@
                        :activeEntity {}
                        :singleEntity {}
                        :scrollOffset {}
-                       :activeList {}}))
+                       :activeList {}
+                       :canvasComponents []}))
 
 (defn update-scroll-position [val scroll]
   (if scroll
@@ -70,6 +90,11 @@
 (defn set-active-list [payload]
   "Sets the provided list to active"
   (swap! state conj {:activeList payload}))
+
+(defn add-canvas-component []
+  (swap! state update-in [:canvasComponents] merge (generate-canvasComponent-id canvasComponent))
+  ; (swap! state conj {:canvasComponents (generate-canvasComponent-id canvasComponent)})
+)
 
 (defn handle-state-change [action payload]
   "Accept an action function to dispatch and passes it the current payload"

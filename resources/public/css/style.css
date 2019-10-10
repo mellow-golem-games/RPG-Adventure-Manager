@@ -424,6 +424,29 @@ textarea {
   background-repeat: repeat;
 }
 
+.Canvas .Controls {
+  position: absolute;
+  right: 0;
+  border: 1px solid white;
+  color: white;
+  transition: all .5s;
+  z-index: 75;
+  width: 40px;
+  height: 40px;
+  font-size: 1.8rem;
+  text-align: center;
+  line-height: 40px;
+}
+
+.Canvas .Controls p {
+  margin: 0;
+}
+
+.Canvas .Controls:hover {
+  background: white;
+  color: black;
+}
+
 /* TESTING */
 .draggable {
   width: 200px;
