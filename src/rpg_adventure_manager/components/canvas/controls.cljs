@@ -9,4 +9,4 @@
 
 (defn render []
    [:div.Controls
-      [:p {:on-click #(handle-state-change "add-canvas-component" nil)} "+"]])
+      [:p {:on-click #(localforageApi/add-canvas-component)} "+"]])

@@ -32,7 +32,7 @@
   [:div.Main-Wrapper
     [header/render]
     [:div.ViewSwitcher
-      [:h2 {:on-click #(handle-state-change "update-current-view" "canvas")} "Canvas"]]
+      [:button {:on-click #(handle-state-change "update-current-view" "canvas")} "Visual Builder"]]
     [search/render state]
     [about/render (:about (:activeView @state))]
     [canvas/render state]

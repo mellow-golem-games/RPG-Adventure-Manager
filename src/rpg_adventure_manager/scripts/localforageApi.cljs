@@ -17,6 +17,17 @@
   (.then (.getItem (.-localforage js/window) type) (fn [value]
                                                     (handle-state-change "update-entity" {:type type :value value}))))
 
+(defn generate-canvasComponent-id [component]
+  "TODO change this to a UUID"
+  (conj component {:id (rand-int 1000)}))
+
+(def canvasComponent {
+  :id nil
+  :title "Title"
+  :descrition "Description"
+  :linkedTo []
+})
+
 (defn pull-initial-data []
   "this function gets all the current saved data and pushes it to the store"
   (go (get-initial-data-by-type "cities"))
@@ -25,7 +36,8 @@
   (go (get-initial-data-by-type "items"))
   (go (get-initial-data-by-type "hooks"))
   (go (get-initial-data-by-type "lists"))
-  (go (get-initial-data-by-type "notes")))
+  (go (get-initial-data-by-type "notes"))
+  (go (get-initial-data-by-type "canvasComponents")))
 
 ; TODO we need to go back and extract the alert settings to a single var since we re-use it so much
 ; NEXT couple of functions are probably a good case for multimethods
@@ -142,6 +154,16 @@
                                                                                                                                                                 :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
                                                                                                                                                                 :buttonProperties {:buttonText "Okay"}}))))
                                                              (recur (inc i))))))))
+
+(defn add-canvas-component []
+  "From our canvas builder - adds an item"
+  (.then (.getItem (.-localforage js/window) "canvasComponents")
+    (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)]
+        (.then (.setItem (.-localforage js/window) "canvasComponents"
+          (clj->js (conj currentStorage (generate-canvasComponent-id canvasComponent))))
+            (fn [value]
+              (handle-state-change "add-canvas-component" (js->clj value :keywordize-keys true))))))))
 
 (defn check-if-key-exists-on-notes [newNote currentStorage]
   (loop [i 0]

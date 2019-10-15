@@ -45,17 +45,7 @@
     (.resume panHandler))
 
   (defn onMoveEventStart []
-    (.pause panHandler))
-
-  ; (def displaceRef (displace (.querySelector js/document ".draggable")
-  ;   (clj->js
-  ;     {:onMouseDown onMoveEventStart
-  ;      :onTouchStart onMoveEventStart
-  ;      :onTouchMove handleBounds
-  ;      :onMouseMove handleBounds
-  ;      :onMouseUp onMoveEventEnd
-  ;      :onTouchStop onMoveEventEnd})))
-)))
+    (.pause panHandler)))))
 
 (defn Canvas [state]
   (reagent/create-class                 ;; <-- expects a map of functions
@@ -82,14 +72,12 @@
         ;; other lifecycle funcs can go in here
         :reagent-render        ;; Note:  is not :render
          (fn [state]           ;; remember to repeat parameters
-          (let [canvasComponents (:canvasComponents @state)]
+          (let [canvasComponents (js->clj (:canvasComponents @state) :keywordize-keys true)]
             [:div.Canvas.viewPage {:class (:canvas (:activeView @state))}
               (header/render)
               [:div.CanvasParent
                 (controls/render)
                 [:div#Canvas
-                  [:div.draggable
-                  ]
                   (for [component canvasComponents]
                     [:div.draggable {:key (:id component)}
                       [:p (:title component)]
