@@ -447,11 +447,23 @@ textarea {
   color: black;
 }
 
+.
+
 /* TESTING */
-.draggable {
+.Component {
   width: 200px;
-  height: 100px;
+  height: 275px;
   background: white;
   position: absolute;
   z-index: 55;
+  display: flex;
+  flex-direction: column;
 }
+
+.Component input, .Component textarea {
+  width: 95%;
+  margin: 0 auto;
+  display: block;
+}
+
+

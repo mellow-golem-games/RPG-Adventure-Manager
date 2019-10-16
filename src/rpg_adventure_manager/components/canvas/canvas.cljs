@@ -4,6 +4,7 @@
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]
               [rpg-adventure-manager.components.new-header :as header]
               [rpg-adventure-manager.components.canvas.controls :as controls]
+              [rpg-adventure-manager.components.canvas.component :refer [Component]]
               ["panzoom" :as panzoom]
               ["displacejs" :as displace]
               ["interactjs" :as interact]))
@@ -42,6 +43,14 @@
     ; Extra check - may refactor this - possible to 'throw' it out of bounds
     (handle-lower-bounds event)
     (handle-upper-bounds event)
+    ; (js/console.log (js/parseInt (.-top (.-style event))))
+    ; (js/console.log (js/parseInt (.-left (.-style event))))
+    ; (js/console.log (.getAttribute event "data-id"))
+    (localforageApi/update-canvas-component-position
+      (js/parseInt (.getAttribute event "data-id"))
+      (js/parseInt (.-left (.-style event)))
+      (js/parseInt (.-top (.-style event))))
+
     (.resume panHandler))
 
   (defn onMoveEventStart []
@@ -79,11 +88,7 @@
                 (controls/render)
                 [:div#Canvas
                   (for [component canvasComponents]
-                    [:div.draggable {:key (:id component)}
-                      [:p (:title component)]
-                      [:p (:description component)]
-                      [:p (:id component)]])
-                  ]]]))}))
+                    [Component component])]]]))}))
 
 ; TODO we can probably just work with the abpve canvas - remove this and import the component
 (defn render [state]

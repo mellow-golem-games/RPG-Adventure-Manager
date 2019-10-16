@@ -24,7 +24,9 @@
 (def canvasComponent {
   :id nil
   :title "Title"
-  :descrition "Description"
+  :description "Description"
+  :xPos 0
+  :yPos 0
   :linkedTo []
 })
 
@@ -165,6 +167,33 @@
             (fn [value]
               (handle-state-change "add-canvas-component" (js->clj value :keywordize-keys true))))))))
 
+(defn update-canvas-component-position [id x y]
+  (.then (.getItem (.-localforage js/window) "canvasComponents")
+    (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)]
+        (.then (.setItem (.-localforage js/window) "canvasComponents"
+          (clj->js
+            (map
+              (fn [item]
+                (if (= (:id item) id)
+                  (conj item {:xPos x :yPos y})
+                  item))
+              currentStorage))))))))
+
+(defn update-canvas-component-text [id vals]
+  "updates the specified id with with the new map of text valus"
+  (.then (.getItem (.-localforage js/window) "canvasComponents")
+    (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)]
+        (.then (.setItem (.-localforage js/window) "canvasComponents"
+          (clj->js
+            (map
+              (fn [item]
+                (if (= (:id item) id)
+                  (conj item {:title (:title vals) :description (:description vals)})
+                  item))
+              currentStorage))))))))
+
 (defn check-if-key-exists-on-notes [newNote currentStorage]
   (loop [i 0]
     (if (= (count currentStorage) i)
@@ -178,7 +207,6 @@
     (fn [value]
       (let [currentStorage (js->clj value :keywordize-keys true)
             newNote (conj note {:key (rand-int 90000000)})]
-        (print (check-if-key-exists-on-notes newNote currentStorage))
         (if (check-if-key-exists-on-notes newNote currentStorage)
           (.then (.setItem (.-localforage js/window) "notes" (clj->js (conj currentStorage newNote)))
             (fn [value]
