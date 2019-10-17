@@ -194,6 +194,21 @@
                   item))
               currentStorage))))))))
 
+(defn add-canvas-component-liking [id idToLink]
+  "adds an idToLink to the given ids linked property"
+  (.then (.getItem (.-localforage js/window) "canvasComponents")
+    (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)]
+        (print (:linkedTo currentStorage))
+        (.then (.setItem (.-localforage js/window) "canvasComponents"
+          (clj->js
+            (map
+              (fn [item]
+                (if (= (:id item) id)
+                  ; (concat item {:linkedTo [idToLink]})
+                  (update-in item [:linkedTo] concat [idToLink])
+                  item)) currentStorage))))))))
+
 (defn check-if-key-exists-on-notes [newNote currentStorage]
   (loop [i 0]
     (if (= (count currentStorage) i)

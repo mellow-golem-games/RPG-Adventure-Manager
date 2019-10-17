@@ -1,15 +1,6 @@
 (ns rpg-adventure-manager.state
   (:require [reagent.core :as reagent :refer [atom]]))
 
-; MODEL of canvas component
-; (def obj "canvasComponent" {
-;   :title "string"
-;   :description "string"
-;   :id "string" ; UUID - probably work
-;   :linkedTo "vector of ID's"
-; })
-
-
 ; Holds a reference to all the current Items in the Database
 ; :activeView also contains things like view-all-cities & view-individual-city
 (defonce state (atom {:activeView {  ; This gets erased as state changes but I left it here as a reminder for expected values
@@ -25,7 +16,11 @@
                        :singleEntity {}
                        :scrollOffset {}
                        :activeList {}
-                       :canvasComponents []}))
+                       :canvasComponents []}
+                       :isLinked nil))
+
+(defn get-value-from-state [value]
+  (js->clj ((keyword value) @state) :keywordize-keys true))
 
 (defn update-scroll-position [val scroll]
   (if scroll
@@ -82,6 +77,12 @@
 
 (defn add-canvas-component [payload]
   (swap! state conj {:canvasComponents payload}))
+
+(defn set-isLinked [payload]
+  (swap! state conj {:isLinked payload}))
+
+(defn reset-isLinked []
+  (swap! state conj {:isLinked nil}))
 
 (defn handle-state-change [action payload]
   "Accept an action function to dispatch and passes it the current payload"

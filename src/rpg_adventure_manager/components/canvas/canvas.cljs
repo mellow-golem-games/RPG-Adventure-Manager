@@ -88,7 +88,7 @@
                 (controls/render)
                 [:div#Canvas
                   (for [component canvasComponents]
-                    [Component component])]]]))}))
+                    [:span {:key (:id component)}[Component component]])]]]))}))
 
 ; TODO we can probably just work with the abpve canvas - remove this and import the component
 (defn render [state]
