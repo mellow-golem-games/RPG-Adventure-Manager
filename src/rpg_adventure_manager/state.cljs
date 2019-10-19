@@ -84,6 +84,13 @@
 (defn reset-isLinked []
   (swap! state conj {:isLinked nil}))
 
+(defn update-canvas-component-pos [payload]
+  (let [newComponentsValue (map (fn [component]
+    (if (= (:id payload) (:id component))
+      (conj component {:yPos (:y payload) :xPos (:x payload)})
+      component)) (js->clj (:canvasComponents @state) :keywordize-keys true))]
+  (swap! state conj {:canvasComponents newComponentsValue})))
+
 (defn handle-state-change [action payload]
   "Accept an action function to dispatch and passes it the current payload"
   (let [fn-var ((ns-publics 'rpg-adventure-manager.state) (symbol action))]

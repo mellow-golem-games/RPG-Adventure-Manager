@@ -6,8 +6,8 @@
               [rpg-adventure-manager.scripts.curve :as curveHelpers]))
 
 (def size {
-  :h 285
-  :w 186
+  :h 190
+  :w 270
 })
 
 (defn initilize-link [id]
@@ -60,7 +60,7 @@
             y-initial (curveHelpers/calculate-curve-y-initial size startingDirection)
             end-x (curveHelpers/calculate-curve-x-end size {:x (:xPos linkToComponent) :y (:yPos linkToComponent)} {:x (:xPos component) :y (:yPos component)} startingDirection) ; Should be x pos of end - the x offset of the original since 0,0 is relative to the first elem
             end-y (curveHelpers/calculate-curve-y-end size {:x (:xPos linkToComponent) :y (:yPos linkToComponent)} {:x (:xPos component) :y (:yPos component)} startingDirection)]
-        [:svg {:height "1px" :width "1px" :overflow "visible" :key  (str (:id linkToComponent) "-" (rand-int 100))} ;1px prevents clicks and overflow dispalys whole thing
+        [:svg {:height "1px" :width "1px" :overflow "visible" :key  (str (:id linkToComponent) "-" (rand-int 2000))} ;1px prevents clicks and overflow dispalys whole thing
           [:path {:fill "transparent" :stroke "white" :stroke-width "2"
                   :d (str "M"x-initial","y-initial"
                        C"(+ x-initial (/ (- end-x x-initial) 3))","(- y-initial 50)"
@@ -80,9 +80,12 @@
                                   :width "275px"}}
            (doall (for [link (:linkedTo component)]
              (draw-curve link component)))
-           [:p {:on-click #(initilize-link (:id component))}"Link Component"]
-           [:input {:type "text"
-                    :default-value (:title @componentValues)
-                    :on-change #(update-title (-> % .-target .-value) componentValues (:id component))}]
-           [:textarea {:default-value (:description @componentValues)
-                       :on-change #(update-description (-> % .-target .-value) componentValues (:id component))}]])))
+           [:div.Component_inner
+             [:p {:on-click #(initilize-link (:id component))}"Link Component"]
+             [:input {:type "text"
+                      :default-value (:title @componentValues)
+                      :on-change #(update-title (-> % .-target .-value) componentValues (:id component))}]
+             [:textarea {:default-value (:description @componentValues)
+                         :on-change #(update-description (-> % .-target .-value) componentValues (:id component))}]]])))
+
+

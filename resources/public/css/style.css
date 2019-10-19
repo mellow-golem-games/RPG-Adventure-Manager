@@ -466,4 +466,15 @@ textarea {
   display: block;
 }
 
+.Component_inner {
+  z-index: 20;
+}
+
+.Component svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
 

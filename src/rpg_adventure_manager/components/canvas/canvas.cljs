@@ -36,6 +36,14 @@
 
   (defn handleBounds [event]
     "handles calling check for upper and lower bounds"
+
+    ; This stops the udate from happening so much but it still quick enough to look fluid
+    (if (or ( = 0 (mod (js/parseInt (.-left (.-style event))) 4))   ( = 0 (mod (js/parseInt (.-top (.-style event))) 4)))
+      (handle-state-change "update-canvas-component-pos" {
+        :id (js/parseInt (.getAttribute event "data-id"))
+        :x  (js/parseInt (.-left (.-style event)))
+        :y  (js/parseInt (.-top (.-style event)))
+      }))
     (handle-lower-bounds event)
     (handle-upper-bounds event))
 
@@ -43,9 +51,6 @@
     ; Extra check - may refactor this - possible to 'throw' it out of bounds
     (handle-lower-bounds event)
     (handle-upper-bounds event)
-    ; (js/console.log (js/parseInt (.-top (.-style event))))
-    ; (js/console.log (js/parseInt (.-left (.-style event))))
-    ; (js/console.log (.getAttribute event "data-id"))
     (localforageApi/update-canvas-component-position
       (js/parseInt (.getAttribute event "data-id"))
       (js/parseInt (.-left (.-style event)))
