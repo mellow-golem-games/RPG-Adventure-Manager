@@ -61,27 +61,56 @@
             end-x (curveHelpers/calculate-curve-x-end size {:x (:xPos linkToComponent) :y (:yPos linkToComponent)} {:x (:xPos component) :y (:yPos component)} startingDirection) ; Should be x pos of end - the x offset of the original since 0,0 is relative to the first elem
             end-y (curveHelpers/calculate-curve-y-end size {:x (:xPos linkToComponent) :y (:yPos linkToComponent)} {:x (:xPos component) :y (:yPos component)} startingDirection)]
         [:svg {:height "1px" :width "1px" :overflow "visible" :key  (str (:id linkToComponent) "-" (rand-int 2000))} ;1px prevents clicks and overflow dispalys whole thing
-          [:path {:fill "transparent" :stroke "white" :stroke-width "2"
+          [:defs
+            [:marker {:id "head"
+                      :orient "auto"
+                      :markerWidth "4"
+                      :markerHeight "6"
+                      :fill "red"
+                      :stroke "white"
+                      :refX "2"
+                      :refY "2"}
+              [:path {:d "M0,0 V4 L2,2 Z" :fill "white"}]
+              ]
+            ]
+          [:path {:fill "transparent" :stroke "white" :stroke-width "3"
                   :d (str "M"x-initial","y-initial"
                        C"(+ x-initial (/ (- end-x x-initial) 3))","(- y-initial 50)"
                       "(+ x-initial x-initial (/ (- end-x x-initial) 3))","(+ 50 end-y)"
-                       "end-x","end-y"")} ]])
+                       "end-x","end-y"")
+                   :marker-end "url(#head)"} ]
+           ; [:path {:d "M0,0 V2 L1,1 Z" :fill "orange"} ]
+        ])
     )
   ))
 
+
+
+
 (defn Component [component]
     (let [componentValues (atom {:title (:title component) :description (:description component)})]
+      ; [:svg {:xmlns "http://www.w3.org/2000/svg" :viewBox "-50 -100 200 200"}
+      ; [:defs
+      ;   [:marker {:id "head"
+      ;             :orient "auto"
+      ;             :markerWidth "2"
+      ;             :markerHeight "4"
+      ;             :refX "0.1"
+      ;             :refY "2"}
+      ;     [:path {:d "M0,0 V4 L2,2 Z" :fill "black"}]
+      ;     ]
+      ;   ]]
       (fn [component]
         [:div.Component.draggable {:key (:id component)
                           :data-id (:id component)
                           :style {:top (:yPos component) :left (:xPos component)
-                                  :background "gray"
+                                  :background "#f4f3ef"
                                   :padding "5px"
                                   :width "275px"}}
            (doall (for [link (:linkedTo component)]
              (draw-curve link component)))
            [:div.Component_inner
-             [:p {:on-click #(initilize-link (:id component))}"Link Component"]
+             [:p.Component__linkText {:on-click #(initilize-link (:id component))}"Link"]
              [:input {:type "text"
                       :default-value (:title @componentValues)
                       :on-change #(update-title (-> % .-target .-value) componentValues (:id component))}]

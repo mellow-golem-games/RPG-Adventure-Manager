@@ -453,7 +453,7 @@ textarea {
 .Component {
   width: 200px;
   height: 275px;
-  background: white;
+  background: #f4f3ef;
   position: absolute;
   z-index: 55;
   display: flex;
@@ -464,6 +464,9 @@ textarea {
   width: 95%;
   margin: 0 auto;
   display: block;
+  background: #f4f3ef;
+  border: 1px solid #cececc;
+  border-radius: 4px;
 }
 
 .Component_inner {
@@ -475,6 +478,10 @@ textarea {
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+.Component__linkText {
+  float: left;
 }
 
 
