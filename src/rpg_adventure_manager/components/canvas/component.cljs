@@ -78,28 +78,15 @@
                        C"(+ x-initial (/ (- end-x x-initial) 3))","(- y-initial 50)"
                       "(+ x-initial x-initial (/ (- end-x x-initial) 3))","(+ 50 end-y)"
                        "end-x","end-y"")
-                   :marker-end "url(#head)"} ]
-           ; [:path {:d "M0,0 V2 L1,1 Z" :fill "orange"} ]
-        ])
-    )
-  ))
+                   :marker-end "url(#head)"} ]]))))
 
-
+(defn delete-component [id]
+  "Deletes a componenet from the canvas"
+  (localforageApi/delete-canvas-component id))
 
 
 (defn Component [component]
     (let [componentValues (atom {:title (:title component) :description (:description component)})]
-      ; [:svg {:xmlns "http://www.w3.org/2000/svg" :viewBox "-50 -100 200 200"}
-      ; [:defs
-      ;   [:marker {:id "head"
-      ;             :orient "auto"
-      ;             :markerWidth "2"
-      ;             :markerHeight "4"
-      ;             :refX "0.1"
-      ;             :refY "2"}
-      ;     [:path {:d "M0,0 V4 L2,2 Z" :fill "black"}]
-      ;     ]
-      ;   ]]
       (fn [component]
         [:div.Component.draggable {:key (:id component)
                           :data-id (:id component)
@@ -110,7 +97,8 @@
            (doall (for [link (:linkedTo component)]
              (draw-curve link component)))
            [:div.Component_inner
-             [:p.Component__linkText {:on-click #(initilize-link (:id component))}"Link"]
+             [:button.Component__linkText {:on-click #(initilize-link (:id component))}"Link"]
+             [:p.Component__deleteText {:on-click #(delete-component (:id component))} "X"]
              [:input {:type "text"
                       :default-value (:title @componentValues)
                       :on-change #(update-title (-> % .-target .-value) componentValues (:id component))}]

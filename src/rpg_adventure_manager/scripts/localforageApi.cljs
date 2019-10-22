@@ -167,6 +167,17 @@
             (fn [value]
               (handle-state-change "add-canvas-component" (js->clj value :keywordize-keys true))))))))
 
+(defn delete-canvas-component [id]
+  "Deletes the specified component by ID"
+  (.then (.getItem (.-localforage js/window) "canvasComponents")
+    (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)]
+        (.then (.setItem (.-localforage js/window) "canvasComponents"
+          (clj->js (filter (fn [component]
+            (not= id (:id component))) currentStorage)))
+            (fn [value]
+              (handle-state-change "add-canvas-component" (js->clj value :keywordize-keys true))))))))
+
 (defn update-canvas-component-position [id x y]
   (.then (.getItem (.-localforage js/window) "canvasComponents")
     (fn [value]
@@ -199,7 +210,6 @@
   (.then (.getItem (.-localforage js/window) "canvasComponents")
     (fn [value]
       (let [currentStorage (js->clj value :keywordize-keys true)]
-        (print (:linkedTo currentStorage))
         (.then (.setItem (.-localforage js/window) "canvasComponents"
           (clj->js
             (map
@@ -207,7 +217,8 @@
                 (if (= (:id item) id)
                   ; (concat item {:linkedTo [idToLink]})
                   (update-in item [:linkedTo] concat [idToLink])
-                  item)) currentStorage))))))))
+                  item)) currentStorage)))
+          (fn [value] (handle-state-change "add-canvas-component" (js->clj value :keywordize-keys true))))))))
 
 (defn check-if-key-exists-on-notes [newNote currentStorage]
   (loop [i 0]
