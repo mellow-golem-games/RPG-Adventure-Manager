@@ -215,8 +215,24 @@
             (map
               (fn [item]
                 (if (= (:id item) id)
-                  ; (concat item {:linkedTo [idToLink]})
                   (update-in item [:linkedTo] concat [idToLink])
+                  item)) currentStorage)))
+          (fn [value] (handle-state-change "add-canvas-component" (js->clj value :keywordize-keys true))))))))
+
+(defn delete-canvas-component-liking [componentId linkId]
+  "adds an idToLink to the given ids linked property"
+  (.then (.getItem (.-localforage js/window) "canvasComponents")
+    (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)]
+        (.then (.setItem (.-localforage js/window) "canvasComponents"
+          (clj->js
+            (map
+              (fn [item]
+                (if (= (:id item) componentId)
+                  (update-in item [:linkedTo] (partial filter (fn [link]
+                                                                (if (= linkId link)
+                                                                  false
+                                                                  true))))
                   item)) currentStorage)))
           (fn [value] (handle-state-change "add-canvas-component" (js->clj value :keywordize-keys true))))))))
 

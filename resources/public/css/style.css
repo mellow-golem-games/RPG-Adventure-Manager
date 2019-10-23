@@ -473,11 +473,25 @@ textarea {
   z-index: 20;
 }
 
+.Component__linkingBox {
+  position: absolute;
+}
+
+.Component__linkingBox p{
+  position: absolute;
+  color: white;
+}
+
 .Component svg {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+.Component svg:hover {
+  stroke: red;
+  fill: red;
 }
 
 .Component__linkText {

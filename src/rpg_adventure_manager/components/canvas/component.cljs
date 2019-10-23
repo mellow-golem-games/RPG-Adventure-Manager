@@ -20,6 +20,9 @@
           (localforageApi/add-canvas-component-liking currentLink id)))
       (handle-state-change "set-isLinked" id))))
 
+(defn delete-link [componentId linkId]
+  (localforageApi/delete-canvas-component-liking componentId linkId))
+
 
 (defn update-title [newVal oldVals id]
   (swap! oldVals conj {:title newVal})
@@ -45,12 +48,14 @@
   "Right"))
 
 (defn get-relative-position [point1 point2]
-
   (let [x (- (:xPos point1) (:xPos point2))
         y(- (:yPos point1) (:yPos point2))]
   (if (> (.abs js/Math x) (.abs js/Math y))
     (get-direction-for-side x)
     (get-direction-for-top y))))
+
+(defn calculate-curve-midpoint []
+  "calulates the midpoint of our curve to place our close trigger")
 
 (defn draw-curve [link component]
   (let [linkToComponent (get-linked-to-component link)]
@@ -59,7 +64,13 @@
             x-initial (curveHelpers/calculate-curve-x-initial size startingDirection) ; Should just be the width
             y-initial (curveHelpers/calculate-curve-y-initial size startingDirection)
             end-x (curveHelpers/calculate-curve-x-end size {:x (:xPos linkToComponent) :y (:yPos linkToComponent)} {:x (:xPos component) :y (:yPos component)} startingDirection) ; Should be x pos of end - the x offset of the original since 0,0 is relative to the first elem
-            end-y (curveHelpers/calculate-curve-y-end size {:x (:xPos linkToComponent) :y (:yPos linkToComponent)} {:x (:xPos component) :y (:yPos component)} startingDirection)]
+            end-y (curveHelpers/calculate-curve-y-end size {:x (:xPos linkToComponent) :y (:yPos linkToComponent)} {:x (:xPos component) :y (:yPos component)} startingDirection)
+            close-x (/ (+ x-initial end-x) 2) ; TODO we need a better way to remove the curve here
+            close-y (/ (+ y-initial end-y) 2)]
+        [:div.Component__linkingBox
+          [:p { :on-click #(delete-link (:id component) link)
+                :style {:left close-x :top close-y}
+                :key  (str (:id linkToComponent) "-" (rand-int 2000))} "X"] ; Used to delet the linking
         [:svg {:height "1px" :width "1px" :overflow "visible" :key  (str (:id linkToComponent) "-" (rand-int 2000))} ;1px prevents clicks and overflow dispalys whole thing
           [:defs
             [:marker {:id "head"
@@ -78,7 +89,7 @@
                        C"(+ x-initial (/ (- end-x x-initial) 3))","(- y-initial 50)"
                       "(+ x-initial x-initial (/ (- end-x x-initial) 3))","(+ 50 end-y)"
                        "end-x","end-y"")
-                   :marker-end "url(#head)"} ]]))))
+                   :marker-end "url(#head)"} ]]]))))
 
 (defn delete-component [id]
   "Deletes a componenet from the canvas"
