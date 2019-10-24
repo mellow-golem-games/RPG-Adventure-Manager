@@ -506,6 +506,12 @@ textarea {
 
 .Component__linkingBox p {
   margin: 0;
+  color: #f85e5e;
+  font-weight: 600;
+  z-index: 500;
+  font-size: 2rem;
+  width: 40px;
+  height: 40px;
 }
 
 

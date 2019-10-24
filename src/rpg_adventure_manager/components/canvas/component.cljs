@@ -62,7 +62,7 @@
     at t(0) = our initial points
     at t(1) = our end point"
     (+
-      (* (- 1 t) (- 1 t) (- 1 t) p1) ; (1-t)^3p1
+      (* (- 1 t) (- 1 t) (- 1 t) p1)
       (* (- 1 t) (- 1 t) 3 t p2)
       (* (* t t)(- 1 t) 3 p3)
       (* t t t p4)))
@@ -83,12 +83,7 @@
             ; Close approximations of midpoint - dont think 0.5 is exactly correct but
             ; it's close enough for our needs
             close-x (calcuate-point-on-curve 0.5 x-initial p2x p3x end-x)
-            close-y (- (calcuate-point-on-curve 0.5 y-initial p2y p3y end-y) 5)]
-            (print (str x-initial "," y-initial))
-            (print (str p2x "," p2y))
-            (print (str p3x "," p3y))
-            (print (str end-x "," end-y))
-            (print (str close-x "," close-y))
+            close-y (- (calcuate-point-on-curve 0.5 y-initial p2y p3y end-y) 5)] ; Add 5 as it looks a little better - thinks it's html wonkiness
         [:div.Component__linkingBox
           [:p { :on-click #(delete-link (:id component) link)
                 :style {:left close-x :top close-y}
