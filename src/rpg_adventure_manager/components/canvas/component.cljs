@@ -57,6 +57,16 @@
 (defn calculate-curve-midpoint []
   "calulates the midpoint of our curve to place our close trigger")
 
+(defn calcuate-point-on-curve [t p1 p2 p3 p4]
+  "t(x) = (1-t)^3p1 +  3(1-t)^2tp2 + 3(1-t)t^2p3 + t^3p4 - where: 0 <= t <= 1
+    at t(0) = our initial points
+    at t(1) = our end point"
+    (+
+      (* (- 1 t) (- 1 t) (- 1 t) p1) ; (1-t)^3p1
+      (* (- 1 t) (- 1 t) 3 t p2)
+      (* (* t t)(- 1 t) 3 p3)
+      (* t t t p4)))
+
 (defn draw-curve [link component]
   (let [linkToComponent (get-linked-to-component link)]
     (if linkToComponent ; Handle deletes where linked to no longer exists
@@ -65,8 +75,20 @@
             y-initial (curveHelpers/calculate-curve-y-initial size startingDirection)
             end-x (curveHelpers/calculate-curve-x-end size {:x (:xPos linkToComponent) :y (:yPos linkToComponent)} {:x (:xPos component) :y (:yPos component)} startingDirection) ; Should be x pos of end - the x offset of the original since 0,0 is relative to the first elem
             end-y (curveHelpers/calculate-curve-y-end size {:x (:xPos linkToComponent) :y (:yPos linkToComponent)} {:x (:xPos component) :y (:yPos component)} startingDirection)
-            close-x (/ (+ x-initial end-x) 2) ; TODO we need a better way to remove the curve here
-            close-y (/ (+ y-initial end-y) 2)]
+            p2x (+ x-initial (/ (- end-x x-initial) 4))
+            p2y (- y-initial 50)
+            p3x (+ x-initial (* 3 (/ (- end-x x-initial) 4)))
+            p3y (+ 50 end-y)
+
+            ; Close approximations of midpoint - dont think 0.5 is exactly correct but
+            ; it's close enough for our needs
+            close-x (calcuate-point-on-curve 0.5 x-initial p2x p3x end-x)
+            close-y (- (calcuate-point-on-curve 0.5 y-initial p2y p3y end-y) 5)]
+            (print (str x-initial "," y-initial))
+            (print (str p2x "," p2y))
+            (print (str p3x "," p3y))
+            (print (str end-x "," end-y))
+            (print (str close-x "," close-y))
         [:div.Component__linkingBox
           [:p { :on-click #(delete-link (:id component) link)
                 :style {:left close-x :top close-y}
@@ -84,10 +106,10 @@
               [:path {:d "M0,0 V4 L2,2 Z" :fill "white"}]
               ]
             ]
-          [:path {:fill "transparent" :stroke "white" :stroke-width "3"
+          [:path#path {:fill "transparent" :stroke "white" :stroke-width "3"
                   :d (str "M"x-initial","y-initial"
-                       C"(+ x-initial (/ (- end-x x-initial) 3))","(- y-initial 50)"
-                      "(+ x-initial x-initial (/ (- end-x x-initial) 3))","(+ 50 end-y)"
+                       C"p2x","p2y"
+                      "p3x","p3y"
                        "end-x","end-y"")
                    :marker-end "url(#head)"} ]]]))))
 

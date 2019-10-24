@@ -504,5 +504,9 @@ textarea {
   right: 5px;
 }
 
+.Component__linkingBox p {
+  margin: 0;
+}
+
 
 
