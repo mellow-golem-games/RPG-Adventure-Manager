@@ -67,6 +67,18 @@
       (* (* t t)(- 1 t) 3 p3)
       (* t t t p4)))
 
+(defn get-x-offset [direction]
+  "gets offset of the line for the close point"
+  (if (or (= direction "Top") (= direction "Bottom"))
+    20
+    0))
+
+(defn get-y-offset [direction]
+  "gets offset of the line for the close point"
+  (if (or (= direction "Left") (= direction "Right"))
+    20
+    0))
+
 (defn draw-curve [link component]
   (let [linkToComponent (get-linked-to-component link)]
     (if linkToComponent ; Handle deletes where linked to no longer exists
@@ -75,18 +87,20 @@
             y-initial (curveHelpers/calculate-curve-y-initial size startingDirection)
             end-x (curveHelpers/calculate-curve-x-end size {:x (:xPos linkToComponent) :y (:yPos linkToComponent)} {:x (:xPos component) :y (:yPos component)} startingDirection) ; Should be x pos of end - the x offset of the original since 0,0 is relative to the first elem
             end-y (curveHelpers/calculate-curve-y-end size {:x (:xPos linkToComponent) :y (:yPos linkToComponent)} {:x (:xPos component) :y (:yPos component)} startingDirection)
-            p2x (+ x-initial (/ (- end-x x-initial) 4))
-            p2y (- y-initial 50)
-            p3x (+ x-initial (* 3 (/ (- end-x x-initial) 4)))
-            p3y (+ 50 end-y)
+            p2x (curveHelpers/caculate-first-control-point-x startingDirection (- end-x x-initial) x-initial)
+            p2y (curveHelpers/caculate-first-control-point-y startingDirection (- end-y y-initial) y-initial)
+            p3x (curveHelpers/caculate-second-control-point-x startingDirection (- end-x x-initial) x-initial)
+            p3y (curveHelpers/caculate-second-control-point-y startingDirection (- end-y y-initial) y-initial)
 
-            ; Close approximations of midpoint - dont think 0.5 is exactly correct but
+            ; Close approximations of midpoint - dont think 0.5 is exactly the mid point but
             ; it's close enough for our needs
             close-x (calcuate-point-on-curve 0.5 x-initial p2x p3x end-x)
-            close-y (- (calcuate-point-on-curve 0.5 y-initial p2y p3y end-y) 5)] ; Add 5 as it looks a little better - thinks it's html wonkiness
+            close-y (calcuate-point-on-curve 0.5 y-initial p2y p3y end-y)
+            x-offset (get-x-offset startingDirection) ; these get an offset for the "X" think its due to the sizing of the p tag and it not being a single point
+            y-offset (get-y-offset startingDirection)]
         [:div.Component__linkingBox
           [:p { :on-click #(delete-link (:id component) link)
-                :style {:left close-x :top close-y}
+                :style {:left (- close-x x-offset) :top (- close-y y-offset)}
                 :key  (str (:id linkToComponent) "-" (rand-int 2000))} "X"] ; Used to delet the linking
         [:svg {:height "1px" :width "1px" :overflow "visible" :key  (str (:id linkToComponent) "-" (rand-int 2000))} ;1px prevents clicks and overflow dispalys whole thing
           [:defs
