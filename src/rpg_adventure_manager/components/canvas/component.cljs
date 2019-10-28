@@ -6,8 +6,8 @@
               [rpg-adventure-manager.scripts.curve :as curveHelpers]))
 
 (def size {
-  :h 190
-  :w 270
+  :h 130
+  :w 180
 })
 
 (defn initilize-link [id]
@@ -135,16 +135,20 @@
                           :style {:top (:yPos component) :left (:xPos component)
                                   :background "#f4f3ef"
                                   :padding "5px"
-                                  :width "275px"}}
+                                  :height (:h size)
+                                  :width (:w size)}}
            (doall (for [link (:linkedTo component)]
              (draw-curve link component)))
            [:div.Component_inner
-             [:button.Component__linkText {:on-click #(initilize-link (:id component))}"Link"]
-             [:p.Component__deleteText {:on-click #(delete-component (:id component))} "X"]
+             [:div.Component__header {:style {:height (* 0.2 (:h size))}}
+               [:button.Component__linkText {:on-click #(initilize-link (:id component))}"Link"]
+               [:p.Component__deleteText {:on-click #(delete-component (:id component))} "X"]]
              [:input {:type "text"
+                      :style {:height (* 0.2 (:h size))}
                       :default-value (:title @componentValues)
                       :on-change #(update-title (-> % .-target .-value) componentValues (:id component))}]
              [:textarea {:default-value (:description @componentValues)
+                         :style {:height (* 0.4 (:h size))}
                          :on-change #(update-description (-> % .-target .-value) componentValues (:id component))}]]])))
 
 

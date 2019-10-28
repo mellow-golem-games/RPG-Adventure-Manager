@@ -37,7 +37,7 @@
   (defn handleBounds [event]
     "handles calling check for upper and lower bounds"
 
-    ; This stops the udate from happening so much but it still quick enough to look fluid
+    ; This stops the udate from happening so much but it's still quick enough to look fluid
     (if (or ( = 0 (mod (js/parseInt (.-left (.-style event))) 4))   ( = 0 (mod (js/parseInt (.-top (.-style event))) 4)))
       (handle-state-change "update-canvas-component-pos" {
         :id (js/parseInt (.getAttribute event "data-id"))
@@ -89,6 +89,7 @@
           (let [canvasComponents (js->clj (:canvasComponents @state) :keywordize-keys true)]
             [:div.Canvas.viewPage {:class (:canvas (:activeView @state))}
               (header/render)
+              [:p.Canvas__howTo {:on-click #(handle-state-change "update-current-view" "canvas-howTo")} "i"]
               [:div.CanvasParent
                 (controls/render)
                 [:div#Canvas

@@ -447,12 +447,26 @@ textarea {
   color: black;
 }
 
-.
+.Canvas__howTo {
+  position: absolute;
+  right: 10px;
+  top: 1px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  color: black;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.howTo.visible {
+  z-index: 20;
+}
 
 /* TESTING */
 .Component {
-  width: 200px;
-  height: 275px;
+  width: 270px;
+  height: 190px;
   background: #f4f3ef;
   position: absolute;
   z-index: 55;
@@ -469,12 +483,21 @@ textarea {
   border-radius: 4px;
 }
 
+.Component input {
+  margin-bottom: 5px;
+}
+
 .Component_inner {
   z-index: 20;
 }
 
 .Component__linkingBox {
   position: absolute;
+}
+
+.Component__linkText {
+  padding: 5px 15px;
+  font-size: .6rem;
 }
 
 .Component__linkingBox p{
@@ -500,7 +523,8 @@ textarea {
 .Component__deleteText {
   float: right;
   position: relative;
-  bottom: 5px;
+  margin: 0;
+  top: 2px;
   right: 5px;
 }
 

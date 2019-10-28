@@ -13,6 +13,7 @@
               [rpg-adventure-manager.components.search :as search]
               [rpg-adventure-manager.components.about :as about]
               [rpg-adventure-manager.components.canvas.canvas :as canvas]
+              [rpg-adventure-manager.components.canvas.howTow :as canvasHowTo]
               [rpg-adventure-manager.components.shared.alert :as alert]
               [rpg-adventure-manager.state :refer [state handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
@@ -36,6 +37,7 @@
     [search/render state]
     [about/render (:about (:activeView @state))]
     [canvas/render state]
+    [canvasHowTo/render (:canvas-howTo (:activeView @state))]
     [:div.Home-content
       [:div.itemContainer
         [:div.itemContainer__left

@@ -9,7 +9,8 @@
                                    :new-item false
                                    :new-location false
                                    :new-hook false
-                                   :active-list false}
+                                   :active-list false
+                                   :canvas-howTo false}
                        :showAlert {:visible false :content ""}
                        :activeType ""
                        :activeEntity {}
