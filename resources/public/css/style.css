@@ -474,13 +474,19 @@ textarea {
   flex-direction: column;
 }
 
-.Component input, .Component textarea {
+.Component input, .Component textarea, .Component #textarea {
   width: 95%;
   margin: 0 auto;
   display: block;
   background: #f4f3ef;
   border: 1px solid #cececc;
   border-radius: 4px;
+}
+
+.Component #textarea p{
+  margin: 0;
+  font-size: .75rem;
+  padding: 3px;
 }
 
 .Component input {
@@ -536,6 +542,11 @@ textarea {
   font-size: 2rem;
   width: 40px;
   height: 40px;
+}
+
+.Component__searchResults {
+  background: white;
+  font-size: .75rem;
 }
 
 

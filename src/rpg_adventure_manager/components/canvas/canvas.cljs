@@ -32,6 +32,7 @@
 
   (defn handle-upper-bounds [event]
     ; TODO set and test upper drag limit
+    ; 5k - size so it can't be hidden upper left is point
   )
 
   (defn handleBounds [event]

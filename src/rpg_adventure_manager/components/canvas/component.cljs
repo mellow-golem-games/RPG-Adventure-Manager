@@ -3,12 +3,34 @@
               [rpg-adventure-manager.state :refer [handle-state-change get-value-from-state]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]
               [rpg-adventure-manager.components.new-header :as header]
-              [rpg-adventure-manager.scripts.curve :as curveHelpers]))
+              [rpg-adventure-manager.scripts.curve :as curveHelpers]
+              [clojure.string :as str]))
 
-(def size {
+(defonce size {
   :h 130
   :w 180
 })
+
+(defonce search-list '(
+  "cities"
+  "npcs"
+  "locations"
+  "items"
+  "hooks"
+))
+
+(defonce searchHelpers (atom {:inSearch false :index nil}))
+
+(defn handle-search-change [searchVal searchResults]
+  (reset! searchResults nil) ; reset our atom
+  (if (> (count searchVal) 1)
+    (doseq [item search-list]
+      (let [searchMap (js->clj (get-value-from-state item) :keywordize-keys true)]
+        ; Holds the entire map of the entities for each item of the search list
+          (doseq [singleEntity searchMap
+                  :when searchMap] ; search throug the list of entities
+            (if (or (str/includes? (:name singleEntity) searchVal) (str/includes? (:description singleEntity) searchVal))
+              (swap! searchResults conj {:results {:type item :item singleEntity}})))))))
 
 (defn initilize-link [id]
   (let [currentLink (get-value-from-state "isLinked")]
@@ -28,7 +50,22 @@
   (swap! oldVals conj {:title newVal})
   (localforageApi/update-canvas-component-text id {:title newVal :description (:description @oldVals)}))
 
-(defn update-description [newVal oldVals id]
+(defn update-description [newVal oldVals id searchResults]
+  (print newVal)
+  ; check the last value typed - if it's a @ then we enter a seatch - save the index
+  ; for each letter aferwatds take everything after the index
+  ; if they click add the entity
+  ; (print (.-length newVal))
+  ; (print (nth newVal (- (.-length newVal) 1)))
+  (if (or (= (nth newVal (- (.-length newVal) 1)) "@") (:inSearch @searchHelpers))
+    (do
+      (if (not (:inSearch @searchHelpers))
+        (swap! searchHelpers conj {:index (- (.-length newVal) 1) :inSearch true}))
+      (print (:index @searchHelpers) )
+      (print (- (.-length newVal) 1))
+      (print (subs newVal (+ (:index @searchHelpers) 1) ))
+      (handle-search-change (subs newVal (+ (:index @searchHelpers) 1) ) searchResults))) ; updates our search value
+
   (swap! oldVals conj {:description oldVals})
   (localforageApi/update-canvas-component-text id {:title (:title @oldVals) :description newVal}))
 
@@ -98,7 +135,7 @@
             close-y (calcuate-point-on-curve 0.5 y-initial p2y p3y end-y)
             x-offset (get-x-offset startingDirection) ; these get an offset for the "X" think its due to the sizing of the p tag and it not being a single point
             y-offset (get-y-offset startingDirection)]
-        [:div.Component__linkingBox
+        [:div.Component__linkingBox {:key (rand-int 10000)}
           [:p { :on-click #(delete-link (:id component) link)
                 :style {:left (- close-x x-offset) :top (- close-y y-offset)}
                 :key  (str (:id linkToComponent) "-" (rand-int 2000))} "X"] ; Used to delet the linking
@@ -128,7 +165,8 @@
 
 
 (defn Component [component]
-    (let [componentValues (atom {:title (:title component) :description (:description component)})]
+    (let [componentValues (atom {:title (:title component) :description (:description component)})
+          searchResults (atom {:results nil})]
       (fn [component]
         [:div.Component.draggable {:key (:id component)
                           :data-id (:id component)
@@ -147,8 +185,16 @@
                       :style {:height (* 0.2 (:h size))}
                       :default-value (:title @componentValues)
                       :on-change #(update-title (-> % .-target .-value) componentValues (:id component))}]
-             [:textarea {:default-value (:description @componentValues)
-                         :style {:height (* 0.4 (:h size))}
-                         :on-change #(update-description (-> % .-target .-value) componentValues (:id component))}]]])))
+             [:div#textarea  {:style {:height (* 0.4 (:h size))}}
+              [:p {:contentEditable "true" :suppressContentEditableWarning "true"
+                   :on-input #(update-description (-> % .-target .-innerHTML) componentValues (:id component) searchResults)}
+                (:description component)]]
+             ; [:textarea {:default-value (:description @componentValues)
+             ;             :style {:height (* 0.4 (:h size))}
+             ;             :on-change #(update-description (-> % .-target .-value) componentValues (:id component))}]
 
+            (if (:results @searchResults)
+              [:div.Component__searchResults
+                (doall (for [result (:results @searchResults)]
+                  [:p {:key (:name (:item result))} (str (:type result) " - " (:name (:item result)))]))])]])))
 
