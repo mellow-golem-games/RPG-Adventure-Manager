@@ -17,7 +17,8 @@
                        :singleEntity {}
                        :scrollOffset {}
                        :activeList {}
-                       :canvasComponents []}
+                       :canvasComponents []
+                       :canvasLast? false}
                        :isLinked nil))
 
 (defn get-value-from-state [value]
@@ -84,6 +85,10 @@
 
 (defn reset-isLinked []
   (swap! state conj {:isLinked nil}))
+
+(defn update-canvas-last [payload]
+  "maintains that the last page was canvas to allow selectively going back to it"
+  (swap! state conj {:canvasLast? payload}))
 
 (defn update-canvas-component-pos [payload]
   (let [newComponentsValue (map (fn [component]

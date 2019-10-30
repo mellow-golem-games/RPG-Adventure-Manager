@@ -19,6 +19,21 @@
   "hooks"
 ))
 
+; This is bad practice as it puts this in the global scope, but we need something to hook back
+; for dynamically generated <A> theres probably a better way to do this - TODO find a better way
+; Note handle-link-click breaks 'cannot find handle' - needs to be one word
+(set! js/handlelinkclick (fn [type name]
+
+  (.preventDefault js/event)
+
+  ; Finds the entity as we can't pass it and pushes it to state
+  (let [currentEntity (first (filter (fn [entity] ; first as it expect an entity not a list
+                        (= (:name entity) name)) (get-value-from-state type)))]
+    (handle-state-change "update-canvas-last" true)
+    (handle-state-change "update-current-view" "view-single")
+    (handle-state-change "set-single-entity" currentEntity))))
+
+
 
 (defn handle-search-change [searchVal searchResults]
   (swap! searchResults conj {:results []})  ; reset our atom
@@ -62,9 +77,6 @@
   ;Check if we are in search, if so do the stuff
   (if (:inSearch @searchResults)
     (do
-    ; (print (:index @searchResults) )
-    ; (print (- (.-length newVal) 1))
-    ; (print (subs newVal (+ (:index @searchResults) 1) ))
     (handle-search-change (subs newVal (+ (:index @searchResults) 1) ) searchResults)))
 
 
@@ -166,19 +178,22 @@
   (localforageApi/delete-canvas-component id))
 
 (defn handle-focus-after-click [elem]
-  "focuses our element after linking"
+  "focuses our editable element after linking at the end of the text"
   (let [range (.createRange js/document) selection (.getSelection js/window)]
     (.selectNodeContents range elem)
     (.collapse range false)
       (.removeAllRanges selection)
       (.addRange selection range)))
 
-(defn handle-link [item searchResults]
+(defn handle-link [item searchResults id title]
   "Handles adding the link to the dom"
-  (let [elem (.getElementById js/document (str "desc-" (:id @searchResults)))]
-    (set! (.-innerHTML elem) (str (subs (:val @searchResults) 0 (:index @searchResults) ) "<a contentEditable='false' href='google.com'>"(:name (:item item))"</a>"))
-    (handle-focus-after-click elem))
-  (swap! searchResults conj {:results [] :inSearch false :index nil :val nil})) ; reset for the next search
+  (let [elem (.getElementById js/document (str "desc-" (:id @searchResults)))
+        contentString (str (subs (:val @searchResults) 0 (:index @searchResults) )
+              "<a onClick=\"handlelinkclick('"(:type item)"','" (:name (:item item))"')\" contentEditable='false' href='google.com'>"(:name (:item item))"</a>")]
+    (set! (.-innerHTML elem) contentString)
+    (handle-focus-after-click elem)
+  (swap! searchResults conj {:results [] :inSearch false :index nil :val nil}) ; reset for the next search
+  (localforageApi/update-canvas-component-text id {:title title :description contentString}))) ; Make sure changes are saved
 
 
 
@@ -210,6 +225,6 @@
               [:div.Component__searchResults
                 (doall (for [result (:results @searchResults)]
                   [:p {:key (:name (:item result))
-                       :on-click #(handle-link result searchResults)}
+                       :on-click #(handle-link result searchResults (:id component) (:title @componentValues))}
                     (str (:type result) " - " (:name (:item result)))]))])]])))
 
