@@ -19,10 +19,9 @@
   "hooks"
 ))
 
-(defonce searchHelpers (atom {:inSearch false :index nil}))
 
 (defn handle-search-change [searchVal searchResults]
-  (reset! searchResults nil) ; reset our atom
+  (swap! searchResults conj {:results []})  ; reset our atom
   (if (> (count searchVal) 1)
     (doseq [item search-list]
       (let [searchMap (js->clj (get-value-from-state item) :keywordize-keys true)]
@@ -30,7 +29,7 @@
           (doseq [singleEntity searchMap
                   :when searchMap] ; search throug the list of entities
             (if (or (str/includes? (:name singleEntity) searchVal) (str/includes? (:description singleEntity) searchVal))
-              (swap! searchResults conj {:results {:type item :item singleEntity}})))))))
+              (swap! searchResults update-in [:results] merge {:type item :item singleEntity})))))))
 
 (defn initilize-link [id]
   (let [currentLink (get-value-from-state "isLinked")]
@@ -51,20 +50,23 @@
   (localforageApi/update-canvas-component-text id {:title newVal :description (:description @oldVals)}))
 
 (defn update-description [newVal oldVals id searchResults]
-  (print newVal)
-  ; check the last value typed - if it's a @ then we enter a seatch - save the index
-  ; for each letter aferwatds take everything after the index
-  ; if they click add the entity
-  ; (print (.-length newVal))
-  ; (print (nth newVal (- (.-length newVal) 1)))
-  (if (or (= (nth newVal (- (.-length newVal) 1)) "@") (:inSearch @searchHelpers))
+
+  ; save the current value so we don't have to query it later
+  (swap! searchResults conj {:val newVal})
+
+  ; Check if we have an @ if so put us in searchHelpers
+  (if (= (nth newVal (- (.-length newVal) 1)) "@")
+    (swap! searchResults conj {:index (- (.-length newVal) 1) :inSearch true}))
+
+
+  ;Check if we are in search, if so do the stuff
+  (if (:inSearch @searchResults)
     (do
-      (if (not (:inSearch @searchHelpers))
-        (swap! searchHelpers conj {:index (- (.-length newVal) 1) :inSearch true}))
-      (print (:index @searchHelpers) )
-      (print (- (.-length newVal) 1))
-      (print (subs newVal (+ (:index @searchHelpers) 1) ))
-      (handle-search-change (subs newVal (+ (:index @searchHelpers) 1) ) searchResults))) ; updates our search value
+    ; (print (:index @searchResults) )
+    ; (print (- (.-length newVal) 1))
+    ; (print (subs newVal (+ (:index @searchResults) 1) ))
+    (handle-search-change (subs newVal (+ (:index @searchResults) 1) ) searchResults)))
+
 
   (swap! oldVals conj {:description oldVals})
   (localforageApi/update-canvas-component-text id {:title (:title @oldVals) :description newVal}))
@@ -163,10 +165,26 @@
   "Deletes a componenet from the canvas"
   (localforageApi/delete-canvas-component id))
 
+(defn handle-focus-after-click [elem]
+  "focuses our element after linking"
+  (let [range (.createRange js/document) selection (.getSelection js/window)]
+    (.selectNodeContents range elem)
+    (.collapse range false)
+      (.removeAllRanges selection)
+      (.addRange selection range)))
+
+(defn handle-link [item searchResults]
+  "Handles adding the link to the dom"
+  (let [elem (.getElementById js/document (str "desc-" (:id @searchResults)))]
+    (set! (.-innerHTML elem) (str (subs (:val @searchResults) 0 (:index @searchResults) ) "<a contentEditable='false' href='google.com'>"(:name (:item item))"</a>"))
+    (handle-focus-after-click elem))
+  (swap! searchResults conj {:results [] :inSearch false :index nil :val nil})) ; reset for the next search
+
+
 
 (defn Component [component]
     (let [componentValues (atom {:title (:title component) :description (:description component)})
-          searchResults (atom {:results nil})]
+          searchResults (atom {:results [] :inSearch false :index nil :val nil :id (rand-int 1000)})]
       (fn [component]
         [:div.Component.draggable {:key (:id component)
                           :data-id (:id component)
@@ -185,16 +203,13 @@
                       :style {:height (* 0.2 (:h size))}
                       :default-value (:title @componentValues)
                       :on-change #(update-title (-> % .-target .-value) componentValues (:id component))}]
-             [:div#textarea  {:style {:height (* 0.4 (:h size))}}
-              [:p {:contentEditable "true" :suppressContentEditableWarning "true"
-                   :on-input #(update-description (-> % .-target .-innerHTML) componentValues (:id component) searchResults)}
-                (:description component)]]
-             ; [:textarea {:default-value (:description @componentValues)
-             ;             :style {:height (* 0.4 (:h size))}
-             ;             :on-change #(update-description (-> % .-target .-value) componentValues (:id component))}]
-
-            (if (:results @searchResults)
+             [:div.textarea  {:style {:height (* 0.4 (:h size))} :contentEditable "true" :suppressContentEditableWarning "true" :id (str "desc-" (:id @searchResults))
+                              :on-input #(update-description (-> % .-target .-innerHTML) componentValues (:id component) searchResults)
+                              :dangerouslySetInnerHTML {:__html (:description component)}}]
+            (if (> (count (:results @searchResults)) 0)
               [:div.Component__searchResults
                 (doall (for [result (:results @searchResults)]
-                  [:p {:key (:name (:item result))} (str (:type result) " - " (:name (:item result)))]))])]])))
+                  [:p {:key (:name (:item result))
+                       :on-click #(handle-link result searchResults)}
+                    (str (:type result) " - " (:name (:item result)))]))])]])))
 

@@ -474,7 +474,7 @@ textarea {
   flex-direction: column;
 }
 
-.Component input, .Component textarea, .Component #textarea {
+.Component input, .Component textarea, .Component .textarea {
   width: 95%;
   margin: 0 auto;
   display: block;
@@ -483,10 +483,11 @@ textarea {
   border-radius: 4px;
 }
 
-.Component #textarea p{
+.Component .textarea{
   margin: 0;
   font-size: .75rem;
   padding: 3px;
+  overflow-y: scroll;
 }
 
 .Component input {
