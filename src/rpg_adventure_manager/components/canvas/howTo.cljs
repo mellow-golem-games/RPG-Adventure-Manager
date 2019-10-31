@@ -13,7 +13,9 @@
       [:p "Start by clicking the '+' in the upper right. This will create a component card on the canvas.
            You can move the component card around, as well as pan and zoom on the canvas."]
       [:p "The card comes with a title and place to add details. You can add anything you like here to help you plan your
-          campaign."]
+          campaign. You can also reference your components by typing '@' and then a few letters. This will bring
+          up any components that match your characters, and allow you to add a link to it directly in the card.
+          This makes it easy to setup story flows, and then quickly reference back to components as you need to."]
       [:p "Once you've created multiple cards you can link them together by pressing the 'link' text on the card.
            After pressing this once, the next card you tap will create a link between the two. This will create a
           visual arrow between the two. Each card be linked multiple times. You can easily remove a link by

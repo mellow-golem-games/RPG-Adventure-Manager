@@ -81,9 +81,11 @@
   (swap! state conj {:canvasComponents payload}))
 
 (defn set-isLinked [payload]
+  "keeps a reference if a linked button was click to which id"
   (swap! state conj {:isLinked payload}))
 
 (defn reset-isLinked []
+  "resets that linked reference above after a link to allow another"
   (swap! state conj {:isLinked nil}))
 
 (defn update-canvas-last [payload]

@@ -546,8 +546,15 @@ textarea {
 }
 
 .Component__searchResults {
-  background: white;
+  background: #f4f3ef;
   font-size: .75rem;
+  width: 100%;
+  border: 1px solid #cececc;
+  margin-top: 5px;
+}
+
+.Component__searchResults p {
+  border-bottom: 1px solid #cececc;
 }
 
 

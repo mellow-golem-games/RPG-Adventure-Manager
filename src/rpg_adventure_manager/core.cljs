@@ -23,12 +23,12 @@
 ; First thing we need to do is pull all the current entities that we have saved
 (localforageApi/pull-initial-data)
 
-; Handles the show all page
 (defn show-view-all [entitiesToView type]
+  "handles the show all page"
   (handle-state-change "update-current-view" "view-all-entities")
   (handle-state-change "set-active-entity" entitiesToView)
   (handle-state-change "set-active-type" type))
-; {:class (if ( > (count (:activeType @state)) 2) :hide-scroll)}
+
 (defn Main []
   [:div.Main-Wrapper
     [header/render]
