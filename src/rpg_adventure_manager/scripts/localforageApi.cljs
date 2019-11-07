@@ -90,16 +90,18 @@
 
 (defn delete-item [entity type]
   "deletes an item by creating a new list of type without the removed element and overrides storage"
-  (.then (.getItem (.-localforage js/window) type) (fn [value]
-                                                    (let [currentStorage (js->clj value :keywordize-keys true)
-                                                          filteredValues (filter (fn [item]
-                                                                                  (not= (:name item) (:name entity))) currentStorage)]
-                                                      (.then (.setItem (.-localforage js/window) type (clj->js filteredValues) (fn [value]
-                                                                                                                                (handle-state-change "update-entity" {:type type :value filteredValues})
-                                                                                                                                (fancy-alert/fancy-alert
-                                                                                                                                  {:text "Item Deleted!" :hideAfterN false
-                                                                                                                                   :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
-                                                                                                                                   :buttonProperties {:buttonText "Okay"}}))))))))
+  (.then (.getItem (.-localforage js/window) type)
+    (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)
+            filteredValues (filter (fn [item]
+              (not= (:name item) (:name entity))) currentStorage)]
+        (.then (.setItem (.-localforage js/window) type (clj->js filteredValues)
+          (fn [value]
+            (handle-state-change "update-entity" {:type type :value filteredValues})
+            (fancy-alert/fancy-alert
+              {:text "Item Deleted!" :hideAfterN false
+               :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
+               :buttonProperties {:buttonText "Okay"}}))))))))
 
 ; ALL list functions have a bit of code repeating to update the store - probably ````let```` that to resuse
 (defn add-list [details]
@@ -169,16 +171,25 @@
 
 (defn delete-canvas-component [id]
   "Deletes the specified component by ID"
+  ; (print id)
   (.then (.getItem (.-localforage js/window) "canvasComponents")
     (fn [value]
-      (let [currentStorage (js->clj value :keywordize-keys true)]
-        (.then (.setItem (.-localforage js/window) "canvasComponents"
-          (clj->js (filter (fn [component]
-            (not= id (:id component))) currentStorage)))
-            (fn [value]
-              (handle-state-change "add-canvas-component" (js->clj value :keywordize-keys true))))))))
+      (let [currentStorage (js->clj value :keywordize-keys true)
+            valueToSave (filter (fn [component]
+              (not= id (:id component))) currentStorage)]
+        ; (print valueToSave)
+        (.then (.setItem (.-localforage js/window) "canvasComponents" (clj->js valueToSave))
+            (fn []
+              (.then (.getItem (.-localforage js/window) "canvasComponents")
+                (fn [value]
+                  ; (print value)
+                ))
+              (handle-state-change "add-canvas-component" (js->clj valueToSave :keywordize-keys true))))
+
+  ))))
 
 (defn update-canvas-component-position [id x y]
+  (print "poition")
   (.then (.getItem (.-localforage js/window) "canvasComponents")
     (fn [value]
       (let [currentStorage (js->clj value :keywordize-keys true)]

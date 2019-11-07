@@ -2,8 +2,7 @@
     (:require [reagent.core :as reagent :refer [atom]]
               [rpg-adventure-manager.state :refer [handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]
-              [rpg-adventure-manager.components.new-header :as header]
-              [rpg-adventure-manager.components.canvas.controls :as controls]
+              [rpg-adventure-manager.components.canvas.canvas-header :as header]
               [rpg-adventure-manager.components.canvas.component :refer [Component]]
               ["panzoom" :as panzoom]
               ["displacejs" :as displace]
@@ -50,12 +49,19 @@
 
   (defn onMoveEventEnd [event]
     ; Extra check - may refactor this - possible to 'throw' it out of bounds
-    (handle-lower-bounds event)
-    (handle-upper-bounds event)
-    (localforageApi/update-canvas-component-position
-      (js/parseInt (.getAttribute event "data-id"))
-      (js/parseInt (.-left (.-style event)))
-      (js/parseInt (.-top (.-style event))))
+    (let [startX (js/parseInt (.getAttribute event "data-x"))
+          startY (js/parseInt (.getAttribute event "data-y"))
+          newX (js/parseInt (.-left (.-style event)))
+          newY (js/parseInt (.-top (.-style event)))]
+    ; we need this check as the delete throws a move event which resets our state
+    (if (and (not= startX newX) (not= startY newY)) ; if they're both equal it was a delete event
+      (do
+        (handle-lower-bounds event)
+        (handle-upper-bounds event)
+        (localforageApi/update-canvas-component-position
+          (js/parseInt (.getAttribute event "data-id"))
+          newX
+          newY))))
 
     (.resume panHandler))
 
@@ -92,7 +98,6 @@
               (header/render)
               [:p.Canvas__howTo {:on-click #(handle-state-change "update-current-view" "canvas-howTo")} "i"]
               [:div.CanvasParent
-                (controls/render)
                 [:div#Canvas
                   (for [component canvasComponents]
                     [:span {:key (:id component)}[Component component]])]]]))}))

@@ -1,4 +1,4 @@
-(ns rpg-adventure-manager.newlocation
+(ns rpg-adventure-manager.components.newlocation
     (:require [rpg-adventure-manager.state :refer [handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]
               [rpg-adventure-manager.components.new-header :as header]))

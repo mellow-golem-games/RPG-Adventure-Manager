@@ -557,5 +557,12 @@ textarea {
   border-bottom: 1px solid #cececc;
 }
 
+.canvasHeader {
+  display: flex;
+}
+
+.canvasHeader button {
+  margin-left: 50px;
+}
 
 

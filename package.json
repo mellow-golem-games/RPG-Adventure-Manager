@@ -4,6 +4,6 @@
     "displacejs": "^1.3.2",
     "interactjs": "^1.6.3",
     "localforage": "^1.7.3",
-    "panzoom": "^8.4.0"
+    "panzoom": "^8.4.1"
   }
 }

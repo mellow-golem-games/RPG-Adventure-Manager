@@ -1,4 +1,4 @@
-(ns rpg-adventure-manager.components.canvas.howTow
+(ns rpg-adventure-manager.components.canvas.howTo
     (:require [rpg-adventure-manager.state :refer [handle-state-change]]))
 
 (defn render [active]
