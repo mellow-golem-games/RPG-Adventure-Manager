@@ -11,6 +11,8 @@
 ; We need to setup all our handlers after the componeent has rendered
 ; TODO test with state - think a rerender will break everything - maybe set a global `handlersSet` ?
 ; TODO this does break on a reload - probably need a flag to only do this once or some sort of cleanup?
+(def initial-move-position (atom {:x nil :y nil}))
+
 (defn render-canvas []
   (def zoomElem (.querySelector js/document "#Canvas"))
   (if zoomElem
@@ -49,8 +51,8 @@
 
   (defn onMoveEventEnd [event]
     ; Extra check - may refactor this - possible to 'throw' it out of bounds
-    (let [startX (js/parseInt (.getAttribute event "data-x"))
-          startY (js/parseInt (.getAttribute event "data-y"))
+    (let [startX (:x @initial-move-position)
+          startY (:y @initial-move-position)
           newX (js/parseInt (.-left (.-style event)))
           newY (js/parseInt (.-top (.-style event)))]
     ; we need this check as the delete throws a move event which resets our state
@@ -65,7 +67,8 @@
 
     (.resume panHandler))
 
-  (defn onMoveEventStart []
+  (defn onMoveEventStart [event]
+    (reset! initial-move-position {:x (js/parseInt (.-left (.-style event))) :y (js/parseInt (.-top (.-style event)))})
     (.pause panHandler)))))
 
 (defn Canvas [state]

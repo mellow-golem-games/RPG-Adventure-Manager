@@ -203,8 +203,6 @@
       (fn [component]
         [:div.Component.draggable {:key (:id component)
                           :data-id (:id component)
-                          :data-x (:xPos component)
-                          :data-y (:yPos component)
                           :style {:top (:yPos component) :left (:xPos component)
                                   :background "#f4f3ef"
                                   :padding "5px"
