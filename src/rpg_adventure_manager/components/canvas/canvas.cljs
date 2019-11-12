@@ -12,7 +12,7 @@
 ; TODO test with state - think a rerender will break everything - maybe set a global `handlersSet` ?
 ; TODO this does break on a reload - probably need a flag to only do this once or some sort of cleanup?
 (def initial-move-position (atom {:x nil :y nil}))
-(def canvas-init (atom false))
+(def drag-ref (atom []))
 
 (defn render-canvas []
   (def zoomElem (.querySelector js/document "#Canvas"))
@@ -39,7 +39,7 @@
 
   (defn handleBounds [event]
     "handles calling check for upper and lower bounds"
-
+    ; TODO we can test brining this back not that we're not calling it 100's of times at the end
     ; This stops the udate from happening so much but it's still quick enough to look fluid
     ; (if (or ( = 0 (mod (js/parseInt (.-left (.-style event))) 10))   ( = 0 (mod (js/parseInt (.-top (.-style event))) 10)))
     ;   (handle-state-change "update-canvas-component-pos" {
@@ -57,7 +57,6 @@
           newX (js/parseInt (.-left (.-style event)))
           newY (js/parseInt (.-top (.-style event)))]
     ; we need this check as the delete throws a move event which resets our state
-    (print "test")
     (if (and (not= startX newX) (not= startY newY)) ; if they're both equal it was a delete event
       (do
         (handle-lower-bounds event)
@@ -84,11 +83,12 @@
 
        :component-did-update              ;; the name of a lifecycle function
         (fn [this old-argv]                ;; reagent provides you the entire "argv", not just the "props"
-
-          (if (not @canvas-init)
-            (let [elems (array-seq (.getElementsByClassName js/document "draggable"))]
-              (reset! canvas-init true)
-              (doseq [elem elems]
+          (doseq [dragRef @drag-ref] ; We delete each drag ref so that we dont overload after a couple of drags
+            (.destroy dragRef))      ; if we don't then each new one doubles it and we get 100's of drag events
+          (reset! drag-ref [])
+          (let [elems (array-seq (.getElementsByClassName js/document "draggable"))]
+            (doseq [elem elems]
+              (swap! drag-ref conj
                 (displace elem
                   (clj->js
                     {:onMouseDown onMoveEventStart

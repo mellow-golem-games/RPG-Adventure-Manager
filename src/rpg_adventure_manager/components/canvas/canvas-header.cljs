@@ -2,7 +2,7 @@
     (:require [rpg-adventure-manager.state :refer [handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
 
-; Header file for the new entity pages
+; Header file for the canvas page
 ; Made a separate one as having to pass parameters around to conditionally turn off options
 ; seems like a pain for such a small app
 
