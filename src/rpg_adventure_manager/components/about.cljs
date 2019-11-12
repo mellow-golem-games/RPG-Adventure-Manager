@@ -5,7 +5,7 @@
 (defn render [active]
   [:div.About.itemPage {:class active}
     (header/render)
-    [:div.About.content
+    [:div.About.content {:style {:overflow "scroll"}}
       [:h2 "RPG Adventuer Manager"]
       [:p "RPG Adventure Manage is a simple solution for managing campaigns in Table Top Campaigns.
           Its goal is to provide a simple interface to record and track the various entities present in your game.
@@ -16,4 +16,4 @@
       [:br]
       [:p str "EMAIL: "][:a {:href "Info@mellowgolemgames.com"} "Info@mellowgolemgames.com"]
       [:br]
-      [:p str "EMAIL: "][:a {:href "Info@totalwebconnections.com"} "Info@totalwebconnections.com"]]])
+      [:p {:style {:padding-bottom "100px"}} str "EMAIL: "][:a {:href "Info@totalwebconnections.com"} "Info@totalwebconnections.com"]]])

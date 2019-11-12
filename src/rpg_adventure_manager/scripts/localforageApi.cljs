@@ -189,7 +189,6 @@
   ))))
 
 (defn update-canvas-component-position [id x y]
-  (print "poition")
   (.then (.getItem (.-localforage js/window) "canvasComponents")
     (fn [value]
       (let [currentStorage (js->clj value :keywordize-keys true)]
@@ -200,7 +199,9 @@
                 (if (= (:id item) id)
                   (conj item {:xPos x :yPos y})
                   item))
-              currentStorage))))))))
+              currentStorage))) (fn []
+                (.then (.getItem (.-localforage js/window) "canvasComponents") (fn [value]
+                  (handle-state-change "add-canvas-component" (js->clj value :keywordize-keys true))))))))))
 
 (defn update-canvas-component-text [id vals]
   "updates the specified id with with the new map of text valus"

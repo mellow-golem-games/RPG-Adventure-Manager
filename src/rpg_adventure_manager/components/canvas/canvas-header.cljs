@@ -7,7 +7,7 @@
 ; seems like a pain for such a small app
 
 (defn render []
-  [:div.New-City__header.header.itemPage__header
+  [:div.New-City__header.header.itemPage__header.canvas-header
     [:div.headerInner.canvasHeader
       [:p {:on-click #(handle-state-change "update-current-view" "")} "x"]
       [:button {:on-click #(localforageApi/add-canvas-component)} "Add Card"]]])

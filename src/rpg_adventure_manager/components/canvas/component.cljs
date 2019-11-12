@@ -25,7 +25,7 @@
 (set! js/handlelinkclick (fn [type name]
 
   (.preventDefault js/event)
-
+  (.blur (.-activeElement js/document))
   ; Finds the entity as we can't pass it and pushes it to state
   (let [currentEntity (first (filter (fn [entity] ; first as it expect an entity not a list
                         (= (:name entity) name)) (get-value-from-state type)))]
@@ -199,7 +199,7 @@
 
 (defn Component [component]
     (let [componentValues (atom {:title (:title component) :description (:description component)})
-          searchResults (atom {:results [] :inSearch false :index nil :val nil :id (rand-int 1000)})]
+          searchResults (atom {:results [] :inSearch false :index nil :val nil :id (rand-int 10000)})]
       (fn [component]
         [:div.Component.draggable {:key (:id component)
                           :data-id (:id component)
