@@ -13,16 +13,21 @@
 ; TODO this does break on a reload - probably need a flag to only do this once or some sort of cleanup?
 (def initial-move-position (atom {:x nil :y nil}))
 (def drag-ref (atom []))
+(def current-position (atom {:x 2500, :y 2500})) ; * -1 of the current drag position
 
 (defn render-canvas []
   (def zoomElem (.querySelector js/document "#Canvas"))
   (if zoomElem
     (do
-  (def panHandler (panzoom zoomElem (clj->js {:maxZoom 4 :minZoom 0.1
+  (def panHandler (panzoom zoomElem (clj->js {:maxZoom 3 :minZoom 0.2
                                               :minScale 1
                                               :boundsPadding 1 ; it multiplies by this is in the code for panzoom
                                               :bounds true})))
+  (.on panHandler "transform" (fn [e]
+    (let [currentPan (.getTransform e)]
+      (reset! current-position {:x (/ (* -1 (int (.-x currentPan))) (.-scale currentPan)) :y (/ (* -1 (int (.-y currentPan))) (.-scale currentPan))}))))
 
+  (.moveTo panHandler -2500, -2500) ; move to our default position
   (defn handle-lower-bounds [event]
     "drag position cannot be lower than 0"
     (let [left (js/parseInt (.-left (.-style event)))
@@ -103,7 +108,7 @@
          (fn [state]           ;; remember to repeat parameters
           (let [canvasComponents (js->clj (:canvasComponents @state) :keywordize-keys true)]
             [:div.Canvas.viewPage {:class (:canvas (:activeView @state))}
-              (header/render)
+              (header/render current-position)
               [:p.Canvas__howTo {:on-click #(handle-state-change "update-current-view" "canvas-howTo")} "i"]
               [:div.CanvasParent
                 [:div#Canvas

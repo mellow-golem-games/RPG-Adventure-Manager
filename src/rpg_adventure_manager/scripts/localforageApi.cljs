@@ -159,13 +159,14 @@
                                                                                                                                                                 :buttonProperties {:buttonText "Okay"}}))))
                                                              (recur (inc i))))))))
 
-(defn add-canvas-component []
+(defn add-canvas-component [current-position]
   "From our canvas builder - adds an item"
+  (print current-position)
   (.then (.getItem (.-localforage js/window) "canvasComponents")
     (fn [value]
       (let [currentStorage (js->clj value :keywordize-keys true)]
         (.then (.setItem (.-localforage js/window) "canvasComponents"
-          (clj->js (conj currentStorage (generate-canvasComponent-id canvasComponent))))
+          (clj->js (conj currentStorage (generate-canvasComponent-id (conj canvasComponent {:xPos (:x current-position) :yPos (:y current-position)})))))
             (fn [value]
               (handle-state-change "add-canvas-component" (js->clj value :keywordize-keys true))))))))
 

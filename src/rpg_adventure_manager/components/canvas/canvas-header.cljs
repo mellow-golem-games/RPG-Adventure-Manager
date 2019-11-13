@@ -6,8 +6,8 @@
 ; Made a separate one as having to pass parameters around to conditionally turn off options
 ; seems like a pain for such a small app
 
-(defn render []
+(defn render [current-position]
   [:div.New-City__header.header.itemPage__header.canvas-header
     [:div.headerInner.canvasHeader
       [:p {:on-click #(handle-state-change "update-current-view" "")} "x"]
-      [:button {:on-click #(localforageApi/add-canvas-component)} "Add Card"]]])
+      [:button {:on-click #(localforageApi/add-canvas-component @current-position)} "Add Card"]]])
