@@ -31,6 +31,7 @@
                         (= (:name entity) name)) (get-value-from-state type)))]
     (handle-state-change "update-canvas-last" true)
     (handle-state-change "update-current-view" "view-single")
+    (handle-state-change "set-active-type" type)
     (handle-state-change "set-single-entity" currentEntity))))
 
 

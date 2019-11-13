@@ -393,6 +393,7 @@ textarea {
 /* CANVAS STLYES */
 .Canvas.visible {
   z-index: 50;
+  overflow: hidden;
 }
 
 .CanvasParent {

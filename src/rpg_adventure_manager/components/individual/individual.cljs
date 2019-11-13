@@ -19,8 +19,7 @@
 (defn save-edits [entity editing type]
   "Handles saving when an entity is updated"
   (swap! editing not)
-  (localforageApi/update-item type @entity)
-  )
+  (localforageApi/update-item type @entity))
 
 (defn render [state] ; TODO probably don't want to pass the whole state here but it causes problems with the view since we need that too...
   (let [editing (atom false)]
