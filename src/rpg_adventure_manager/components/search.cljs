@@ -22,7 +22,8 @@
         ; Holds the entire map of the entities for each item of the search list
           (doseq [singleEntity searchMap
                   :when searchMap] ; search throug the list of entities
-            (if (or (str/includes? (:name singleEntity) searchVal) (str/includes? (:description singleEntity) searchVal))
+            (if (or (str/includes? (str/lower-case (:name singleEntity)) (str/lower-case searchVal))
+                    (str/includes? (str/lower-case (:description singleEntity)) (str/lower-case searchVal)))
               (swap! searchResults conj {:type item :item singleEntity})))))))
 
 (defn handle-search-result-click [state item]
