@@ -57,6 +57,9 @@
           (localforageApi/add-canvas-component-liking currentLink id)))
       (handle-state-change "set-isLinked" id))))
 
+(defn un-initilize-link []
+  (handle-state-change "reset-isLinked" nil))
+
 (defn delete-link [componentId linkId]
   (localforageApi/delete-canvas-component-liking componentId linkId))
 
@@ -204,6 +207,7 @@
       (fn [component]
         [:div.Component.draggable {:key (:id component)
                           :data-id (:id component)
+                          :class (if (= (get-value-from-state "isLinked") (:id component)) "Component--linked")
                           :style {:top (:yPos component) :left (:xPos component)
                                   :background "#f4f3ef"
                                   :padding "5px"
@@ -213,7 +217,9 @@
              (draw-curve link component)))
            [:div.Component_inner
              [:div.Component__header {:style {:height (* 0.2 (:h size))}}
-               [:button.Component__linkText {:on-click #(initilize-link (:id component))}"Link"]
+               (if (= (get-value-from-state "isLinked") (:id component))
+                 [:button.Component__linkText {:on-click #(un-initilize-link)} "Cancel Link"]
+                 [:button.Component__linkText {:on-click #(initilize-link (:id component))} "Link"])
                [:p.Component__deleteText {:on-click #(delete-component (:id component))} "X"]]
              [:input {:type "text"
                       :style {:height (* 0.2 (:h size))}

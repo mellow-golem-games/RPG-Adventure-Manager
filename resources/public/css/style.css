@@ -484,6 +484,10 @@ textarea {
   flex-direction: column;
 }
 
+.Component--linked {
+  border: 2px solid red;
+}
+
 .Component input, .Component textarea, .Component .textarea {
   width: 95%;
   margin: 0 auto;
