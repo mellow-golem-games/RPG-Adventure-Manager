@@ -593,4 +593,21 @@ textarea {
   justify-content: space-between;
 }
 
+.HouseRules-button {
+  position: relative;
+  top: 10px;
+}
+
+.HouseRules-body p {
+  margin-top: 0px;
+}
+
+.HouseRule-item {
+  margin-top: 50px;
+}
+
+.HouseRule-item:first-child {
+  margin-top: 0px;
+}
+
 

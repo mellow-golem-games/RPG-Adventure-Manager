@@ -294,15 +294,24 @@
 (defn remove-rule-by-name [rules name]
   (filter #(not= (:name %) name) rules))
 
-(defn add-house-rule [rule]
+(defn add-house-rule [rule state]
   (.then (.getItem (.-localforage js/window) "rpg-house-rules")
     (fn [value]
       (let [currentStorage (js->clj value :keywordize-keys true)]
-        (if (= 0 (count (check-if-house-rule-exists currentStorage (:name rule))))
-          (.then (.setItem (.-localforage js/window) "rpg-house-rules" (clj->js (conj currentStorage rule)))
-            (handle-state-change "update-house-rule" (conj currentStorage rule)))
-
-          (print "duplicate rule")
+        (if (= 0 (count (check-if-house-rule-exists currentStorage (:name @rule))))
+          (.then (.setItem (.-localforage js/window) "rpg-house-rules" (clj->js (conj currentStorage @rule)))
+            (handle-state-change "update-house-rule" (conj currentStorage @rule))
+            (reset! rule {:rule "" :name ""})
+            (reset! state false)
+            (fancy-alert/fancy-alert
+              {:text "Rule Added!" :hideAfterN false
+               :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
+               :buttonProperties {:buttonText "Okay"}})
+          )
+          (fancy-alert/fancy-alert
+            {:text "Rule Name Must Be Unique!" :hideAfterN false
+             :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
+             :buttonProperties {:buttonText "Okay"}})
         )
 ))))
 

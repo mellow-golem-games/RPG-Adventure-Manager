@@ -5,10 +5,8 @@
               [rpg-adventure-manager.components.new-header :as header]))
 
 (defn add-rule [details state]
-  ; (print @details)
-  (localforageApi/add-house-rule @details)
-  (reset! details {:rule "" :name ""})
-  (reset! state false))
+  (localforageApi/add-house-rule details state))
+
 
 (defn House-rules [state]
   (let [details (atom {:rule "" :name ""})]

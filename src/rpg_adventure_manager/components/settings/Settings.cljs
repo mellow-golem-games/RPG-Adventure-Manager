@@ -12,7 +12,6 @@
 (defn Settings [state]
   (let [house-rule-add-screen (atom false)]
     (fn [state]
-      (print (:rpg-house-rules @state))
       [:div.Settings.viewPage {:class (:settings (:activeView @state))}
         (header/render)
         [House-rules house-rule-add-screen]
@@ -21,10 +20,11 @@
           [:div.HouseRules-header
            [:h2 "House Rules"]
            [:div
-            [:button {:on-click #(reset! house-rule-add-screen "visible")} "Add Rule"]]]
+            [:button.HouseRules-button {:on-click #(reset! house-rule-add-screen "visible")} "Add Rule"]]]
           [:div.HouseRules-body
            (for [rule (:rpg-house-rules (js->clj @state :keywordize-keys true))]
-             [:div
-              [:p.deleteNote {:on-click #(delete-rule (:name rule))}"x"]
-              [:h2 (:name rule)]
+             [:div.HouseRule-item {:key (:name rule)}
+              [:div.Note-item
+               [:p.deleteNote {:on-click #(delete-rule (:name rule))}"x"]
+               [:h2 (:name rule)]]
               [:p (:rule rule)]])]]]])))
