@@ -18,8 +18,9 @@
                        :scrollOffset {}
                        :activeList {}
                        :canvasComponents []
-                       :canvasLast? false}
-                       :isLinked nil))
+                       :rpg-house-rules []
+                       :canvasLast? false
+                       :isLinked nil}))
 
 (defn get-value-from-state [value]
   (js->clj ((keyword value) @state) :keywordize-keys true))
@@ -94,10 +95,13 @@
 
 (defn update-canvas-component-pos [payload]
   (let [newComponentsValue (map (fn [component]
-    (if (= (:id payload) (:id component))
-      (conj component {:yPos (:y payload) :xPos (:x payload)})
-      component)) (js->clj (:canvasComponents @state) :keywordize-keys true))]
-  (swap! state conj {:canvasComponents newComponentsValue})))
+                                 (if (= (:id payload) (:id component))
+                                   (conj component {:yPos (:y payload) :xPos (:x payload)})
+                                   component)) (js->clj (:canvasComponents @state) :keywordize-keys true))]
+   (swap! state conj {:canvasComponents newComponentsValue})))
+
+(defn update-house-rule [payload]
+  (swap! state conj {:rpg-house-rules payload}))
 
 (defn handle-state-change [action payload]
   "Accept an action function to dispatch and passes it the current payload"

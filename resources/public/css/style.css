@@ -579,4 +579,18 @@ textarea {
   margin-left: 50px;
 }
 
+/* SETTINGS PAGE */
+.Settings {
+  z-index: 100;
+}
+
+.Settings.content {
+  padding: 0px 10px;
+}
+
+.HouseRules-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 

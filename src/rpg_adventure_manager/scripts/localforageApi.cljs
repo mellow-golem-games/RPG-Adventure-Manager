@@ -39,7 +39,8 @@
   (go (get-initial-data-by-type "hooks"))
   (go (get-initial-data-by-type "lists"))
   (go (get-initial-data-by-type "notes"))
-  (go (get-initial-data-by-type "canvasComponents")))
+  (go (get-initial-data-by-type "canvasComponents")
+  (go (get-initial-data-by-type "rpg-house-rules"))))
 
 ; TODO we need to go back and extract the alert settings to a single var since we re-use it so much
 ; NEXT couple of functions are probably a good case for multimethods
@@ -286,3 +287,31 @@
                                                                                                                  :buttonProperties {:buttonText "Okay"}})
                                                                                                                   (get-initial-data-by-type "notes"))))
           (recur (inc i))))))))
+
+(defn check-if-house-rule-exists [rules name]
+  (filter #(= (:name %) name) rules))
+
+(defn remove-rule-by-name [rules name]
+  (filter #(not= (:name %) name) rules))
+
+(defn add-house-rule [rule]
+  (.then (.getItem (.-localforage js/window) "rpg-house-rules")
+    (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)]
+        (if (= 0 (count (check-if-house-rule-exists currentStorage (:name rule))))
+          (.then (.setItem (.-localforage js/window) "rpg-house-rules" (clj->js (conj currentStorage rule)))
+            (handle-state-change "update-house-rule" (conj currentStorage rule)))
+
+          (print "duplicate rule")
+        )
+))))
+
+(defn delete-house-rule [rule-name]
+  (.then (.getItem (.-localforage js/window) "rpg-house-rules")
+    (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)
+            new-rule-state (remove-rule-by-name currentStorage rule-name)]
+        (.then (.setItem (.-localforage js/window) "rpg-house-rules" (clj->js new-rule-state))
+          (handle-state-change "update-house-rule" new-rule-state)
+        )
+))))

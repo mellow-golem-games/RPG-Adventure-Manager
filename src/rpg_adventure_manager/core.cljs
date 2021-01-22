@@ -15,6 +15,7 @@
               [rpg-adventure-manager.components.canvas.canvas :as canvas]
               [rpg-adventure-manager.components.canvas.howTo :as canvasHowTo]
               [rpg-adventure-manager.components.shared.alert :as alert]
+              [rpg-adventure-manager.components.settings.Settings :refer [Settings]]
               [rpg-adventure-manager.state :refer [state handle-state-change]]
               [rpg-adventure-manager.scripts.localforageApi :as localforageApi]))
 
@@ -33,9 +34,11 @@
   [:div.Main-Wrapper
     [header/render]
     [:div.ViewSwitcher
+      [:button {:on-click #(handle-state-change "update-current-view" "settings")} "Campaign Settings"]
       [:button {:on-click #(handle-state-change "update-current-view" "canvas")} "Visual Builder"]]
     [search/render state]
     [about/render (:about (:activeView @state))]
+    [Settings state]
     [canvas/render state]
     [canvasHowTo/render (:canvas-howTo (:activeView @state))]
     [:div.Home-content
