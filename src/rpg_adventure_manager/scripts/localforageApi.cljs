@@ -41,6 +41,7 @@
   (go (get-initial-data-by-type "notes"))
   (go (get-initial-data-by-type "canvasComponents")
   (go (get-initial-data-by-type "rpg-house-rules"))))
+  (go (get-initial-data-by-type "rpg-settings"))
 
 ; TODO we need to go back and extract the alert settings to a single var since we re-use it so much
 ; NEXT couple of functions are probably a good case for multimethods
@@ -311,9 +312,7 @@
           (fancy-alert/fancy-alert
             {:text "Rule Name Must Be Unique!" :hideAfterN false
              :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
-             :buttonProperties {:buttonText "Okay"}})
-        )
-))))
+             :buttonProperties {:buttonText "Okay"}}))))))
 
 (defn delete-house-rule [rule-name]
   (.then (.getItem (.-localforage js/window) "rpg-house-rules")
@@ -321,6 +320,16 @@
       (let [currentStorage (js->clj value :keywordize-keys true)
             new-rule-state (remove-rule-by-name currentStorage rule-name)]
         (.then (.setItem (.-localforage js/window) "rpg-house-rules" (clj->js new-rule-state))
-          (handle-state-change "update-house-rule" new-rule-state)
-        )
-))))
+          (handle-state-change "update-house-rule" new-rule-state))))))
+
+(defn save-game-days [days]
+  (.then (.getItem (.-localforage js/window) "rpg-settings")
+    (fn [value]
+      (let [currentStorage (js->clj value :keywordize-keys true)
+            final-value (if currentStorage (conj currentStorage {:days days}) {:days days})]
+        (.then (.setItem (.-localforage js/window) "rpg-settings" (clj->js final-value))
+          (handle-state-change "update-user-settings" final-value))))))
+
+
+
+

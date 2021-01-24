@@ -103,6 +103,9 @@
 (defn update-house-rule [payload]
   (swap! state conj {:rpg-house-rules payload}))
 
+(defn update-user-settings [payload]
+  (swap! state conj {:rpg-settings payload}))
+
 (defn handle-state-change [action payload]
   "Accept an action function to dispatch and passes it the current payload"
   (let [fn-var ((ns-publics 'rpg-adventure-manager.state) (symbol action))]

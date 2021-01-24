@@ -588,6 +588,10 @@ textarea {
   padding: 0px 10px;
 }
 
+.House-Rules.itemPage {
+  z-index: 2;
+}
+
 .HouseRules-header {
   display: flex;
   justify-content: space-between;
@@ -608,6 +612,26 @@ textarea {
 
 .HouseRule-item:first-child {
   margin-top: 0px;
+}
+
+.deleteHouseRule {
+  position: relative;
+  top: 20px;
+}
+
+.Gamedays-section {
+  margin-bottom: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Gamedays-section input {
+  width: 50px;
+  border: 1px solid #ecebe9;
+  padding: 5px;
+  font-size: .85rem;
+  margin: 5px 0;
 }
 
 
