@@ -17,7 +17,7 @@
     <script src="js/compiled/rpg_adventure_manager.js" type="text/javascript"></script>
     <script>
       document.addEventListener("deviceready", onDeviceReady, false);
-      function onDeviceReady() {
+      async function onDeviceReady() {
         FastClick.attach(document.body);
 
         localforage.defineDriver(window.cordovaSQLiteDriver).then(function() {
@@ -35,28 +35,30 @@
             // this should alert "cordovaSQLiteDriver" when in an emulator or a device
           });
 
-        if ( /(android)/i.test(navigator.userAgent) ) {
-          admobid = { // for Android
-            banner: 'ca-app-pub-7918336603285970/7410839200',
-            interstitial: ''
-          };
-        } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
-            admobid = { // for iOS
-              banner: 'ca-app-pub-7918336603285970/5996477961'
-            };
-          } else {
-              admobid = { // for Windows Phone
-                banner: '',
-                interstitial: ''
-              };
-          }
+        // keeping this for later
+        // if ( /(android)/i.test(navigator.userAgent) ) {
+        //   admobid = { // for Android
+        //     banner: 'ca-app-pub-7918336603285970/7410839200',
+        //     interstitial: ''
+        //   };
+        // } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+        //     admobid = { // for iOS
+        //       banner: 'ca-app-pub-7918336603285970/5996477961'
+        //     };
+        //   } else {
+        //       admobid = { // for Windows Phone
+        //         banner: '',
+        //         interstitial: ''
+        //       };
+        //   }
+        await admob.start()
+        const banner = new admob.BannerAd({
+          adUnitId: 'ca-app-pub-7918336603285970/5996477961',
+        })
 
-          AdMob.createBanner({
-            adId: admobid.banner,
-            position: AdMob.AD_POSITION.BOTTOM_CENTER,
-            overlap: true,
-            autoShow : true
-          });
+
+        await banner.show()
+
       }
     </script>
   </body>
