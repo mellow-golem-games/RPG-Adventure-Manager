@@ -6,7 +6,7 @@
 
 (defn add-metadata [details]
   "Adds the extra metadata we want to track on each item"
-  (conj details {:used false :created (js/Date.)}))
+  (conj details {:used false :created (str (rand-int 1000) (rand-int 1000))}))
 
 (defn add-metadata-list [details]
   "Adds the extra metadata we want to track on each list"
