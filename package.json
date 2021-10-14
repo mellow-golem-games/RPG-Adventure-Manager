@@ -2,8 +2,8 @@
   "dependencies": {
     "@cljs-oss/module-deps": "^1.1.1",
     "displacejs": "^1.4.1",
-    "interactjs": "^1.10.2",
-    "localforage": "^1.9.0",
-    "panzoom": "^9.4.1"
+    "interactjs": "^1.10.11",
+    "localforage": "^1.10.0",
+    "panzoom": "^9.4.2"
   }
 }

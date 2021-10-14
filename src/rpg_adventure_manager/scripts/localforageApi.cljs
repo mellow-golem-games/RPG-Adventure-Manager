@@ -52,24 +52,25 @@
      {:text "Name Cannot Be Blank" :hideAfterN false
       :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
       :buttonProperties {:buttonText "Okay"}})
-   (.then (.getItem (.-localforage js/window) type) (fn [value]
-                                                     (let [currentStorage (js->clj value :keywordize-keys true)]
-                                                       (loop [i 0] ; Little cleaner than doall/for so we only iterate as needed this probably won't get too big anyways
-                                                         (if (= (count currentStorage) i) ; This is after we loop through them all to check that the name doesnt exits
-                                                           (.then (.setItem (.-localforage js/window) type (clj->js (conj currentStorage (add-metadata details))) (fn [value]
-                                                                                                                                                                   (handle-state-change "update-entity" {:type type :value (conj currentStorage (add-metadata details))})
-                                                                                                                                                                   (fancy-alert/fancy-alert
-                                                                                                                                                                     {:text "Item Saved!" :hideAfterN false
-                                                                                                                                                                      :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
-                                                                                                                                                                      :buttonProperties {:buttonText "Okay"}})
-                                                                                                                                                                   (handle-state-change "update-current-view" ""))))
-                                                           (if (= (:name (nth currentStorage i)) (:name details))
-                                                             ; (js/alert "That Name Is Already Taken!")
-                                                             (fancy-alert/fancy-alert
-                                                               {:text "That Name Is Already Taken!" :hideAfterN false
-                                                                :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
-                                                                :buttonProperties {:buttonText "Okay"}})
-                                                             (recur (inc i)))))))))) ; TODO we need a better alert box
+   (let [to-save (add-metadata details)]
+     (.then (.getItem (.-localforage js/window) type) (fn [value]
+                                                       (let [currentStorage (js->clj value :keywordize-keys true)]
+                                                         (loop [i 0] ; Little cleaner than doall/for so we only iterate as needed this probably won't get too big anyways
+                                                           (if (= (count currentStorage) i) ; This is after we loop through them all to check that the name doesnt exits
+                                                             (.then (.setItem (.-localforage js/window) type (clj->js (conj currentStorage to-save)) (fn [value]
+                                                                                                                                                                     (handle-state-change "update-entity" {:type type :value (conj currentStorage to-save)})
+                                                                                                                                                                     (fancy-alert/fancy-alert
+                                                                                                                                                                       {:text "Item Saved!" :hideAfterN false
+                                                                                                                                                                        :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
+                                                                                                                                                                        :buttonProperties {:buttonText "Okay"}})
+                                                                                                                                                                     (handle-state-change "update-current-view" ""))))
+                                                             (if (= (:name (nth currentStorage i)) (:name details))
+                                                               ; (js/alert "That Name Is Already Taken!")
+                                                               (fancy-alert/fancy-alert
+                                                                 {:text "That Name Is Already Taken!" :hideAfterN false
+                                                                  :styles {:background "white;" :border "1px solid #9776ec;" :z-index "999;" :color "black;"}
+                                                                  :buttonProperties {:buttonText "Okay"}})
+                                                               (recur (inc i))))))))))) ; TODO we need a better alert box
 
 (defn update-item [type item]
   "updats an item - does so by completly overriding it so it must pass the same item with update details and all fields"
@@ -329,7 +330,3 @@
             final-value (if currentStorage (conj currentStorage {:days days}) {:days days})]
         (.then (.setItem (.-localforage js/window) "rpg-settings" (clj->js final-value))
           (handle-state-change "update-user-settings" final-value))))))
-
-
-
-
